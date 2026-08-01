@@ -1,72 +1,167 @@
-\section{The LEDGER Audit Layer}\label{sec:method}
+\section{The LEDGER Audit Layer}
+\label{sec:method}
+
+\etitle{Overview.}
+Given a completed episode $E$, \ledger resolves its declared evidence,
+reconciles observed reads, replays the final program in the resolved view,
+and returns $\mathsf{Audit}(E)$ with a machine-readable witness or failure
+record. When replay is unavailable, bounded closure over $\operands$ provides
+a fallback. A task-specific interface independently produces $S(E;V_q)$;
+the two statuses meet only at governance.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.99\textwidth]{fig_architecture.pdf}
-\caption{LEDGER consumes a completed episode after host execution. Semantic validation and execution-provenance auditing run independently; dashed boxes denote the bounded fallback and an optional correction path that is not evaluated here.}
+\includegraphics[width=0.99\textwidth]{pipeline-v6.pdf}
+\caption{%
+Architecture of the \ledger audit layer. A completed episode is copied to
+independent execution-provenance and task-specific semantic branches. The
+provenance branch resolves evidence, reconciles host and replay reads,
+performs restricted replay, and invokes bounded closure only when replay is
+unavailable. Governance combines the two status records.}
 \label{fig:architecture}
 \end{figure*}
 
-\subsection{Overview and trace capture}
+\subsection{Trace capture and evidence normalization}
+\label{sec:tracecapture}
 
-The host wrapper records program revisions, the final program snapshot, stdout, exceptions, declared citations, runtime data reads, accessed columns, and scalar operands reaching the final expression. Paths and dataset identifiers are canonicalized before comparison. Declared sources, host reads, and replay reads remain separate fields throughout the audit record.
+\etitle{Trace capture.}
+The host wrapper freezes the final program, declared evidence, execution
+status and output, observed data reads, exceptions, accessed attributes, and
+operands reaching the returned result. Python/pandas and SQL adapters map
+these records into the common trace $\tau$ defined in
+Section~\ref{sec:episode}. Declared sources, host reads, and replay reads remain
+separate fields.
 
-For dataframe programs, operand attribution follows accessed columns and scalar values that reach the final expression. For SQL, the record stores relations, projected attributes, predicates, aggregates, and returned scalars. Each outcome carries a concise evidence string and the machine-readable artifact needed to reproduce it.
+\etitle{Evidence normalization.}
+The resolver maps declarations to
+$F_{\mathrm{res}}=R(F_{\mathrm{decl}})$ before comparing
+$F_{\mathrm{host}}$ with the resolved view. This step implements evidence
+authorization and supplies the data view used by restricted replay.
 
-\subsection{Episode audit and failure precedence}\label{sec:auditproc}
+\subsection{Episode audit and restricted replay}
+\label{sec:auditproc}
 
-Algorithm~\ref{alg:audit} implements the complete audit. Evidence-boundary failures take precedence over replay failures, which take precedence over output mismatch. When several violations are observed, the record preserves the full set and exposes the earliest class as the primary outcome. Closure is consulted only when no explicit failure has been observed and the final runtime is unavailable.
+\etitle{Audit order.}
+Algorithm~\ref{alg:audit} resolves evidence and checks host-read authorization
+before replay, then records replay-boundary, execution, and output-comparison
+conditions. A failure record $c$ may retain several observed conditions;
+closure is considered only when replay is unavailable and no observed failure
+already determines the outcome.
 
 \begin{algorithm}[t]
-\caption{LEDGER episode audit}
+\caption{\ledger episode audit}
 \label{alg:audit}
 \begin{algorithmic}[1]
-\Require episode $E$, resolver $R$, sandbox $H$, comparator $\operatorname{cmp}$, operations $\opset$, depth $d$
+\Require episode $E$, resolver $R$, replay runtime
+$\mathcal R_{\mathrm{replay}}$, comparator $\operatorname{cmp}_{\tol}$,
+operations $\opset$, depth $d$
+\State $c\gets[\,]$; $b\gets\bot$
 \State $F_{\mathrm{res}}\gets R(F_{\mathrm{decl}})$
-\If{some declaration is unresolved}
-  \State \Return $\failure(\mathrm{unresolved\ source})$
-\EndIf
-\If{$F_{\mathrm{host}}\nsubseteq F_{\mathrm{res}}$}
-  \State \Return $\failure(\mathrm{undeclared\ host\ read})$
-\EndIf
-\If{$s_{\mathrm{host}}\neq\mathrm{success}$ and an answer was stated}
-  \State \Return $\failure(\mathrm{host\ execution})$
-\EndIf
-\If{$P^*$ is runnable in $H$}
-  \State $(F_{\mathrm{replay}},s_{\mathrm{replay}},v_{\mathrm{replay}})\gets\operatorname{Replay}(P^*,H[F_{\mathrm{res}}])$
-  \If{$F_{\mathrm{replay}}\nsubseteq F_{\mathrm{res}}$}
-    \State \Return $\failure(\mathrm{replay\ boundary})$
-  \ElsIf{$s_{\mathrm{replay}}\neq\mathrm{success}$}
-    \State \Return $\failure(\mathrm{replay\ execution})$
-  \ElsIf{$v_{\mathrm{replay}}$ is not comparable}
-    \State \Return $\failure(\mathrm{missing\ output})$
-  \ElsIf{$\operatorname{cmp}(v_{\mathrm{replay}},\hat a;\tol)=1$}
-    \State \Return $\cert_{\mathrm{replay}}$ and replay witness
-  \Else
-    \State \Return $\failure(\mathrm{output\ mismatch})$
+
+\If{$F_{\mathrm{res}}$ is incomplete}
+  \State append $\mathrm{unresolved\ source}$ to $c$
+\Else
+  \If{$F_{\mathrm{host}}\nsubseteq F_{\mathrm{res}}$}
+    \State append $\mathrm{undeclared\ host\ read}$ to $c$
   \EndIf
 \EndIf
-\If{reached operands are complete}
-  \State \Return \Call{BoundedClosure}{$\operands,\opset,d,\hat a$}
+
+\If{$s_{\mathrm{host}}\neq\mathrm{success}$}
+  \State append $\mathrm{host\ execution}$ to $c$
 \EndIf
+
+\If{$F_{\mathrm{res}}$ is complete and $P^*$ is executable in
+$\mathcal R_{\mathrm{replay}}$}
+  \State $\rho\gets
+  \operatorname{Exec}_{\mathcal R_{\mathrm{replay}}}
+  (P^*,F_{\mathrm{res}})$
+
+  \If{$F_{\mathrm{replay}}\nsubseteq F_{\mathrm{res}}$}
+    \State append $\mathrm{replay\ boundary}$ to $c$
+  \EndIf
+
+  \If{$s_{\mathrm{replay}}\neq\mathrm{success}$}
+    \State append $\mathrm{replay\ execution}$ to $c$
+  \Else
+    \State $b\gets
+    \operatorname{cmp}_{\tol}(v_{\mathrm{replay}},\hat a)$
+
+    \If{$b=0$}
+      \State append $\mathrm{output\ mismatch}$ to $c$
+    \ElsIf{$b=\bot$}
+      \State append $\mathrm{missing\ comparable\ output}$ to $c$
+    \EndIf
+  \EndIf
+
+  \If{$c=[\,]$ and $b=1$}
+    \State \Return $\cert_{\mathrm{replay}}$ and replay witness
+  \EndIf
+\EndIf
+
+\If{$c\neq[\,]$}
+  \State \Return $\failure(c)$ and diagnostic record
+\EndIf
+
+\If{$P^*$ is not executable in $\mathcal R_{\mathrm{replay}}$
+    and $\operands$ is complete}
+  \State \Return
+  \Call{BoundedClosure}{$\operands,\opset,d,\hat a$}
+\EndIf
+
 \State \Return $\unknown$
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{Citation-restricted replay}
+\etitle{Replay witness.}
+The replay runtime mounts only $F_{\mathrm{res}}$, records
+$F_{\mathrm{replay}}$, and applies
+$\operatorname{cmp}_{\tol}(v_{\mathrm{replay}},\hat a)$. Deterministic
+normalization handles strings, booleans, collections, and structured outputs;
+numeric values use tolerance $\tol$. A replay certificate stores $P^*$,
+$F_{\mathrm{res}}$, host and replay reads, replay output, and comparator
+configuration.
 
-The replay sandbox mounts only $F_{\mathrm{res}}$, fixes deterministic library settings when available, and records every data read. The comparator normalizes strings, booleans, ordered or unordered lists, and numeric values under relative tolerance $\tol$. A successful certificate therefore binds a concrete program snapshot, a canonical evidence view, and a comparable output. Failure records retain the denied read, exception, missing output, or mismatching value that caused the decision.
+\etitle{Running example.}
+For the identity-theft episode, all 17 declared files resolve, so
+$|F_{\mathrm{decl}}|=|F_{\mathrm{res}}|=17$. The preserved final program
+$P^*$ reads the national identity-theft table and 16 state-level
+fraud-and-other tables. Because the archived episode did not retain syscall
+reads, we reconstruct $F_{\mathrm{host}}$ from the exact program and verify it
+with a fresh trace: $|F_{\mathrm{host}}|=17$ but
+$|F_{\mathrm{host}}\cap F_{\mathrm{res}}|=1$, leaving 16 undeclared reads.
 
-\subsection{Operand-constrained fallback}\label{sec:closure}
+The program unions 87 metropolitan-area names from those 16 files, filters the
+national table, infers population as
+$\mathrm{pop}=\mathrm{reports}/\mathrm{rate}_{100\mathrm{k}}
+\times100{,}000$, and retains 14 rows. Their report sum is 150,138, yielding
+$v_{\mathrm{host}}=10{,}724.1429$ after rounding; this equals $\hat a$.
 
-Some archived episodes expose operands and a stated value while the original runtime is unavailable. Let
-\[
-\opset=\{\mathrm{sum,diff,ratio,pctchg,prod}\}.
-\]
-Starting from the trace-local operand multiset $\operands$, the depth-$d$ closure $\cl_d(\operands)$ recursively applies valid operations in $\opset$ with normalization and duplicate removal.
+Restricted replay mounts only $F_{\mathrm{res}}$: the 16 fraud-file existence
+checks fail, the valid-name set is empty, and the program exits normally with
+\texttt{\{"main-task": null\}}. Thus
+$s_{\mathrm{replay}}=\mathrm{success}$,
+$F_{\mathrm{replay}}\subseteq F_{\mathrm{res}}$, and
+$\operatorname{cmp}_{\tol}(v_{\mathrm{replay}},\hat a)=\bot$.
+The failure record therefore contains both an undeclared-host-read witness and
+a missing comparable replay output; no replay certificate is issued.
 
-\begin{definition}[Closure certificate]\label{def:closure}
-Episode $E$ receives a depth-$d$ closure certificate when $\hat a\in\cl_d(\operands)$ within tolerance $\tol$. The witness stores a minimal expression and its operand subset.
+\subsection{Operand-constrained fallback}
+\label{sec:closure}
+
+\etitle{Fallback witness.}
+When a runnable replay environment is unavailable, \ledger searches only over
+the program-reached operands rather than all numbers in the cited context.
+With
+$\opset=\{\mathrm{sum},\mathrm{diff},\mathrm{ratio},
+\mathrm{pctchg},\mathrm{prod}\}$,
+the depth-$d$ closure recursively applies valid operations, normalizes results,
+and removes duplicates.
+
+\begin{definition}[Closure certificate]
+\label{def:closure}
+Episode $E$ receives a depth-$d$ closure certificate when
+$\hat a\in\cl_d(\operands)$ within tolerance $\tol$. The witness stores a
+minimal expression and its operand subset.
 \end{definition}
 
 \begin{algorithm}[t]
@@ -89,43 +184,62 @@ Episode $E$ receives a depth-$d$ closure certificate when $\hat a\in\cl_d(\opera
 \end{algorithmic}
 \end{algorithm}
 
-\begin{proposition}[Closure completeness]\label{prop:complete}
-If $\hat a$ is generated from reached operands by operations in $\opset$, expression depth at most $d$, and the audit's normalization and tolerance, then $\hat a\in\cl_d(\operands)$.
+\begin{proposition}[Closure completeness]
+\label{prop:complete}
+If $\hat a$ is generated from reached operands by operations in $\opset$,
+expression depth at most $d$, and the audit's normalization and tolerance,
+then $\hat a\in\cl_d(\operands)$.
 \end{proposition}
-\noindent\emph{Proof sketch.} Leaves occur in $S_0$. Induction on expression depth places each valid internal result in the next closure level. The root therefore appears by depth $d$; The full proof appears in~\ref{app:proofs}.
 
-The operating point is calibrated on 60 disjoint ConvFinQA examples and frozen at $d=2$ with relative tolerance $10^{-4}$. Context-wide numbers, held-out examples, and human labels do not change this setting.
+\noindent\emph{Proof sketch.}
+The operands form $S_0$. Induction on expression depth places every valid
+internal result in the next closure level, so the root appears by depth $d$.
+The full proof appears in~\ref{app:proofs}.
 
-\subsection{Semantic interface and governance decision}\label{sec:semanticinterface}
+A closure certificate establishes derivability from $\operands$; it does not
+carry the read-set guarantee of a replay certificate or identify the operation
+requested by $q$.
 
-The audit record exposes $q$, $P^*$, schema references, and replay output to the optional validator $V_q$. SQL tasks permit normalized-structure comparison and execution on generated database variants \citep{zhong2020testsuite}; other deployments may supply executable constraints, metamorphic relations, a model-based judge, or human review. The resulting semantic status is appended to the audit record without modifying its provenance outcome.
+\subsection{Semantic interface and governance}
+\label{sec:semanticinterface}
 
-A conservative decision policy delivers a provenance-certified answer when the semantic status is correct or unavailable under the deployment policy, and escalates semantically rejected or provenance-incomplete episodes. A uniquely localized mechanical mismatch can support an optional correction workflow; the present evaluation measures delivery and escalation and does not evaluate automated repair.
+\etitle{Semantic status.}
+The semantic interface consumes $q$, $P^*$, and the task specification $V_q$
+and returns $S(E;V_q)$. SQL tasks may compare normalized program structure or
+execute programs on database variants \citep{zhong2020testsuite}; other tasks
+may provide executable constraints, metamorphic relations, or human judgement.
+This status remains separate from $\mathsf{Audit}(E)$.
 
+\etitle{Governance.}
+A policy maps the two statuses to deliver, abstain, or escalate. A provenance
+certificate with incorrect semantics is withheld, while a failure or unknown
+provenance status is abstained from or escalated. A certificate with unknown
+semantic status is handled by deployment policy.
 
-
-\begin{remark}
-The provenance witness remains valid without a semantic validator. Semantic status is a separate, deployment-specific property.
-\end{remark}
-
-\subsection{Complexity and deterministic contract}
-
-Resolution and read reconciliation cost $O(|F_{\mathrm{decl}}|+|F_{\mathrm{host}}|)$. Replay adds one execution of the final program. If $N_j$ is the number of closure candidates before duplicate removal, $m=|\operands|$, and $r=|\opset|$, then $N_d\le m+r\sum_{j=1}^{d}N_{j-1}^2$. Restricting $S_0$ to reached operands reduces every recursive expansion. For a fixed trace, resolver, runtime, comparator, normalization, and depth, the provenance audit is deterministic and invokes no language model.
-
-\begin{table}[!t]
+\begin{table}[t]
 \centering
-\caption{Interface between independent statuses and downstream action.}
+\caption{Interface between audit statuses and governance actions.}
 \label{tab:policy}
 \scriptsize
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lll@{}}
 \toprule
-Provenance status & Semantic status & Default action \\
+Provenance status & Semantic status & Action \\
 \midrule
 certificate & correct & deliver \\
-certificate & unknown & deliver or review by policy \\
+certificate & unknown & deliver or review \\
 certificate & incorrect & abstain / escalate \\
 failure or unknown & any & abstain / escalate \\
-localized mismatch & correct/unknown & optional correction \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{Complexity and deterministic contract}
+
+\etitle{Cost and determinism.}
+Resolution and read reconciliation cost
+$O(|F_{\mathrm{decl}}|+|F_{\mathrm{host}}|)$, and replay adds one execution
+of $P^*$. If $n_j=|S_j|$ and $r=|\opset|$, closure level $j$ generates at
+most $r n_{j-1}^{2}$ candidates before normalization and duplicate removal.
+For a fixed trace, resolver, replay runtime, comparator, operation vocabulary,
+and depth, \ledger is deterministic and invokes no language model.

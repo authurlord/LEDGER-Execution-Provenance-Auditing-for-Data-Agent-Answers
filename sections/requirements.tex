@@ -1,45 +1,152 @@
-\section{What a Post-Execution Audit Must Establish}\label{sec:requirements}
+\section{Audit Relations and Guarantees}
+\label{sec:requirements}
 
-The motivating episode exposes three distinct decisions. The audit must identify which evidence the host computation was authorized to use, determine whether the final program reproduces the stated answer under that evidence view, and preserve the boundary between reproducibility and task intent. These decisions motivate the \ledger design in Section~\ref{sec:method}.
+Section~\ref{sec:problem} defines the completed episode and its
+audit interfaces. We now formalize the three audit relations
+summarized in Figure~\ref{fig:teaser}. Evidence authorization
+establishes the data view permitted by the agent's declaration.
+Execution reproducibility determines whether the final program
+reproduces the stated answer within that view. Semantic correctness
+independently evaluates whether the program implements the requested
+task. The first two relations determine the execution-provenance
+status; the third determines the semantic status.
 
-\subsection{Which evidence is authorized?}\label{sec:authorization}
+\subsection{Evidence authorization}
+\label{sec:authorization}
 
-An evidence view is complete when every declaration resolves. A completed host episode is evidence-authorized when
+The declared evidence first determines the data view against which
+the recorded execution is audited.
+
+\begin{definition}[Evidence authorization]
+\label{def:authorization}
+A completed episode $E$ is evidence-authorized when every declared
+evidence identifier resolves and
 \[
-F_{\mathrm{host}}\subseteq F_{\mathrm{res}}.
+F_{\mathrm{host}}\subseteq F_{\mathrm{res}},
+\qquad
+F_{\mathrm{res}}=R(F_{\mathrm{decl}}).
 \]
-An unresolved declaration and an undeclared host read are different failures: the first leaves a claimed source unavailable, whereas the second shows that the recorded computation depended on data outside the claimed boundary. Canonicalization occurs before either comparison so aliases and path variants do not create artificial mismatches.
+\end{definition}
 
-\subsection{Does the recorded execution reproduce the answer?}\label{sec:reproducible}
+The two conditions produce distinct audit evidence. An unresolved
+declaration identifies a claimed source that cannot be included in
+the evidence view. An undeclared host read identifies an observed
+execution dependency outside that view. Canonical resolution
+precedes the subset test so that aliases and path variants refer to
+the same data object.
 
-Let $H[F_{\mathrm{res}}]$ denote a replay environment that exposes only the resolved evidence view, and let $\operatorname{cmp}(\cdot,\cdot;\tol)$ be a frozen type-aware comparator. A replay certificate is issued exactly when
+Evidence authorization establishes $F_{\mathrm{res}}$ as the input
+view for restricted replay. It does not yet establish that the final
+program reproduces the stated answer.The running example violates this relation because 16
+fraud-and-other files read by $P^*$ are absent from
+$F_{\mathrm{res}}$.
+
+\subsection{Execution reproducibility}
+\label{sec:reproducible}
+
+Let
+\[
+\rho
+=
+\operatorname{Exec}_{\mathcal R_{\mathrm{replay}}}
+(P^*,F_{\mathrm{res}})
+=
+(s_{\mathrm{replay}},
+ v_{\mathrm{replay}},
+ F_{\mathrm{replay}},
+ \operands_{\mathrm{replay}})
+\]
+be the restricted replay record defined in
+Section~\ref{sec:statuses}. A replay certificate is issued exactly
+when
 \begin{equation}
 \begin{aligned}
 \operatorname{Cert}_{\mathrm{replay}}(E)=1
 \ \Longleftrightarrow\quad
-&F_{\mathrm{res}}=R(F_{\mathrm{decl}})\text{ is complete},\\
-&F_{\mathrm{host}}\subseteq F_{\mathrm{res}},\quad
-  s_{\mathrm{host}}=\mathrm{success},\\
-&\rho=\operatorname{Replay}(P^*,H[F_{\mathrm{res}}]),\\
-&s_{\mathrm{replay}}=\mathrm{success},\quad
-  F_{\mathrm{replay}}\subseteq F_{\mathrm{res}},\\
-&\operatorname{cmp}(v_{\mathrm{replay}},\hat a;\tol)=1.
+&F_{\mathrm{res}}=R(F_{\mathrm{decl}})
+  \text{ is complete},\\
+&F_{\mathrm{host}}\subseteq F_{\mathrm{res}},
+  \quad s_{\mathrm{host}}=\mathrm{success},\\
+&\rho=
+  \operatorname{Exec}_{\mathcal R_{\mathrm{replay}}}
+  (P^*,F_{\mathrm{res}}),\\
+&s_{\mathrm{replay}}=\mathrm{success},
+  \quad F_{\mathrm{replay}}\subseteq F_{\mathrm{res}},\\
+&\operatorname{cmp}_{\tol}
+  (v_{\mathrm{replay}},\hat a)=1.
 \end{aligned}
 \label{eq:replaycert}
 \end{equation}
-The witness stores the program snapshot, resolved evidence identifiers, host and replay reads, replay output, comparator, and tolerance.
 
-\begin{theorem}[Relative soundness of replay]\label{thm:relative}
-Under the trust assumptions of Section~\ref{sec:threat}, a replay certificate establishes that the stated answer is reproduced by $P^*$ using only resolved declared evidence, and that no observed host or replay data dependency lies outside that evidence view. Any unresolved declaration, undeclared host read, replay boundary violation, execution failure, missing comparable output, or answer mismatch prevents the certificate.
+The replay witness stores the final program snapshot, resolved
+evidence identifiers, host and replay reads, replay output,
+comparator, and tolerance.
+
+\begin{theorem}[Relative soundness of replay]
+\label{thm:relative}
+Under the trusted execution model of
+Section~\ref{sec:threat}, a replay certificate establishes that
+$P^*$ reproduces $\hat a$ within the resolved declared evidence
+view, and that all observed host and replay data reads remain
+inside that view.
 \end{theorem}
-\noindent\emph{Proof sketch.} Equation~\ref{eq:replaycert} requires evidence resolution, read authorization, successful restricted execution, and output agreement. The trusted logger and sandbox make the two read-set inclusions observable and enforceable. Violating any conjunct follows a failure branch in Algorithm~\ref{alg:audit}; the full argument appears in~\ref{app:proofs}.
 
-\subsection{What remains outside provenance auditing?}\label{sec:nonimplication}
+\noindent\emph{Proof sketch.}
+Equation~\ref{eq:replaycert} requires complete evidence resolution,
+authorized host reads, restricted replay, authorized replay reads,
+and output agreement. The trusted logger, resolver, replay runtime,
+and comparator make these conditions observable and enforceable.
+The full proof appears in Appendix~\ref{app:proofs}.
 
-A replay witness describes the program that ran. It does not compare that program with the operation requested by $q$. The same limitation applies to arithmetic derivability when a different operation over the same operands reaches the same value.
+The guarantee is relative to the recorded final program and the
+resolved evidence view. It establishes how the stated answer was
+reproduced, while leaving the question--program relation to the
+semantic audit. Its restricted replay additionally returns a null result, so
+$\operatorname{cmp}_{\tol}(v_{\mathrm{replay}},\hat a)=\bot$.
 
-\begin{proposition}[Semantic non-implication]\label{prop:semantic}
-There exist episodes for which $\operatorname{Cert}_{\mathrm{replay}}(E)=1$ or $\hat a\in\cl_d(\operands)$ while $S(E;V_q)=\mathrm{incorrect}$. Consequently, execution-provenance status alone does not imply semantic correctness.
+\subsection{Semantic correctness}
+\label{sec:nonimplication}
+
+Semantic correctness evaluates whether $P^*$ implements the
+task-specific specification $V_q$ for question $q$:
+\[
+S(E;V_q)
+\in
+\{
+\mathrm{correct},
+\mathrm{incorrect},
+\mathrm{unknown}
+\}.
+\]
+Depending on the task, this relation may inspect the requested
+aggregation, predicates, selected scope, output type, or other
+executable constraints. It is evaluated independently of whether
+the recorded program reproduces the stated answer.
+
+\begin{proposition}[Semantic non-implication]
+\label{prop:semantic}
+There exist completed episodes for which
+\[
+\operatorname{Cert}_{\mathrm{replay}}(E)=1
+\qquad\text{and}\qquad
+S(E;V_q)=\mathrm{incorrect}.
+\]
+Consequently, execution-provenance consistency does not imply
+semantic correctness.
 \end{proposition}
 
-A sum and a mean can coincide on a particular database, and a wrong filter can leave the current output unchanged. This property motivates the independent semantic branch in Figure~\ref{fig:architecture} and the same-output SQL evaluation in Section~\ref{sec:rq3}.
+\noindent\emph{Proof sketch.}
+Choose two programs with different task semantics but identical
+outputs on the current data. Replay certifies the submitted
+program's output, while the task-specific validator rejects its
+operation. Appendix~\ref{app:proofs} gives the full argument.
+
+For example, a sum and an average coincide after filtering to one
+row, and an incorrect predicate may leave the result unchanged on
+the current database. Such episodes are reproducible but violate
+the task specification. The same separation applies to the bounded
+closure introduced in Section~\ref{sec:closure}: derivability from
+reached operands does not identify the operation requested by the
+question. This distinction motivates the independent semantic
+branch in Figure~\ref{fig:teaser} and the same-output SQL evaluation
+in Section~\ref{sec:rq3}.

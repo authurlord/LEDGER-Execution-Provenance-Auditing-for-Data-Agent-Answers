@@ -1,47 +1,228 @@
-\section{Audit Problem and Trust Model}\label{sec:problem}
+\section{Data-Agent Execution and Audit Setting}
+\label{sec:problem}
 
-\subsection{Completed episode and trace contract}
+\subsection{Data-agent environment and completed episode}
+\label{sec:episode}
 
-A completed data-agent episode is
-\[
-E=(q,\mathcal D,\tau,\hat a),
-\]
-where $q$ is the question, $\mathcal D$ is the accessible data environment, $\hat a$ is the stated answer, and $\tau$ is the final host trace. We write
-\[
-\tau=(P^*,F_{\mathrm{decl}},F_{\mathrm{host}},\operands,
-      s_{\mathrm{host}},v_{\mathrm{host}}).
-\]
-Here $P^*$ is the final program snapshot, $F_{\mathrm{decl}}$ is the evidence declared by the agent, $F_{\mathrm{host}}$ contains observed data-source reads in the instrumented namespace, $\operands$ contains values reached by the final computation, and $(s_{\mathrm{host}},v_{\mathrm{host}})$ records host execution status and comparable output when available. Program versions, tool calls, exceptions, and timestamps remain in the full record but are omitted from the tuple.
+\etitle{Environment.}
+A data-agent environment is
+$\mathcal E=(\mathcal D,\mathcal K,\mathcal T,
+\mathcal R_{\mathrm{host}})$, where $\mathcal D$ contains typed
+executable data objects, $\mathcal K$ contains schemas, catalog metadata,
+task instructions, and other planning knowledge, $\mathcal T$ is the tool
+set, and $\mathcal R_{\mathrm{host}}$ executes data programs. Any object
+from $\mathcal K$ read by the final program is registered in $\mathcal D$
+and treated as an execution dependency.
 
-A canonical resolver maps declarations into an evidence view
-\[
-F_{\mathrm{res}}=R(F_{\mathrm{decl}})
- =\{\operatorname{canon}(f):f\in F_{\mathrm{decl}},\ f\text{ resolves}\}.
-\]
-During audit, restricted replay produces
-\[
-\rho=(F_{\mathrm{replay}},s_{\mathrm{replay}},v_{\mathrm{replay}}),
-\]
-where $F_{\mathrm{replay}}$ records reads observed inside the replay sandbox. Keeping host reads and replay reads separate distinguishes an undeclared dependency in the original episode from a boundary violation during verification.
+\etitle{Agent output.}
+A data agent $\mathcal A$ answers question $q$ through actions
+$u_t=\mathcal A(q,h_{t-1})$, where $h_{t-1}$ contains earlier actions and
+tool observations. On termination, it submits
+$(P^*,F_{\mathrm{decl}},\hat a)$: the final executable program
+$P^*\in\mathcal L$, declared evidence identifiers
+$F_{\mathrm{decl}}\subseteq\mathcal I$, and stated answer
+$\hat a\in\mathcal Y$. Our live-trace adapters support SQL and
+Python/pandas; the bounded arithmetic language used without replay is
+defined in Section~\ref{sec:closure}.
 
-The audit output is
-\[
-\mathsf{Audit}(E)\in
+\etitle{Execution record.}
+For runtime $\mathcal R$, program $P$, and mounted data view
+$F\subseteq\mathcal D$, let
+$\operatorname{Exec}_{\mathcal R}(P,F)
+=(s,v,F_{\mathrm{read}},\operands)$ return execution status $s$, output
+$v\in\mathcal Y\cup\{\bot\}$, observed reads $F_{\mathrm{read}}$, and the
+multiset $\operands$ of scalar values reaching the final computation.
+Here $\bot$ denotes the absence of a comparable output. The final host
+execution is
+$\operatorname{Exec}_{\mathcal R_{\mathrm{host}}}(P^*,\mathcal D)
+=(s_{\mathrm{host}},v_{\mathrm{host}},F_{\mathrm{host}},\operands)$.
+We freeze
+$\tau=(P^*,F_{\mathrm{decl}},F_{\mathrm{host}},\operands,
+ s_{\mathrm{host}},v_{\mathrm{host}})$ and define the completed episode as
+$E=(q,\mathcal E,\tau,\hat a)$. The full log may additionally retain
+program revisions, tool calls, exceptions, and timestamps.
+
+\begin{table}[t]
+\centering
+\caption{Notation for data-agent execution and post-execution auditing.}
+\label{tab:notation}
+\scriptsize
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}p{0.31\columnwidth}X@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+\multicolumn{2}{@{}l}{\textit{Data-agent execution}} \\[-1pt]
+$q,\mathcal A,h_t,u_t$
+& Question, data agent, interaction history, and action at turn $t$. \\
+$\mathcal E=(\mathcal D,\mathcal K,\mathcal T,
+\mathcal R_{\mathrm{host}})$
+& Executable data, planning knowledge, tools, and host runtime. \\
+$\mathcal I,\mathcal L,\mathcal Y$
+& Evidence-identifier space, program language, and answer domain. \\
+$P^*,F_{\mathrm{decl}},\hat a$
+& Final program, declared evidence identifiers, and stated answer. \\
+$\operatorname{Exec}_{\mathcal R}(P,F)$
+& Execution returning status, output, observed reads, and reached operands. \\
+$\tau,E$
+& Frozen host trace and completed data-agent episode. \\
+\addlinespace[2pt]
+\multicolumn{2}{@{}l}{\textit{Post-execution audit}} \\[-1pt]
+$R,F_{\mathrm{res}}$
+& Canonical resolver and resolved declared-evidence view. \\
+$F_{\mathrm{host}},F_{\mathrm{replay}}$
+& Reads observed during host execution and restricted replay. \\
+$\operands,\rho$
+& Program-reached operands and restricted-replay record. \\
+$\operatorname{cmp}_{\tol}$
+& Deterministic type-aware output comparator. \\
+$V_q,S(E;V_q)$
+& Task specification and independent semantic status. \\
+$\mathsf{Audit}(E),c$
+& Execution-provenance outcome and its failure-code set. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Audit task and trust model}
+\label{sec:statuses}
+\label{sec:threat}
+
+\etitle{Resolved view and replay.}
+The canonical resolver $R:\mathcal I\rightarrow\mathcal D\cup\{\bot\}$
+maps each declared identifier to a registered data object. The resolved view
+is $F_{\mathrm{res}}=\{R(f):f\in F_{\mathrm{decl}},R(f)\neq\bot\}$ and is
+complete when every declaration resolves. Restricted replay produces
+$\rho=\operatorname{Exec}_{\mathcal R_{\mathrm{replay}}}
+(P^*,F_{\mathrm{res}})
+=(s_{\mathrm{replay}},v_{\mathrm{replay}},F_{\mathrm{replay}},
+\operands_{\mathrm{replay}})$.
+
+\etitle{Audit outputs.}
+A fixed comparator
+$\operatorname{cmp}_{\tol}:\mathcal Y\times\mathcal Y
+\rightarrow\{1,0,\bot\}$ returns agreement, mismatch, or non-comparability;
+numeric outputs use tolerance $\tol$, and structured outputs use
+deterministic normalization. The execution-provenance audit returns
+$\mathsf{Audit}(E)\in
 \{\cert_{\mathrm{replay}},\cert_{\mathrm{closure}},
-  \failure(c),\unknown\}.
-\]
-A failure records an observed violation and its witness; $\unknown$ records insufficient evidence or an unavailable runtime. This distinction prevents missing evidence from being interpreted as a detected error.
+\failure(c),\unknown\}$, where a certificate carries an execution or
+expression witness, $c$ stores one or more observed failure codes and their
+trace evidence, and $\unknown$ denotes that neither a certificate nor an
+explicit failure is established.
 
-\subsection{Independent provenance and semantic statuses}\label{sec:statuses}
+Semantic validation independently returns
+$S(E;V_q)\in\{\mathrm{correct},\mathrm{incorrect},\mathrm{unknown}\}$ for a
+task-specific specification $V_q$, such as reference SQL, executable
+constraints, database variants, metamorphic relations, or human judgement.
+The provenance status evaluates the program--evidence--answer relation; the
+semantic status evaluates the question--program relation.
 
-The provenance status is produced by \ledger from $\tau$, $R$, a restricted runtime, and a frozen comparator. Semantic validation receives a task-specific specification $V_q$ and returns
-\[
-S(E;V_q)\in\{\mathrm{correct},\mathrm{incorrect},\mathrm{unknown}\}.
-\]
-Depending on the task, $V_q$ may contain reference SQL, a normalized program specification, database variants, executable constraints, metamorphic relations, or a human judgement. The provenance and semantic statuses are stored as independent fields. Neither is used as an input to the other.
+% \etitle{Three audit relations.}
+A completed episode induces evidence authorization
+$F_{\mathrm{host}}\leftrightarrow F_{\mathrm{res}}$, execution
+reproducibility $(P^*,F_{\mathrm{res}})\leftrightarrow\hat a$, and semantic
+correctness $(q,V_q)\leftrightarrow P^*$. The first checks whether observed
+host reads remain within the resolved declared view; the second checks whether
+$P^*$ reproduces $\hat a$ in that view; the third checks whether $P^*$
+implements the task specification. Section~\ref{sec:requirements} gives their
+certificate conditions and guarantees.
 
-\subsection{Threat and trust assumptions}\label{sec:threat}
+\etitle{Trusted components.}
+The host agent, generated program, declared evidence, host execution, and
+stated answer are audited objects. \ledger trusts the trace logger, canonical
+resolver, restricted replay runtime, and type-aware comparator. A certificate
+is relative to the integrity and coverage of these components; tampered logs,
+sandbox violations, external nondeterminism, or uninstrumented dependencies
+produce $\unknown$ or a platform-level failure rather than a certificate.
 
-The host agent, generated program, stated answer, and declared citations are fallible. The trusted computing base consists of the trace logger, canonical resolver, restricted replay sandbox, and type-aware comparator. The analysis assumes that the logger captures the final program snapshot and all data-source reads in the instrumented namespace, the resolver maps identifiers consistently, and the sandbox enforces its mounted evidence view. These assumptions make the guarantee relative to recorded execution evidence.
+\etitle{Running example.}
+In the identity-theft episode, all 17 declarations resolve, so
+$|F_{\mathrm{decl}}|=|F_{\mathrm{res}}|=17$. A reconstruction from the
+preserved final program, confirmed by a fresh trace, gives
+$|F_{\mathrm{host}}|=17$ but
+$|F_{\mathrm{host}}\cap F_{\mathrm{res}}|=1$; hence
+$F_{\mathrm{host}}\nsubseteq F_{\mathrm{res}}$. Host execution succeeds with
+$v_{\mathrm{host}}=\hat a=10{,}724.1429$. Restricted replay also exits
+normally, but returns \texttt{\{"main-task": null\}}, represented as
+$v_{\mathrm{replay}}=\bot$ and
+$\operatorname{cmp}_{\tol}(v_{\mathrm{replay}},\hat a)=\bot$. Thus
+$\mathsf{Audit}(E)=\failure(c)$ with
+$c=\{\mathrm{undeclared\ host\ read},
+\mathrm{missing\ comparable\ output}\}$; no replay certificate is issued.
 
-Tampering with the logger, sandbox escape, nondeterministic external services, and dependencies outside the instrumented namespace are outside the present guarantee. Such events should yield $\unknown$ or a platform-level security failure rather than an execution-provenance certificate. This scope aligns the paper with post-execution auditing: it provides action recoverability and evidence integrity for computed answers, while lifecycle-wide accountability requires additional controls \citep{nian2026auditable}.
+
+\begin{table}[t]
+\centering
+\caption{Notation for data-agent execution and post-execution auditing.}
+\label{tab:notation}
+\scriptsize
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{@{}p{0.31\columnwidth}X@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+
+\multicolumn{2}{@{}l}{\textit{Data-agent execution}} \\[-1pt]
+
+$q,\mathcal A,h_t,u_t$
+&
+Question, data agent, interaction history, and action at turn
+$t$. \\
+
+$\mathcal E=(\mathcal D,\mathcal K,\mathcal T,
+\mathcal R_{\mathrm{host}})$
+&
+Data-agent environment: executable data objects, planning
+knowledge, tools, and host runtime. \\
+
+$\mathcal L,\mathcal Y,P^*,\hat a$
+&
+Supported host-program language, answer domain, final program,
+and stated answer. \\
+
+$\operatorname{Exec}_{\mathcal R}(P,F)$
+&
+Execution of program $P$ in runtime $\mathcal R$ with mounted
+data view $F$, returning status, output, observed reads, and
+reached operands. \\
+
+$\tau,E$
+&
+Frozen host trace and completed data-agent episode. \\
+
+\addlinespace[2pt]
+\multicolumn{2}{@{}l}{\textit{Post-execution audit}} \\[-1pt]
+
+$F_{\mathrm{decl}},F_{\mathrm{res}}$
+&
+Evidence declared by the agent and its canonical resolved view. \\
+
+$F_{\mathrm{host}},F_{\mathrm{replay}}$
+&
+Data-source reads observed during host execution and restricted
+replay. \\
+
+$\operands,\rho$
+&
+Program-reached operands and restricted-replay record. \\
+
+$R,\operatorname{cmp}_{\tol}$
+&
+Canonical evidence resolver and deterministic type-aware output
+comparator. \\
+
+$V_q,S(E;V_q)$
+&
+Task-specific specification and independent semantic status. \\
+
+$\mathsf{Audit}(E)$
+&
+Execution-provenance outcome: replay certificate, closure
+certificate, localized failure, or unknown. \\
+
+\bottomrule
+\end{tabularx}
+\end{table}
