@@ -1,0 +1,116 @@
+\section{Evaluation}\label{sec:evaluation}
+
+\subsection{Questions and evidence layers}\label{sec:setup}
+
+We ask four questions.
+\begin{description}
+\item[RQ1] How does operand-constrained auditing compare with ordinary numeric, trace-rule, anomaly, and model-based checks?
+\item[RQ2] Does the frozen audit transfer across datasets, and how does closure depth expose its recall--collision trade-off?
+\item[RQ3] Which semantic changes remain invisible to output replay, and what complementary checks recover them?
+\item[RQ4] Does replay-certificate delivery improve the quality of answers sent to users or downstream systems?
+\end{description}
+
+Table~\ref{tab:datasets} summarizes five testbed families. Program-labelled corpora provide construction-grounded supported and unsupported pairs. WikiSQL provides controlled program perturbations. KramaBench and DABstep provide completed live traces. Human annotation covers 40 KramaBench episodes; one unclear case is omitted from binary analysis.
+
+\begin{table*}[t]
+\centering
+\caption{Evaluation layers. The five families isolate arithmetic derivability, SQL semantics, live execution provenance, and human-facing delivery.}
+\label{tab:datasets}
+\small
+\begin{tabular}{@{}llrrl@{}}
+\toprule
+Layer & Dataset & Total & Evaluable & Primary use \\
+\midrule
+Program-labelled & ConvFinQA remainder & 388 & 386 & calibration-free arithmetic audit and baselines \\
+Program-labelled & MultiHiertt & 7,830 & 6,301 & transfer and derivation-depth stress \\
+Controlled SQL & WikiSQL & 500 queries & 2,715 perturbations & same-output semantic changes \\
+Live traces & KramaBench & 166 & 166 & replay, failures, selective delivery \\
+Live traces & DABstep & 60 & 60 & selection-free transfer \\
+Human labels & KramaBench sample & 40 & 39 & support, semantic boundary, escalation \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\etitle{Ordinary baselines.}
+Numeric baselines include exact operand matching, one-operation derivability, and closure over all numbers in the cited context. Trace rules check execution success, citation resolution, declared-read coverage, and unrestricted replay. Anomaly baselines use robust MAD distance, Isolation Forest \citep{liu2008isolation}, Local Outlier Factor \citep{breunig2000lof}, and one-class SVM \citep{scholkopf2001support}. Their thresholds use only the 60-example calibration seed and retain at least 90\% calibration support recall. A supervised logistic model provides an upper baseline. No anomaly feature contains the audit verdict or benchmark answer.
+
+\etitle{Evidence-aware judge.}
+A local Qwen3.6-35B judge receives the question, declared evidence metadata, reads, program summary, execution status, recomputed output, and stated answer. It receives neither benchmark gold nor \ledger labels. Three temperature-zero repeats quantify response stability. Transferred human records omit most raw rows and full program bodies, so that subset remains a limited-evidence diagnostic.
+
+\subsection{RQ1: Trace-local operands separate derivations from numeric coincidence}\label{sec:rq1}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.99\textwidth]{fig_baselines_semantics_3panel.pdf}
+\caption{Ordinary baselines and the semantic complement. Higher is better on both axes in (a,b); the star marks LEDGER. Panel (c) evaluates controlled SQL changes whose original-database outputs remain unchanged.}
+\label{fig:baselines}
+\end{figure*}
+
+\etitle{Trace-local operands preserve multi-step derivations while suppressing unrelated numbers.}
+ConvFinQA supplies 386 evaluable supported derivations and aligned cross-example unsupported answers; MultiHiertt supplies 6,301 aligned pairs. The frozen checker uses reached operands, five operations, depth 2, and relative tolerance $10^{-4}$. Compared with a single-operation check, \ledger raises balanced accuracy by 9.3 points on ConvFinQA and 18.0 points on MultiHiertt. Closure over all cited-context numbers recovers more supported cases than one-step checking but admits many accidental collisions. Exact counts appear in Table~\ref{tab:baselines} and Figure~\ref{fig:baselines}(a,b).
+
+\begin{table}[t]
+\centering
+\caption{ConvFinQA ordinary baselines on the held-out remainder.}
+\label{tab:baselines}
+\scriptsize
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Method & Support recall & Unsupported detection \\
+\midrule
+Single operation & 276/386 (0.715) & 383/386 (0.992) \\
+All cited numbers & 332/386 (0.860) & 240/386 (0.622) \\
+Isolation Forest & 351/388 (0.905) & 74/388 (0.191) \\
+Supervised upper & 349/388 (0.899) & 230/388 (0.593) \\
+\textbf{LEDGER} & \textbf{360/386 (0.933)} & \textbf{371/386 (0.961)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\etitle{Generic anomaly scores do not establish a computational witness.}
+Isolation Forest, Local Outlier Factor, and one-class SVM retain most supported cases but detect only 13.7--19.8\% of unsupported constructions. Their trace features identify unusual executions; they do not show that an answer has a derivation from the reached values. Restricting closure to program-reached operands preserves the relevant search space and removes unrelated numbers before recursive expansion. The same operating point transfers from conversational finance programs to longer hierarchical table-and-text derivations without retuning.
+
+\subsection{RQ2: Depth recovers derivations and expands the semantic collision surface}\label{sec:rq2}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_depth_ablation_3panel.pdf}
+\caption{Closure depth trades derivation coverage for a larger collision surface; the star marks the frozen depth-2 setting.}
+\label{fig:ablation}
+\end{figure}
+
+\etitle{The frozen depth captures short programs; longer programs account for most remaining misses.}
+We stratify MultiHiertt by gold program depth and vary closure depth on the disjoint ConvFinQA calibration seed. Recall is highest for programs within the frozen bound, and 72.3\% of MultiHiertt misses exceed depth 2. Raising the calibration depth from 1 to 3 recovers every supported seed derivation, while cross-example rejection drops sharply (Figure~\ref{fig:ablation}). The depth-2 setting therefore remains a bounded operating point rather than an attempt to enumerate arbitrary programs.
+
+\etitle{Depth enlarges the semantic collision surface.}
+We replace each ConvFinQA answer with a different operation over the same operands. At the frozen vocabulary and depth, none of 347 in-scope wrong-operation substitutions is rejected. Deeper closure accepts still more such variants because the altered answers remain derivable from the same values. Cross-example swaps remain much easier to detect because they are generally unrelated to the reached operands. This contrast instantiates Proposition~\ref{prop:semantic}: closure records arithmetic derivability, while operation identity belongs to the semantic validator.
+
+\subsection{RQ3: Structural validation recovers same-output program changes}\label{sec:rq3}
+
+\etitle{Output equality under-detects controlled semantic edits.}
+From 500 executable WikiSQL development examples, we construct 2,715 perturbations that change aggregation, projection, predicate column or value, and predicate presence. The study is a controlled semantic pilot rather than an estimate of natural agent-error prevalence. Output equality misses 466 edits because the modified and reference programs happen to return the same result on the original database.
+
+\etitle{Program structure complements replay on the same-output subset.}
+Normalized SQL structure detects every controlled edit and accepts every paired unmodified query. On a 100-case same-output sample, operator/clause signatures detect 67 edits and differential execution detects 27, while replay detects none (Figure~\ref{fig:baselines}c). A single denotation can remain unchanged after an operation or predicate edit; structural comparison observes the changed program directly, whereas test-suite execution succeeds only when generated database variants distinguish the two programs. SQL deployments can therefore instantiate $V_q$ with structure and test-suite methods \citep{zhong2020testsuite}; model-based metrics such as FLEX remain a complementary option when reference programs are unavailable \citep{kim2025flex}.
+
+\subsection{RQ4: Replay certificates support selective delivery}\label{sec:rq4}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_governance_3panel.pdf}
+\caption{Replay-based delivery raises support precision, escalates unsupported cases, and improves live-episode utility at partial coverage.}
+\label{fig:governance}
+\end{figure}
+
+\etitle{Replay status provides a human-facing delivery signal.}
+The live corpus contains 166 KramaBench episodes and 60 DABstep episodes. The human subset contains 39 clear labels. Restricting delivery to replay-certified cases retains every human-supported episode, escalates most unsupported episodes, and raises support precision by 24.2 points (Figure~\ref{fig:governance}a,b). The replay-certified unsupported cases compute a reproducible value through a program that addresses the wrong quantity, scope, or operation, which again separates provenance from semantics.
+
+\etitle{The same signal improves utility on scored live episodes.}
+Among the 148 KramaBench episodes with finite official scores, replay delivery operates at 64.2\% coverage and raises mean delivered score from 0.307 to 0.429; uniform random selection at the same size remains at 0.307. DABstep shows the same boundary because several benchmark-incorrect answers remain replayable. The policy improves which completed episodes are delivered; it does not change source selection, program generation, or host-agent execution.
+
+\subsection{Runtime, determinism, and model baseline}\label{sec:runtime}
+
+\etitle{Deterministic bookkeeping is small relative to host execution.}
+Across 500 saved records, the audit adds sub-millisecond median bookkeeping and makes zero model calls. Five independent repeats over 100 records produce identical provenance outcomes. These measurements cover record parsing, comparison, and closure over saved traces; they exclude host-agent execution and external data loading.
+
+An evidence-aware 35B judge provides a model-based diagnostic but shows label disagreement, structured-output failures, and occasional repeat flips. The complete counts appear in Appendix~\ref{app:tables}. Judge outputs remain separate from the deterministic provenance status.

@@ -1,0 +1,48 @@
+\appendix
+\section{Proofs}\label{app:proofs}
+
+\subsection{Theorem~\ref{thm:relative}}
+A replay certificate is returned only after every declaration resolves, both observed read sets lie within the resolved evidence view, host and replay execution succeed, and the frozen comparator matches replay output to the stated answer. Under the trust assumptions, these observations correspond to the recorded data dependencies and the sandbox-enforced execution. Each listed violation negates at least one required conjunct in Equation~\ref{eq:replaycert} and follows a failure branch in Algorithm~\ref{alg:audit}; hence no replay certificate is returned.
+
+\subsection{Proposition~\ref{prop:complete}}
+At depth zero, every leaf is a reached operand and belongs to $S_0$. Assume every valid expression of depth at most $j-1$ is represented in $S_{j-1}$. An expression of depth $j$ has the form $o(e_1,e_2)$ with $o\in\opset$ and child depth at most $j-1$. The induction hypothesis places both child values in $S_{j-1}$; Algorithm~\ref{alg:closure} adds their valid normalized result to $S_j$. The root therefore appears by depth $d$.
+
+\subsection{Proposition~\ref{prop:semantic}}
+Replay compares the submitted program's output with the stated answer under the declared evidence view. Closure tests whether the answer has an admitted derivation from reached operands. Neither predicate compares the submitted program with $V_q$. Choose two programs with different task semantics but identical output on the current database, or two different admitted arithmetic expressions with the same result. The provenance predicate holds while the semantic validator rejects the altered program.
+
+\section{Additional Result Tables}\label{app:tables}
+
+\begin{table}[ht]
+\centering
+\caption{Canonical live audit distributions.}
+\scriptsize
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Dataset & Total & Replay & Failure & Unknown \\
+\midrule
+KramaBench & 166 & 107 & 3 & 56 \\
+DABstep & 60 & 43 & 0 & 17 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Evidence-aware local judge. Agreement uses construction or human labels; the human row has limited archived evidence.}
+\scriptsize
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Dataset & Agreement & Flip items & Parse failures \\
+\midrule
+ConvFinQA constructed & 170/200 & 4/200 & \multirow{3}{*}{29/870} \\
+KramaBench human & 25/39 & 1/39 & \\
+WikiSQL perturbations & 44/50 & 3/50 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Human Annotation and Reproducibility}\label{app:human}
+
+The 40-row sample spans archeology, environment, legal, and wildfire domains. Annotators receive the question, cited files, final program or available program summary, stated answer, replay output, and evidence notes. The support label asks whether the stated answer follows from the cited data through the recorded computation and whether that computation addresses the requested quantity. The benchmark answer and machine label are hidden. Labels are yes, no, and unclear; one unclear case is excluded from binary analysis.
+
+Machine outputs are frozen before annotation. Human columns remain in a separate file and are never used to rewrite audit labels. The reproducibility package contains the operating point, per-example arithmetic records, live trace records, semantic perturbations, baseline scripts, figure-generation code, and SHA-256 manifests. Every rate in the paper is recoverable from machine-readable counts.

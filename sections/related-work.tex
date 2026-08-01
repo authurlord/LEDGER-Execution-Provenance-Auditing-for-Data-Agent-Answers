@@ -1,0 +1,13 @@
+\section{Related Work}\label{sec:related}
+
+\paragraph{Data-agent evaluation.}
+KramaBench evaluates data-to-insight pipelines over heterogeneous lake files \citep{kramabench2025}; DABstep targets multi-step tool-based analysis \citep{dabstep2025}. LakeQA scales discovery and reasoning to a million-scale lake \citep{lakeqa2026}. SANA decomposes failures across search, planning, analysis, and policy \citep{sana2026}. These benchmarks motivate process-level evidence in addition to final-answer accuracy.
+
+\paragraph{Execution provenance and auditability.}
+Database provenance formalizes how outputs depend on inputs \citep{green2007provenance,cheney2009provenance,amsterdamer2011aggregate}. noWorkflow and Vamsa capture dependencies in data-science scripts \citep{murta2014noworkflow,namaki2020vamsa}. Agent-trace work organizes retrieved evidence, tool outputs, memory, actions, and final claims under process-level accountability \citep{agenttrace2026}. Auditable Agents distinguishes accountability, auditability, and auditing and identifies action recoverability and evidence integrity as core dimensions \citep{nian2026auditable}. \ledger operationalizes these dimensions for completed computed answers and their declared evidence view.
+
+\paragraph{Agent governance, security, and trace evaluation.}
+Contextual security frameworks separate task alignment, action alignment, source authorization, and data isolation \citep{siu2026security}; intent-to-execution integrity further separates tool, instruction, judgment, and data-flow properties \citep{qu2026intent}. The provenance status in \ledger covers an observed source and execution boundary, while its task-specific semantic interface addresses a separate alignment relation. TrustAgent intervenes before, during, and after planning through an agent constitution \citep{hua2024trustagent}; \ledger instead audits a completed episode. ToolEmu, AgentDojo, and R-Judge establish tool trajectories as standard evaluation objects \citep{ruan2024toolemu,debenedetti2024agentdojo,yuan2024rjudge}.
+
+\paragraph{Citation, semantic, and selective evaluation.}
+ALCE and FActScore evaluate textual citation support and factual claims \citep{gao2023alce,min2023factscore}. Text-to-SQL test suites approximate semantic equivalence through execution on multiple database variants \citep{zhong2020testsuite}; FLEX uses an LLM-based expert metric to reduce execution-metric errors \citep{kim2025flex}. Selective QA trades coverage for reliability using confidence \citep{kamath2020selective}. \ledger derives its delivery signal from a replay witness and retains task-specific semantic evaluation as an independent control.

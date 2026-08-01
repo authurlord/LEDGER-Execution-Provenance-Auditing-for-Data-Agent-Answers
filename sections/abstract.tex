@@ -1,0 +1,27 @@
+Data agents answer questions by selecting sources, writing SQL or Python
+programs, executing them, and reporting computed values. Auditing these
+answers requires connecting the stated answer to the final program, declared
+evidence, and data actually read. We present \ledger, a deterministic
+post-execution audit layer that canonicalizes declared sources, reconciles
+observed reads, replays the final program within a citation-restricted evidence
+view, and returns a replay certificate, a localized failure, or an unknown
+status. When replay is unavailable, bounded closure over program-reached
+operands provides a closure certificate. \ledger also exposes a task-specific
+semantic-validation interface, keeping program intent separate from execution
+provenance.
+
+We evaluate these capabilities across three increasingly realistic evidence
+regimes. On WikiSQL, instantiating the semantic interface with normalized SQL
+structure detects all 2,715 controlled semantic perturbations, including 466
+that preserve the original execution result, with no false positives on 500
+unmodified reference queries. On ConvFinQA and MultiHiertt, \ledger recovers
+89.6--93.3\% of reference derivations while rejecting 96.1--97.2\% of
+cross-example unsupported answers; standard anomaly detectors reject fewer
+than 20\% under the same high-recall calibration. On human-labelled
+KramaBench episodes, replay-based selection raises the proportion of delivered
+answers judged supported from 28.2\% to 52.4\% while retaining every supported
+case; on 148 scored live episodes, it increases the mean official score from
+0.307 to 0.429 at 64.2\% coverage. \ledger is deterministic, makes zero model
+calls, and adds sub-millisecond bookkeeping on saved traces. These results
+show that execution-provenance auditing and task-specific semantic validation
+provide complementary evidence for selective delivery and escalation.

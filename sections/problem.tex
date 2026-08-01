@@ -1,0 +1,47 @@
+\section{Audit Problem and Trust Model}\label{sec:problem}
+
+\subsection{Completed episode and trace contract}
+
+A completed data-agent episode is
+\[
+E=(q,\mathcal D,\tau,\hat a),
+\]
+where $q$ is the question, $\mathcal D$ is the accessible data environment, $\hat a$ is the stated answer, and $\tau$ is the final host trace. We write
+\[
+\tau=(P^*,F_{\mathrm{decl}},F_{\mathrm{host}},\operands,
+      s_{\mathrm{host}},v_{\mathrm{host}}).
+\]
+Here $P^*$ is the final program snapshot, $F_{\mathrm{decl}}$ is the evidence declared by the agent, $F_{\mathrm{host}}$ contains observed data-source reads in the instrumented namespace, $\operands$ contains values reached by the final computation, and $(s_{\mathrm{host}},v_{\mathrm{host}})$ records host execution status and comparable output when available. Program versions, tool calls, exceptions, and timestamps remain in the full record but are omitted from the tuple.
+
+A canonical resolver maps declarations into an evidence view
+\[
+F_{\mathrm{res}}=R(F_{\mathrm{decl}})
+ =\{\operatorname{canon}(f):f\in F_{\mathrm{decl}},\ f\text{ resolves}\}.
+\]
+During audit, restricted replay produces
+\[
+\rho=(F_{\mathrm{replay}},s_{\mathrm{replay}},v_{\mathrm{replay}}),
+\]
+where $F_{\mathrm{replay}}$ records reads observed inside the replay sandbox. Keeping host reads and replay reads separate distinguishes an undeclared dependency in the original episode from a boundary violation during verification.
+
+The audit output is
+\[
+\mathsf{Audit}(E)\in
+\{\cert_{\mathrm{replay}},\cert_{\mathrm{closure}},
+  \failure(c),\unknown\}.
+\]
+A failure records an observed violation and its witness; $\unknown$ records insufficient evidence or an unavailable runtime. This distinction prevents missing evidence from being interpreted as a detected error.
+
+\subsection{Independent provenance and semantic statuses}\label{sec:statuses}
+
+The provenance status is produced by \ledger from $\tau$, $R$, a restricted runtime, and a frozen comparator. Semantic validation receives a task-specific specification $V_q$ and returns
+\[
+S(E;V_q)\in\{\mathrm{correct},\mathrm{incorrect},\mathrm{unknown}\}.
+\]
+Depending on the task, $V_q$ may contain reference SQL, a normalized program specification, database variants, executable constraints, metamorphic relations, or a human judgement. The provenance and semantic statuses are stored as independent fields. Neither is used as an input to the other.
+
+\subsection{Threat and trust assumptions}\label{sec:threat}
+
+The host agent, generated program, stated answer, and declared citations are fallible. The trusted computing base consists of the trace logger, canonical resolver, restricted replay sandbox, and type-aware comparator. The analysis assumes that the logger captures the final program snapshot and all data-source reads in the instrumented namespace, the resolver maps identifiers consistently, and the sandbox enforces its mounted evidence view. These assumptions make the guarantee relative to recorded execution evidence.
+
+Tampering with the logger, sandbox escape, nondeterministic external services, and dependencies outside the instrumented namespace are outside the present guarantee. Such events should yield $\unknown$ or a platform-level security failure rather than an execution-provenance certificate. This scope aligns the paper with post-execution auditing: it provides action recoverability and evidence integrity for computed answers, while lifecycle-wide accountability requires additional controls \citep{nian2026auditable}.

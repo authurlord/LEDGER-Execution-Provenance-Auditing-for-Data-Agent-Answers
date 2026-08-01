@@ -1,0 +1,7 @@
+\section{Limitations}\label{sec:limitations}
+
+The guarantee is relative to the trusted logger, resolver, sandbox, and comparator. Tamper-evident logging, sandbox escape, nondeterministic network services, and unobserved dependencies remain outside the current threat model. Platform-level controls are needed before the same certificate semantics can be applied in adversarial environments.
+
+The arithmetic fallback supports a frozen five-operation vocabulary and depth 2. It omits string transformations, joins, and long programs when replay is unavailable. Increasing depth improves derivation coverage and rapidly increases collisions. Current replay adapters cover the Python/pandas and SQL traces retained by the testbed families; additional formats require runtime-specific adapters.
+
+Human support is available for 39 clear KramaBench cases. A larger independently annotated corpus would strengthen estimates of deployment prevalence. The WikiSQL study uses controlled perturbations and access to reference programs. It demonstrates the complementarity of replay and structural validation; it does not establish universal natural-language-to-program equivalence. Automated mechanical correction is shown only as a downstream interface and is not evaluated in this paper.
