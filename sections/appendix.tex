@@ -1,14 +1,239 @@
 \appendix
-\section{Proofs}\label{app:proofs}
+\section{Formal Guarantees and Proofs}
+\label{app:proofs}
 
-\subsection{Theorem~\ref{thm:relative}}
-A replay certificate is returned only after every declaration resolves, both observed read sets lie within the resolved evidence view, host and replay execution succeed, and the frozen comparator matches replay output to the stated answer. Under the trust assumptions, these observations correspond to the recorded data dependencies and the sandbox-enforced execution. Each listed violation negates at least one required conjunct in Equation~\ref{eq:replaycert} and follows a failure branch in Algorithm~\ref{alg:audit}; hence no replay certificate is returned.
+\subsection{Proof setup}
 
-\subsection{Proposition~\ref{prop:complete}}
-At depth zero, every leaf is a reached operand and belongs to $S_0$. Assume every valid expression of depth at most $j-1$ is represented in $S_{j-1}$. An expression of depth $j$ has the form $o(e_1,e_2)$ with $o\in\opset$ and child depth at most $j-1$. The induction hypothesis places both child values in $S_{j-1}$; Algorithm~\ref{alg:closure} adds their valid normalized result to $S_j$. The root therefore appears by depth $d$.
+We first make explicit the assumptions used by the guarantees.
+They correspond to the trusted components defined in
+Section~\ref{sec:threat}.
 
-\subsection{Proposition~\ref{prop:semantic}}
-Replay compares the submitted program's output with the stated answer under the declared evidence view. Closure tests whether the answer has an admitted derivation from reached operands. Neither predicate compares the submitted program with $V_q$. Choose two programs with different task semantics but identical output on the current database, or two different admitted arithmetic expressions with the same result. The provenance predicate holds while the semantic validator rejects the altered program.
+\begin{description}
+\setlength{\itemsep}{1pt}
+\setlength{\parskip}{0pt}
+
+\item[(A1) Trace fidelity.]
+The frozen snapshot $P^*$ is the program submitted by the host
+agent, and $F_{\mathrm{host}}$ contains every data-object read
+observed during its final execution.
+
+\item[(A2) Resolution consistency.]
+The resolver $R$ maps each resolvable evidence identifier to one
+canonical data object. A resolved view is complete exactly when
+every element of $F_{\mathrm{decl}}$ is mapped.
+
+\item[(A3) Replay confinement.]
+The replay runtime exposes only $F_{\mathrm{res}}$, records every
+data-object read in $F_{\mathrm{replay}}$, and returns the recorded
+status and output of $P^*$ in that view.
+
+\item[(A4) Comparator consistency.]
+For supported output types,
+$\operatorname{cmp}_{\tol}(x,y)=1$ exactly when the deterministic
+normalization and tolerance rules treat $x$ and $y$ as equal.
+\end{description}
+
+Write $x\simeq_{\tol}y$ when
+$\operatorname{cmp}_{\tol}(x,y)=1$. Define evidence
+authorization as
+\[
+\operatorname{Auth}(E)
+\equiv
+\bigl[
+F_{\mathrm{res}}=R(F_{\mathrm{decl}})
+\text{ is complete}
+\bigr]
+\land
+\bigl[
+F_{\mathrm{host}}\subseteq F_{\mathrm{res}}
+\bigr].
+\]
+For the replay record
+$\rho=
+(s_{\mathrm{replay}},v_{\mathrm{replay}},
+F_{\mathrm{replay}},\operands_{\mathrm{replay}})$, define
+\[
+\begin{aligned}
+\operatorname{Rep}(E)\equiv\;&
+s_{\mathrm{host}}=\mathrm{success}
+\land
+s_{\mathrm{replay}}=\mathrm{success}\\
+&\land\;
+F_{\mathrm{replay}}\subseteq F_{\mathrm{res}}
+\land
+v_{\mathrm{replay}}\simeq_{\tol}\hat a .
+\end{aligned}
+\]
+Equation~\ref{eq:replaycert} can then be written compactly as
+$\operatorname{Cert}_{\mathrm{replay}}(E)=1$ if and only if
+$\operatorname{Auth}(E)\land\operatorname{Rep}(E)$.
+
+\subsection{Proof of Theorem~\ref{thm:relative}}
+
+\begin{proof}
+Suppose Algorithm~\ref{alg:audit} returns
+$\cert_{\mathrm{replay}}$. The algorithm returns this outcome only
+when its failure record is empty and
+$\operatorname{cmp}_{\tol}
+(v_{\mathrm{replay}},\hat a)=1$.
+
+An empty failure record implies that all declared identifiers
+resolve, $F_{\mathrm{host}}\subseteq F_{\mathrm{res}}$, host
+execution succeeds, restricted replay succeeds, and
+$F_{\mathrm{replay}}\subseteq F_{\mathrm{res}}$. Hence
+$\operatorname{Auth}(E)$ holds. Assumptions (A1) and (A2) make the
+first read-set inclusion a statement about the recorded host
+execution rather than identifier aliases.
+
+By (A3), the replay execution of $P^*$ is performed with only
+$F_{\mathrm{res}}$ exposed. The replay status is successful and
+all observed replay reads remain inside that view. By (A4),
+$\operatorname{cmp}_{\tol}
+(v_{\mathrm{replay}},\hat a)=1$ implies
+$v_{\mathrm{replay}}\simeq_{\tol}\hat a$. Therefore
+$\operatorname{Rep}(E)$ holds. It follows that $P^*$ reproduces
+the stated answer within the resolved declared evidence view, and
+that every observed host and replay data read belongs to that
+view.
+
+Conversely, consider any failed conjunct in
+Equation~\ref{eq:replaycert}. Incomplete resolution, an
+unauthorized host or replay read, an execution failure, an output
+mismatch, or an incomparable output either adds a corresponding
+condition to the failure record or prevents the comparator result
+from equalling one. Algorithm~\ref{alg:audit} therefore cannot
+return $\cert_{\mathrm{replay}}$.
+\end{proof}
+
+\paragraph{Interpretation.}
+The theorem certifies a concrete program--evidence--answer link:
+the recorded program reproduces the stated answer using the
+resolved declared evidence, under the trusted execution model.
+The theorem does not compare $P^*$ with the task specification;
+that relation is addressed by
+Proposition~\ref{prop:semantic}.
+
+\subsection{Proof of Proposition~\ref{prop:complete}}
+
+Let $\mathsf{Expr}(\operands,\opset)$ be the expression language
+generated by
+\[
+e ::= \omega
+\;\mid\;
+o(e_1,e_2),
+\qquad
+\omega\in\operands,\quad o\in\opset.
+\]
+The depth of an operand is zero, and
+$\operatorname{depth}(o(e_1,e_2))
+=1+\max\{\operatorname{depth}(e_1),
+\operatorname{depth}(e_2)\}$. Let
+$\llbracket e\rrbracket$ denote the value of a valid expression,
+and let $\nu(\cdot)$ denote the normalization used by
+Algorithm~\ref{alg:closure}.
+
+We prove the following induction invariant:
+\[
+S_j
+=
+\left\{
+\nu(\llbracket e\rrbracket):
+e\in\mathsf{Expr}(\operands,\opset),\
+e\text{ is valid},\
+\operatorname{depth}(e)\le j
+\right\}.
+\]
+
+\begin{proof}
+For $j=0$, Algorithm~\ref{alg:closure} initializes
+$S_0=\operatorname{normalize}(\operands)$. These are exactly the
+normalized values of all valid depth-zero expressions, so the
+invariant holds.
+
+Assume the invariant holds for $S_{j-1}$. Consider any valid
+expression $e$ of depth at most $j$. If its depth is at most
+$j-1$, its normalized value already belongs to $S_{j-1}$ and is
+retained in $S_j$.
+
+Otherwise, $e=o(e_1,e_2)$ for some $o\in\opset$, where both child
+expressions have depth at most $j-1$. By the induction hypothesis,
+$\nu(\llbracket e_1\rrbracket)$ and
+$\nu(\llbracket e_2\rrbracket)$ occur in $S_{j-1}$.
+Algorithm~\ref{alg:closure} enumerates the pair and operation,
+checks validity, and adds the normalized result
+$\nu(\llbracket e\rrbracket)$ to $S_j$.
+
+For the reverse inclusion, every value newly added to $S_j$ is
+produced by applying an operation in $\opset$ to two values
+represented in $S_{j-1}$. By the induction hypothesis, these
+values have expression witnesses of depth at most $j-1$; combining
+them yields a valid expression of depth at most $j$. The invariant
+therefore holds for $S_j$.
+
+Now suppose $\hat a$ is generated by a valid expression $e$ over
+$\operands$, using operations in $\opset$, with
+$\operatorname{depth}(e)\le d$. The invariant gives
+$\nu(\hat a)\in S_d$. Under the audit comparator and tolerance,
+Algorithm~\ref{alg:closure} consequently returns
+$\cert_{\mathrm{closure}}$.
+\end{proof}
+
+\paragraph{Witness depth.}
+Because closure levels are explored in increasing order of $j$,
+the first stored witness for a normalized value has minimum depth
+among admitted expressions that produce that value. The method
+therefore stores a lowest-depth witness; it need not be globally
+minimal under every possible expression-size measure.
+
+\paragraph{Interpretation.}
+The proposition establishes search completeness only within the
+frozen operation vocabulary, normalization rules, and depth
+bound. It explains why a missed in-scope derivation indicates
+missing operands or implementation error, whereas derivations
+outside this bounded language may correctly receive
+$\unknown$.
+
+\subsection{Proof of Proposition~\ref{prop:semantic}}
+
+\begin{proof}
+Consider a database view containing one selected row with numeric
+value $r$. Let the question $q$ request the average of the selected
+values, and let $V_q$ require the aggregation operator
+$\mathrm{AVG}$.
+
+Let $P_{\mathrm{avg}}$ compute $\mathrm{AVG}$ and let
+$P_{\mathrm{sum}}$ compute $\mathrm{SUM}$ over the same selected
+row. On this database,
+\[
+P_{\mathrm{avg}}=r=P_{\mathrm{sum}}.
+\]
+Suppose the submitted program is $P^*=P_{\mathrm{sum}}$ and the
+stated answer is $\hat a=r$. If the evidence authorization and
+replay conditions hold, restricted replay produces
+$v_{\mathrm{replay}}=r$, so
+$\operatorname{Cert}_{\mathrm{replay}}(E)=1$.
+
+However, $P^*$ implements $\mathrm{SUM}$ rather than the
+$\mathrm{AVG}$ operation required by $V_q$. Hence
+$S(E;V_q)=\mathrm{incorrect}$. We have therefore constructed an
+episode for which replay consistency holds while semantic
+correctness fails. Execution-provenance consistency consequently
+does not imply semantic correctness.
+\end{proof}
+
+The same ambiguity arises for bounded closure. For example, with
+$\operands=\{4,2\}$, both
+$\mathrm{diff}(4,2)$ and $\mathrm{ratio}(4,2)$ produce the value
+$2$. A closure certificate for $\hat a=2$ proves that an admitted
+derivation exists, but does not identify which operation was
+requested by $q$.
+
+\paragraph{Interpretation.}
+Replay establishes the denotation of the submitted program on the
+current evidence view. Semantic validation establishes whether the
+submitted program realizes the task specification. Equal
+denotations on one database do not make these two relations
+equivalent.
 
 \section{Additional Result Tables}\label{app:tables}
 
