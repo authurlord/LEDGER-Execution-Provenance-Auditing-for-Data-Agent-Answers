@@ -235,12 +235,160 @@ submitted program realizes the task specification. Equal
 denotations on one database do not make these two relations
 equivalent.
 
-\section{Additional Result Tables}\label{app:tables}
+\section{Additional Experimental Details and Results}
+\label{app:experiments}
 
-\begin{table}[ht]
+\subsection{Frozen closure configuration}
+
+The closure configuration is selected on 60 disjoint ConvFinQA
+examples and then fixed for all reported evaluations. It uses
+$\opset=\{\mathrm{sum},\mathrm{diff},\mathrm{ratio},
+\mathrm{pctchg},\mathrm{prod}\}$, depth $d=2$, and relative
+tolerance $\tol=10^{-4}$. The same configuration is applied to the
+ConvFinQA remainder, MultiHiertt, and the wrong-operation analysis.
+
+\subsection{Operand-closure results}
+
+Table~\ref{tab:app-closure-results} reports the exact counts behind
+RQ1. Derivation recall counts supported programs that receive closure
+certificates. Rejection counts aligned answer substitutions that do not
+receive certificates.
+
+\begin{table}[t]
 \centering
-\caption{Canonical live audit distributions.}
+\caption{Exact operand-closure results.}
+\label{tab:app-closure-results}
 \scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.06}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Dataset & Method & Derivation recall & Rejection \\
+\midrule
+ConvFinQA
+& Single operation
+& 276/386 (0.715)
+& 383/386 (0.992) \\
+
+ConvFinQA
+& All cited numbers
+& 332/386 (0.860)
+& 240/386 (0.622) \\
+
+ConvFinQA
+& Supervised upper
+& 349/388 (0.899)
+& 230/388 (0.593) \\
+
+ConvFinQA
+& \textbf{\ledger}
+& \textbf{360/386 (0.933)}
+& \textbf{371/386 (0.961)} \\
+\addlinespace[2pt]
+
+MultiHiertt
+& Single operation
+& 3,247/6,301 (0.515)
+& 6,258/6,301 (0.993) \\
+
+MultiHiertt
+& \textbf{\ledger}
+& \textbf{5,648/6,301 (0.896)}
+& \textbf{6,125/6,301 (0.972)} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The standard anomaly detectors reject 53--77 of 388 substitutions
+(13.7--19.8\%) while retaining at least 90\% of supported calibration
+examples. Isolation Forest rejects 74/388 substitutions and retains
+351/388 supported examples.
+
+\subsection{Depth and wrong-operation analysis}
+
+Table~\ref{tab:app-depth-results} records the counts used in RQ2.
+Most MultiHiertt misses fall beyond the frozen depth, while
+same-operand operation changes remain derivable inside the closure
+language.
+
+\begin{table}[t]
+\centering
+\caption{Depth and wrong-operation analysis.}
+\label{tab:app-depth-results}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.06}
+\begin{tabularx}{\columnwidth}{@{}Xr@{}}
+\toprule
+Quantity & Value \\
+\midrule
+MultiHiertt recall misses with reference depth $>2$
+& 72.3\% \\
+Wrong-operation substitutions
+& 382 \\
+Wrong-operation substitutions rejected
+& 9/382 \\
+Substitutions within the frozen vocabulary and depth
+& 347 \\
+In-scope substitutions rejected
+& 0/347 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Semantic-validation results}
+
+Table~\ref{tab:app-semantic-results} gives the exact WikiSQL
+counts. A perturbation changes aggregation, projection, predicate
+column or value, or predicate presence. Same-output perturbations
+return the same denotation as the reference query on the original
+database.
+
+\begin{table}[t]
+\centering
+\caption{Exact WikiSQL semantic-validation results.}
+\label{tab:app-semantic-results}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.06}
+\begin{tabularx}{\columnwidth}{@{}Xr@{}}
+\toprule
+Quantity & Count \\
+\midrule
+Unmodified reference queries
+& 500 \\
+Controlled perturbations
+& 2,715 \\
+Perturbations detected by normalized SQL structure
+& 2,715/2,715 \\
+False positives on unmodified reference queries
+& 0/500 \\
+Same-output perturbations
+& 466 \\
+Same-output perturbations missed by output equality
+& 466/466 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+On the 100-case same-output sample, original-database output
+comparison detects 0 changes, differential execution detects 27,
+operator/clause signatures detect 67, and normalized SQL structure
+detects all 100.
+
+\subsection{Live audit and selective delivery}
+
+Table~\ref{tab:app-live-distribution} reports the complete live
+audit distributions. Replay denotes a replay certificate; failure
+denotes an observed failure record; unknown denotes an episode for
+which neither outcome is established.
+
+\begin{table}[t]
+\centering
+\caption{Live execution-provenance outcomes.}
+\label{tab:app-live-distribution}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrrr@{}}
 \toprule
 Dataset & Total & Replay & Failure & Unknown \\
@@ -251,23 +399,191 @@ DABstep & 60 & 43 & 0 & 17 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[ht]
+The human-labelled KramaBench subset contains 39 clear cases: 11
+are deliverable and 28 are non-deliverable. The corresponding selection
+outcomes appear in Table~\ref{tab:app-human-delivery}.
+
+\begin{table}[t]
 \centering
-\caption{Evidence-aware local judge. Agreement uses construction or human labels; the human row has limited archived evidence.}
+\caption{Selective delivery on the human-labelled KramaBench subset.}
+\label{tab:app-human-delivery}
 \scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.06}
+\begin{tabularx}{\columnwidth}{@{}Xrrrr@{}}
+\toprule
+Policy
+& Delivered
+& Supported
+& Support rate
+& Escalated \\
+\midrule
+Deliver all
+& 39
+& 11/39
+& 28.2\%
+& 0/28 \\
+
+Replay certificate
+& 21
+& 11/21
+& 52.4\%
+& 18/28 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Both policies retain all 11 human-supported cases. Replay-certificate
+selection removes 18 human-rejected episodes from delivery and
+retains 10 replayable episodes whose programs address a different
+quantity, scope, or operation.
+
+The scored KramaBench subset contains 148 episodes. Replay selection
+delivers 95; Table~\ref{tab:app-scored-delivery} reports coverage and
+mean score.
+
+\begin{table}[t]
+\centering
+\caption{Selective delivery on scored KramaBench episodes.}
+\label{tab:app-scored-delivery}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}lrrr@{}}
 \toprule
-Dataset & Agreement & Flip items & Parse failures \\
+Policy & Delivered & Coverage & Mean score \\
 \midrule
-ConvFinQA constructed & 170/200 & 4/200 & \multirow{3}{*}{29/870} \\
-KramaBench human & 25/39 & 1/39 & \\
-WikiSQL perturbations & 44/50 & 3/50 & \\
+Deliver all
+& 148 & 100.0\% & 0.307 \\
+Random, matched size
+& 95 & 64.2\% & 0.307 \\
+Replay certificate
+& 95 & 64.2\% & 0.429 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\section{Human Annotation and Reproducibility}\label{app:human}
+\subsection{Runtime and model baseline}
 
-The 40-row sample spans archeology, environment, legal, and wildfire domains. Annotators receive the question, cited files, final program or available program summary, stated answer, replay output, and evidence notes. The support label asks whether the stated answer follows from the cited data through the recorded computation and whether that computation addresses the requested quantity. The benchmark answer and machine label are hidden. Labels are yes, no, and unclear; one unclear case is excluded from binary analysis.
+Across 500 saved records, median bookkeeping latency is 0.179~ms
+and the 95th percentile is 0.283~ms. The measurement covers record
+parsing, comparison, and closure over saved traces. Five independent
+runs over 100 records produce identical execution-provenance
+outcomes, and the audit makes zero model calls.
 
-Machine outputs are frozen before annotation. Human columns remain in a separate file and are never used to rewrite audit labels. The reproducibility package contains the operating point, per-example arithmetic records, live trace records, semantic perturbations, baseline scripts, figure-generation code, and SHA-256 manifests. Every rate in the paper is recoverable from machine-readable counts.
+\begin{table}[t]
+\centering
+\caption{Evidence-aware local judge results. Agreement is measured
+against construction labels for ConvFinQA and WikiSQL and against
+human deliverability labels for KramaBench. Parse failures are
+reported over all repeated judge calls.}
+\label{tab:app-judge}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Dataset & Agreement & Flip items & Parse failures \\
+\midrule
+ConvFinQA & 170/200 & 4/200 & \multirow{3}{*}{29/870} \\
+KramaBench & 25/39 & 1/39 & \\
+WikiSQL & 44/50 & 3/50 & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Running-Example Audit Record}
+\label{app:running}
+
+Table~\ref{tab:running-audit} instantiates the audit variables for
+the identity-theft episode. The final program reads one national
+identity-theft table and 16 state-level fraud-and-other tables. It
+computes population as $p_i=r_i/\rho_i\times100{,}000$, retains 14
+metropolitan areas above one million population, and returns their
+mean report count.
+
+\begin{table}[t]
+\centering
+\caption{Audit record for the running identity-theft episode.}
+\label{tab:running-audit}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.06}
+\begin{tabularx}{\columnwidth}{@{}lX@{}}
+\toprule
+Field & Recorded value \\
+\midrule
+Question target
+& Mean identity-theft report count for metropolitan areas with
+  inferred 2023 population above one million \\
+
+Declared evidence
+& 17 identity-theft CSV files \\
+
+Resolved evidence
+& $|F_{\mathrm{res}}|=17$ \\
+
+Observed host reads
+& $|F_{\mathrm{host}}|=17$ \\
+
+Declared--host overlap
+& $|F_{\mathrm{host}}\cap F_{\mathrm{res}}|=1$ \\
+
+Undeclared host reads
+& 16 state-level fraud-and-other files \\
+
+Matched metropolitan-area names
+& 87 \\
+
+Rows before population filtering
+& 85 \\
+
+Rows above one million population
+& 14 \\
+
+Host report sum
+& 150,138 \\
+
+Host output
+& $v_{\mathrm{host}}=10{,}724.1429$ \\
+
+Stated answer
+& $\hat a=10{,}724.1429$ \\
+
+Replay status
+& Successful termination \\
+
+Replay output
+& \texttt{\{"main-task": null\}} \\
+
+Comparator result
+& $\operatorname{cmp}_{\tol}(v_{\mathrm{replay}},\hat a)=\bot$ \\
+
+Audit outcome
+& Failure record containing undeclared host reads and a missing
+  comparable replay output \\
+
+Reference recomputation
+& 55 retained rows, report sum 713,068, and mean 12,964.8727 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Human Annotation and Reproducibility}
+\label{app:human}
+
+The 40-row KramaBench sample spans archeology, environment, legal,
+and wildfire domains. Annotators receive the question, cited files,
+final program or program summary, stated answer, replay output, and
+evidence notes. The deliverability label asks whether the stated
+answer follows from the cited data through the recorded computation
+and whether that computation addresses the requested quantity.
+The labels are yes, no, and unclear; one unclear case is excluded
+from binary analysis. The benchmark answer and machine outcome are
+hidden during annotation.
+
+Machine outputs are frozen before annotation. Human labels are
+stored separately and do not modify audit outcomes. The
+reproducibility package contains the frozen closure configuration,
+per-example arithmetic records, live trace records, semantic
+perturbations, baseline outputs, figure-generation code, running-example
+artifacts, and SHA-256 manifests. The reported rates are recoverable
+from the machine-readable counts listed above.
