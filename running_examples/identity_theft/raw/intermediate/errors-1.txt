@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/home/yanmy/miniforge3/envs/kramabench/lib/python3.11/site-packages/pandas/core/indexes/range.py", line 1287, in __getitem__
+    return self._range[new_key]
+           ~~~~~~~~~~~^^^^^^^^^
+IndexError: range object index out of range
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/data/yanmy/LakeOrch/KramaBench/system_scratch/BaselineLLMSystemLocalQwenDiscovery/legal-hard-1/_intermediate/pipeline-1.py", line 22, in <module>
+    header_row_idx = df_main[df_main[1] == 'Rank'].index[0]
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/home/yanmy/miniforge3/envs/kramabench/lib/python3.11/site-packages/pandas/core/indexes/range.py", line 1289, in __getitem__
+    raise IndexError(
+IndexError: index 0 is out of bounds for axis 0 with size 0

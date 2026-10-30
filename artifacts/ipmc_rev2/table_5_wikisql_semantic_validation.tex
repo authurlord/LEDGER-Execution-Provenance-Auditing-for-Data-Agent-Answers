@@ -1,0 +1,48 @@
+\begin{tabular}{llrr}
+\toprule
+Perturbation & Validator & Detected & Rate \\
+\midrule
+added irrelevant predicate & original output equality & 426/500 & 0.852 \\
+added irrelevant predicate & normalized sql exact match & 500/500 & 1.000 \\
+added irrelevant predicate & operator clause multiset & 500/500 & 1.000 \\
+added irrelevant predicate & normalized ast edit threshold & 500/500 & 1.000 \\
+added irrelevant predicate & differential execution & 163/500 & 0.326 \\
+added irrelevant predicate & ledger replay certificate only & 0/500 & 0.000 \\
+dropped predicate & original output equality & 479/490 & 0.978 \\
+dropped predicate & normalized sql exact match & 490/490 & 1.000 \\
+dropped predicate & operator clause multiset & 490/490 & 1.000 \\
+dropped predicate & normalized ast edit threshold & 490/490 & 1.000 \\
+dropped predicate & differential execution & 477/490 & 0.973 \\
+dropped predicate & ledger replay certificate only & 0/490 & 0.000 \\
+same original output counterfactual & original output equality & 0/100 & 0.000 \\
+same original output counterfactual & normalized sql exact match & 100/100 & 1.000 \\
+same original output counterfactual & operator clause multiset & 67/100 & 0.670 \\
+same original output counterfactual & normalized ast edit threshold & 100/100 & 1.000 \\
+same original output counterfactual & differential execution & 27/100 & 0.270 \\
+same original output counterfactual & ledger replay certificate only & 0/100 & 0.000 \\
+wrong aggregate & original output equality & 109/145 & 0.752 \\
+wrong aggregate & normalized sql exact match & 145/145 & 1.000 \\
+wrong aggregate & operator clause multiset & 145/145 & 1.000 \\
+wrong aggregate & normalized ast edit threshold & 145/145 & 1.000 \\
+wrong aggregate & differential execution & 123/145 & 0.848 \\
+wrong aggregate & ledger replay certificate only & 0/145 & 0.000 \\
+wrong predicate column & original output equality & 488/490 & 0.996 \\
+wrong predicate column & normalized sql exact match & 490/490 & 1.000 \\
+wrong predicate column & operator clause multiset & 490/490 & 1.000 \\
+wrong predicate column & normalized ast edit threshold & 490/490 & 1.000 \\
+wrong predicate column & differential execution & 159/490 & 0.324 \\
+wrong predicate column & ledger replay certificate only & 0/490 & 0.000 \\
+wrong predicate value & original output equality & 358/490 & 0.731 \\
+wrong predicate value & normalized sql exact match & 490/490 & 1.000 \\
+wrong predicate value & operator clause multiset & 0/490 & 0.000 \\
+wrong predicate value & normalized ast edit threshold & 490/490 & 1.000 \\
+wrong predicate value & differential execution & 166/490 & 0.339 \\
+wrong predicate value & ledger replay certificate only & 0/490 & 0.000 \\
+wrong projection column & original output equality & 389/500 & 0.778 \\
+wrong projection column & normalized sql exact match & 500/500 & 1.000 \\
+wrong projection column & operator clause multiset & 500/500 & 1.000 \\
+wrong projection column & normalized ast edit threshold & 500/500 & 1.000 \\
+wrong projection column & differential execution & 128/500 & 0.256 \\
+wrong projection column & ledger replay certificate only & 0/500 & 0.000 \\
+\bottomrule
+\end{tabular}

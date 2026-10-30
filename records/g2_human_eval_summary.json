@@ -1,0 +1,69 @@
+{
+ "n_rows": 40,
+ "n_labeled": 40,
+ "n_unclear": 1,
+ "unclear_taskids": [
+  "wildfire-easy-15"
+ ],
+ "effective_n": 39,
+ "label_counts": {
+  "yes": 11,
+  "no": 28,
+  "unclear": 1
+ },
+ "checker_counts": {
+  "supported": 22,
+  "unknown": 15,
+  "unsupported": 3
+ },
+ "preregistered_gate": {
+  "precision": 1.0,
+  "precision_frac": "3/3",
+  "precision_ci95": [
+   0.292,
+   1.0
+  ],
+  "recall": 0.107,
+  "recall_frac": "3/28",
+  "recall_ci95": [
+   0.023,
+   0.282
+  ],
+  "fp_rate_on_human_supported": 0.0,
+  "confusion": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 25,
+   "tn": 11
+  },
+  "gate_thresholds": "precision>=0.6 AND recall>=0.5 AND fp_rate<<0.723",
+  "gate_pass": false
+ },
+ "confusion_3state": {
+  "supported": {
+   "yes": 11,
+   "no": 10,
+   "unclear": 1
+  },
+  "unknown": {
+   "yes": 0,
+   "no": 15,
+   "unclear": 0
+  },
+  "unsupported": {
+   "yes": 0,
+   "no": 3,
+   "unclear": 0
+  }
+ },
+ "human_no_decomposition": {
+  "checker_unknown_abstain": 15,
+  "checker_supported_disagree": 10,
+  "checker_unsupported_hit": 3
+ },
+ "posthoc_diagnostic_NOT_gate": {
+  "withhold_recall": "18/28",
+  "withhold_recall_val": 0.643,
+  "note": "treats checker unknown-abstain as withholding a support certificate; NOT the preregistered detection gate"
+ }
+}

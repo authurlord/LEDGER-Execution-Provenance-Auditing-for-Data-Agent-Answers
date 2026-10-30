@@ -1,0 +1,18 @@
+\begin{tabular}{llrr}
+\toprule
+Dataset & Method & Support recall & Unsupported detection \\
+\midrule
+convfinqa & exact operand & 0.003 (1/386) & 1.000 (386/386) \\
+convfinqa & nearest operand tolerance & 0.003 (1/386) & 1.000 (386/386) \\
+convfinqa & single operation & 0.715 (276/386) & 0.992 (383/386) \\
+convfinqa & operand constrained closure & 0.933 (360/386) & 0.961 (371/386) \\
+convfinqa & all numbers in cited file & 0.860 (332/386) & 0.622 (240/386) \\
+convfinqa & all context numbers & 0.860 (332/386) & 0.622 (240/386) \\
+convfinqa & gold program execution oracle & 1.000 (386/386) & 1.000 (386/386) \\
+multihiertt & exact operand & 0.008 (48/6301) & 0.999 (6297/6301) \\
+multihiertt & nearest operand tolerance & 0.008 (48/6301) & 0.999 (6297/6301) \\
+multihiertt & single operation & 0.515 (3247/6301) & 0.993 (6258/6301) \\
+multihiertt & operand constrained closure & 0.896 (5648/6301) & 0.972 (6125/6301) \\
+multihiertt & gold program execution oracle & 1.000 (6301/6301) & 1.000 (6301/6301) \\
+\bottomrule
+\end{tabular}

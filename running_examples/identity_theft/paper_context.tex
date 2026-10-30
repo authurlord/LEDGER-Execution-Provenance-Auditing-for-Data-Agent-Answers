@@ -1,0 +1,27 @@
+\etitle{Running example.}
+The question asks for the mean number of identity-theft reports among
+metropolitan areas whose 2023 population exceeds one million.  The agent
+declares 17 CSV files---one national identity-theft table and 16 state-level
+identity-theft tables---but its final program $P^*$ actually opens the
+national table and 16 state-level \emph{fraud-and-other} tables.  It uses the
+latter only to construct an admissible set of metropolitan-area names,
+back-computes population as reports divided by reports per 100,000 times
+$100{,}000$, retains 14 rows above the population threshold, and averages
+their report counts.  Host execution prints
+\texttt{\{"main-task": 10724.1429\}}, and the agent states the same value
+$\hat a=10{,}724.1429$ (the benchmark reference answer is $12{,}964.8727$).
+Under restricted replay, only the canonicalized declared files are visible.
+The 16 fraud-and-other paths therefore fail the program's existence checks;
+$P^*$ continues, forms an empty match, and terminates normally with
+\texttt{\{"main-task": null\}}.  The replay has neither an execution
+exception nor an empty stdout, but it supplies no scalar comparable with
+$\hat a$.  The audit therefore withholds a replay certificate and records a
+missing/non-comparable-output witness together with the authorization failure
+$F_{\mathrm{host}}\nsubseteq F_{\mathrm{res}}$.
+
+\begin{verbatim}
+valid_names = union(read_msa_names(16 undeclared fraud CSVs))
+rows = national_identity[norm_msa in valid_names]
+rows["population"] = rows["reports"] / rows["rate_per_100k"] * 100000
+answer = mean(rows[rows.population > 1_000_000]["reports"])
+\end{verbatim}

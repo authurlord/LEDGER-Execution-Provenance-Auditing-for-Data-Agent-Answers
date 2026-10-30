@@ -1,0 +1,994 @@
+
+You are a helpful assistant that generates a plan to solve the given request, and you'll be given:Your task is to answer the following question based on the provided data sources.
+Question: Report the average number of reported identity thefts for all metropolitan areas that are larger than one million in population in 2023. - If you don't have their population size in 2023, use two years where you know the censuses (or an estimate of the censurs) and linearly interpolate between them to estimate the 2023 population size.  - Be sure to robustly match the names of metropolitan areas: Use only the city and state portion of the name, ignoring suffixes like 'Metropolitan Statistical Area' or 'MSA' and normalizing punctuation. Drop entries where there's no match in the html for the areas fraud reports. Round to 4 decimal places
+Data file names: ['csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/DistrictofColumbia.csv', 'csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Wyoming.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Illinois.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Maryland.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Indiana.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Missouri.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/DistrictofColumbia.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/SouthDakota.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/RhodeIsland.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Ohio.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Alaska.csv', 'csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Reports_by_Age.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/NorthDakota.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Idaho.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Montana.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Minnesota.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Mississippi.csv', 'csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv', 'csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/NewMexico.csv', 'csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Types_by_Age.csv']
+
+The following is a snippet of the data files:
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area","19,689"
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/DistrictofColumbia.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area","109,978"
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+Unnamed: 2                                    str
+Unnamed: 3                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1,Unnamed: 2,Unnamed: 3
+0,,,,
+1,Rank,Metropolitan Area,Reports per 100K Population,# of Reports
+2,1,"Miami-Fort Lauderdale-West Palm Beach, FL Metropolitan Statistical Area",903,"55,457"
+3,2,"Atlanta-Sandy Springs-Roswell, GA Metropolitan Statistical Area",690,"42,616"
+4,3,"Houston-Pasadena-The Woodlands, TX Metropolitan Statistical Area",573,"41,668"
+5,4,"Las Vegas-Henderson-North Las Vegas, NV Metropolitan Statistical Area",570,"13,075"
+6,5,"Orlando-Kissimmee-Sanford, FL Metropolitan Statistical Area",555,"15,099"
+7,6,"Los Angeles-Long Beach-Anaheim, CA Metropolitan Statistical Area",550,"71,624"
+8,7,"Baton Rouge, LA Metropolitan Statistical Area",528,"4,604"
+9,8,"Killeen-Temple, TX Metropolitan Statistical Area",482,"2,340"
+10,9,"Odessa, TX Metropolitan Statistical Area",479,782
+11,10,"Dallas-Fort Worth-Arlington, TX Metropolitan Statistical Area",475,"37,114"
+12,11,"Lakeland-Winter Haven, FL Metropolitan Statistical Area",473,"3,598"
+13,12,"Macon-Bibb County, GA Metropolitan Statistical Area",461,"1,079"
+14,13,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD Metropolitan Statistical Area",456,"28,438"
+15,14,"Savannah, GA Metropolitan Statistical Area",437,"1,801"
+16,15,"LaGrange, GA-AL Micropolitan Statistical Area",434,453
+17,16,"New Orleans-Metairie, LA Metropolitan Statistical Area",432,"4,268"
+18,17,"Tampa-St. Petersburg-Clearwater, FL Metropolitan Statistical Area",431,"13,953"
+19,18,"Albany, GA Metropolitan Statistical Area",413,606
+20,19,"Memphis, TN-MS-AR Metropolitan Statistical Area",410,"5,502"
+21,20,"Boston-Cambridge-Newton, MA-NH Metropolitan Statistical Area",405,"19,929"
+22,21,"Port St. Lucie, FL Metropolitan Statistical Area",405,"2,051"
+23,22,"Chicago-Naperville-Elgin, IL-IN Metropolitan Statistical Area",401,"37,486"
+24,23,"Midland, TX Metropolitan Statistical Area",400,707
+25,24,"Columbus, GA-AL Metropolitan Statistical Area",399,"1,302"
+26,25,"Kankakee, IL Metropolitan Statistical Area",392,419
+27,26,"Montgomery, AL Metropolitan Statistical Area",387,"1,491"
+28,27,"Beaumont-Port Arthur, TX Metropolitan Statistical Area",375,"1,487"
+29,28,"Charlotte-Concord-Gastonia, NC-SC Metropolitan Statistical Area",374,"10,144"
+30,29,"Sumter, SC Metropolitan Statistical Area",374,392
+31,30,"Tallahassee, FL Metropolitan Statistical Area",365,"1,417"
+32,31,"Jacksonville, FL Metropolitan Statistical Area",364,"5,986"
+33,32,"East Stroudsburg, PA Micropolitan Statistical Area",362,608
+34,33,"Naples-Marco Island, FL Metropolitan Statistical Area",362,"1,402"
+35,34,"Detroit-Warren-Dearborn, MI Metropolitan Statistical Area",359,"15,687"
+36,35,"Dover, DE Metropolitan Statistical Area",358,663
+37,36,"Little Rock-North Little Rock-Conway, AR Metropolitan Statistical Area",350,"2,641"
+38,37,"Cape Coral-Fort Myers, FL Metropolitan Statistical Area",344,"2,727"
+39,38,"Greenville, NC Metropolitan Statistical Area",344,592
+40,39,"New York-Newark-Jersey City, NY-NJ Metropolitan Statistical Area",343,"67,819"
+41,40,"Shreveport-Bossier City, LA Metropolitan Statistical Area",343,"1,334"
+42,41,"Warner Robins, GA Metropolitan Statistical Area",343,669
+43,42,"Riverside-San Bernardino-Ontario, CA Metropolitan Statistical Area",343,"15,889"
+44,43,"Augusta-Richmond County, GA-SC Metropolitan Statistical Area",342,"2,113"
+45,44,"Charleston-North Charleston, SC Metropolitan Statistical Area",341,"2,790"
+46,45,"Phoenix-Mesa-Chandler, AZ Metropolitan Statistical Area",338,"16,677"
+47,46,"Birmingham, AL Metropolitan Statistical Area",336,"3,968"
+48,47,"Columbia, SC Metropolitan Statistical Area",328,"2,758"
+49,48,"Mobile, AL Metropolitan Statistical Area",328,"1,355"
+50,49,"Tuscaloosa, AL Metropolitan Statistical Area",328,902
+51,50,"Cleveland, OH Metropolitan Statistical Area",328,"7,115"
+52,51,"Fayetteville, NC Metropolitan Statistical Area",325,"1,268"
+53,52,"Providence-Warwick, RI-MA Metropolitan Statistical Area",324,"5,422"
+54,53,"Florence, SC Metropolitan Statistical Area",321,640
+55,54,"North Port-Bradenton-Sarasota, FL Metropolitan Statistical Area",320,"2,770"
+56,55,"Austin-Round Rock-San Marcos, TX Metropolitan Statistical Area",317,"7,473"
+57,56,"Columbus, OH Metropolitan Statistical Area",316,"6,805"
+58,57,"Sebastian-Vero Beach-West Vero Corridor, FL Metropolitan Statistical Area",316,518
+59,58,"Baltimore-Columbia-Towson, MD Metropolitan Statistical Area",315,"8,940"
+60,59,"Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area",314,"19,689"
+61,60,"San Diego-Chula Vista-Carlsbad, CA Metropolitan Statistical Area",313,"10,260"
+62,61,"Indianapolis-Carmel-Greenwood, IN Metropolitan Statistical Area",312,"6,570"
+63,62,"Lumberton, NC Micropolitan Statistical Area",309,361
+64,63,"Jackson, MS Metropolitan Statistical Area",304,"1,873"
+65,64,"Springfield, MA Metropolitan Statistical Area",302,"1,400"
+66,65,"San Antonio-New Braunfels, TX Metropolitan Statistical Area",302,"7,889"
+67,66,"Palm Bay-Melbourne-Titusville, FL Metropolitan Statistical Area",298,"1,847"
+68,67,"Worcester, MA Metropolitan Statistical Area",297,"2,561"
+69,68,"Hammond, LA Metropolitan Statistical Area",297,401
+70,69,"Panama City-Panama City Beach, FL Metropolitan Statistical Area",293,606
+71,70,"Valdosta, GA Metropolitan Statistical Area",293,437
+72,71,"Scranton--Wilkes-Barre, PA Metropolitan Statistical Area",290,"1,648"
+73,72,"Trenton-Princeton, NJ Metropolitan Statistical Area",290,"1,112"
+74,73,"Deltona-Daytona Beach-Ormond Beach, FL Metropolitan Statistical Area",290,"1,998"
+75,74,"Huntsville, AL Metropolitan Statistical Area",289,"1,459"
+76,75,"Rockford, IL Metropolitan Statistical Area",288,968
+77,76,"Raleigh-Cary, NC Metropolitan Statistical Area",286,"4,150"
+78,77,"Ocala, FL Metropolitan Statistical Area",286,"1,108"
+79,78,"Monroe, LA Metropolitan Statistical Area",285,640
+80,79,"Lafayette, LA Metropolitan Statistical Area",284,"1,168"
+81,80,"Vallejo, CA Metropolitan Statistical Area",283,"1,278"
+82,81,"Slidell-Mandeville-Covington, LA Metropolitan Statistical Area",281,757
+83,82,"Kiryas Joel-Poughkeepsie-Newburgh, NY Metropolitan Statistical Area",279,"1,959"
+84,83,"Allentown-Bethlehem-Easton, PA-NJ Metropolitan Statistical Area",279,"2,414"
+85,84,"Bakersfield-Delano, CA Metropolitan Statistical Area",277,"2,525"
+86,85,"Fresno, CA Metropolitan Statistical Area",276,"3,235"
+87,86,"Richmond, VA Metropolitan Statistical Area",274,"3,637"
+88,87,"Bridgeport-Stamford-Danbury, CT Metropolitan Statistical Area",271,"2,571"
+89,88,"Anderson Creek, NC Micropolitan Statistical Area",270,368
+90,89,"Sacramento-Roseville-Folsom, CA Metropolitan Statistical Area",269,"6,483"
+91,90,"Reading, PA Metropolitan Statistical Area",268,"1,151"
+92,91,"Greenville-Anderson-Greer, SC Metropolitan Statistical Area",267,"2,525"
+93,92,"Spartanburg, SC Metropolitan Statistical Area",266,972
+94,93,"Rocky Mount, NC Metropolitan Statistical Area",265,382
+95,94,"Virginia Beach-Chesapeake-Norfolk, VA-NC Metropolitan Statistical Area",263,"4,689"
+96,95,"Stockton-Lodi, CA Metropolitan Statistical Area",260,"2,048"
+97,96,"Champaign-Urbana, IL Metropolitan Statistical Area",259,611
+98,97,"St. Louis, MO-IL Metropolitan Statistical Area",258,"7,242"
+99,98,"Myrtle Beach-Conway-North Myrtle Beach, SC Metropolitan Statistical Area",256,944
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Cheyenne, WY Metropolitan Statistical Area",140
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Wyoming.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Cheyenne, WY Metropolitan Statistical Area","1,131"
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Bloomington, IL Metropolitan Statistical Area",318
+3,"Champaign-Urbana, IL Metropolitan Statistical Area",611
+4,"Chicago-Naperville-Elgin, IL-IN Metropolitan Statistical Area","37,486"
+5,"Davenport-Moline-Rock Island, IA-IL Metropolitan Statistical Area",620
+6,"Decatur, IL Metropolitan Statistical Area",186
+7,"Kankakee, IL Metropolitan Statistical Area",419
+8,"Ottawa, IL Micropolitan Statistical Area",171
+9,"Paducah, KY-IL Metropolitan Statistical Area",184
+10,"Peoria, IL Metropolitan Statistical Area",572
+11,"Rockford, IL Metropolitan Statistical Area",968
+12,"Springfield, IL Metropolitan Statistical Area",455
+13,"St. Louis, MO-IL Metropolitan Statistical Area","7,242"
+14,,
+15,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+16,,
+17,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Illinois.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Bloomington, IL Metropolitan Statistical Area","1,624"
+3,"Champaign-Urbana, IL Metropolitan Statistical Area","2,631"
+4,"Chicago-Naperville-Elgin, IL-IN Metropolitan Statistical Area","158,000"
+5,"Davenport-Moline-Rock Island, IA-IL Metropolitan Statistical Area","3,376"
+6,"Decatur, IL Metropolitan Statistical Area","1,011"
+7,"Kankakee, IL Metropolitan Statistical Area","1,595"
+8,"Ottawa, IL Micropolitan Statistical Area",893
+9,"Paducah, KY-IL Metropolitan Statistical Area",785
+10,"Peoria, IL Metropolitan Statistical Area","3,296"
+11,"Rockford, IL Metropolitan Statistical Area","3,959"
+12,"Springfield, IL Metropolitan Statistical Area","2,159"
+13,"St. Louis, MO-IL Metropolitan Statistical Area","42,059"
+14,,
+15,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+16,,
+17,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Baltimore-Columbia-Towson, MD Metropolitan Statistical Area","8,940"
+3,"Hagerstown-Martinsburg, MD-WV Metropolitan Statistical Area",502
+4,"Lexington Park, MD Metropolitan Statistical Area",427
+5,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD Metropolitan Statistical Area","28,438"
+6,"Salisbury, MD Metropolitan Statistical Area",239
+7,"Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area","19,689"
+8,,
+9,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+10,,
+11,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Maryland.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Baltimore-Columbia-Towson, MD Metropolitan Statistical Area","52,648"
+3,"Hagerstown-Martinsburg, MD-WV Metropolitan Statistical Area","3,665"
+4,"Lexington Park, MD Metropolitan Statistical Area","2,473"
+5,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD Metropolitan Statistical Area","121,966"
+6,"Salisbury, MD Metropolitan Statistical Area","1,287"
+7,"Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area","109,978"
+8,,
+9,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+10,,
+11,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Bloomington, IN Metropolitan Statistical Area",205
+3,"Chicago-Naperville-Elgin, IL-IN Metropolitan Statistical Area","37,486"
+4,"Cincinnati, OH-KY-IN Metropolitan Statistical Area","4,477"
+5,"Elkhart-Goshen, IN Metropolitan Statistical Area",228
+6,"Evansville, IN Metropolitan Statistical Area",397
+7,"Fort Wayne, IN Metropolitan Statistical Area",732
+8,"Indianapolis-Carmel-Greenwood, IN Metropolitan Statistical Area","6,570"
+9,"Lafayette-West Lafayette, IN Metropolitan Statistical Area",275
+10,"Louisville/Jefferson County, KY-IN Metropolitan Statistical Area","2,653"
+11,"Michigan City-La Porte, IN Metropolitan Statistical Area",166
+12,"Muncie, IN Metropolitan Statistical Area",134
+13,"South Bend-Mishawaka, IN-MI Metropolitan Statistical Area",475
+14,"Terre Haute, IN Metropolitan Statistical Area",203
+15,,
+16,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+17,,
+18,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Indiana.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Bloomington, IN Metropolitan Statistical Area","1,382"
+3,"Chicago-Naperville-Elgin, IL-IN Metropolitan Statistical Area","158,000"
+4,"Cincinnati, OH-KY-IN Metropolitan Statistical Area","24,149"
+5,"Elkhart-Goshen, IN Metropolitan Statistical Area","1,395"
+6,"Evansville, IN Metropolitan Statistical Area","2,472"
+7,"Fort Wayne, IN Metropolitan Statistical Area","4,431"
+8,"Indianapolis-Carmel-Greenwood, IN Metropolitan Statistical Area","31,318"
+9,"Lafayette-West Lafayette, IN Metropolitan Statistical Area","1,613"
+10,"Louisville/Jefferson County, KY-IN Metropolitan Statistical Area","14,501"
+11,"Michigan City-La Porte, IN Metropolitan Statistical Area","1,073"
+12,"Muncie, IN Metropolitan Statistical Area",850
+13,"South Bend-Mishawaka, IN-MI Metropolitan Statistical Area","3,006"
+14,"Terre Haute, IN Metropolitan Statistical Area","1,121"
+15,,
+16,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+17,,
+18,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Columbia, MO Metropolitan Statistical Area",295
+3,"Jefferson City, MO Metropolitan Statistical Area",152
+4,"Joplin, MO-KS Metropolitan Statistical Area",240
+5,"Kansas City, MO-KS Metropolitan Statistical Area","4,247"
+6,"Springfield, MO Metropolitan Statistical Area",703
+7,"St. Joseph, MO-KS Metropolitan Statistical Area",181
+8,"St. Louis, MO-IL Metropolitan Statistical Area","7,242"
+9,,
+10,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+11,,
+12,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Missouri.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Columbia, MO Metropolitan Statistical Area","1,921"
+3,"Jefferson City, MO Metropolitan Statistical Area","1,113"
+4,"Joplin, MO-KS Metropolitan Statistical Area","1,596"
+5,"Kansas City, MO-KS Metropolitan Statistical Area","24,559"
+6,"Springfield, MO Metropolitan Statistical Area","4,427"
+7,"St. Joseph, MO-KS Metropolitan Statistical Area",856
+8,"St. Louis, MO-IL Metropolitan Statistical Area","42,059"
+9,,
+10,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+11,,
+12,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area","19,689"
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/DistrictofColumbia.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Washington-Arlington-Alexandria, DC-VA-MD-WV Metropolitan Statistical Area","109,978"
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Rapid City, SD Metropolitan Statistical Area",166
+3,"Sioux City, IA-NE-SD Metropolitan Statistical Area",132
+4,"Sioux Falls, SD-MN Metropolitan Statistical Area",352
+5,,
+6,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+7,,
+8,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/SouthDakota.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Rapid City, SD Metropolitan Statistical Area","1,329"
+3,"Sioux City, IA-NE-SD Metropolitan Statistical Area",895
+4,"Sioux Falls, SD-MN Metropolitan Statistical Area","2,266"
+5,,
+6,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+7,,
+8,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Providence-Warwick, RI-MA Metropolitan Statistical Area","5,422"
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/RhodeIsland.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Providence-Warwick, RI-MA Metropolitan Statistical Area","17,440"
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Akron, OH Metropolitan Statistical Area","1,720"
+3,"Canton-Massillon, OH Metropolitan Statistical Area",723
+4,"Cincinnati, OH-KY-IN Metropolitan Statistical Area","4,477"
+5,"Cleveland, OH Metropolitan Statistical Area","7,115"
+6,"Columbus, OH Metropolitan Statistical Area","6,805"
+7,"Dayton-Kettering-Beavercreek, OH Metropolitan Statistical Area","1,984"
+8,"Huntington-Ashland, WV-KY-OH Metropolitan Statistical Area",405
+9,"Lima, OH Metropolitan Statistical Area",124
+10,"Mansfield, OH Metropolitan Statistical Area",164
+11,"Salem, OH Micropolitan Statistical Area",138
+12,"Sandusky, OH Metropolitan Statistical Area",226
+13,"Springfield, OH Metropolitan Statistical Area",300
+14,"Toledo, OH Metropolitan Statistical Area","1,163"
+15,"Weirton-Steubenville, WV-OH Metropolitan Statistical Area",130
+16,"Wheeling, WV-OH Metropolitan Statistical Area",131
+17,"Wooster, OH Micropolitan Statistical Area",127
+18,"Youngstown-Warren, OH Metropolitan Statistical Area",865
+19,,
+20,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+21,,
+22,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Ohio.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Akron, OH Metropolitan Statistical Area","8,993"
+3,"Canton-Massillon, OH Metropolitan Statistical Area","3,711"
+4,"Cincinnati, OH-KY-IN Metropolitan Statistical Area","24,149"
+5,"Cleveland, OH Metropolitan Statistical Area","31,336"
+6,"Columbus, OH Metropolitan Statistical Area","28,999"
+7,"Dayton-Kettering-Beavercreek, OH Metropolitan Statistical Area","8,820"
+8,"Huntington-Ashland, WV-KY-OH Metropolitan Statistical Area","2,569"
+9,"Lima, OH Metropolitan Statistical Area",664
+10,"Mansfield, OH Metropolitan Statistical Area",841
+11,"Salem, OH Micropolitan Statistical Area",735
+12,"Sandusky, OH Metropolitan Statistical Area","1,007"
+13,"Springfield, OH Metropolitan Statistical Area","1,194"
+14,"Toledo, OH Metropolitan Statistical Area","6,344"
+15,"Weirton-Steubenville, WV-OH Metropolitan Statistical Area",862
+16,"Wheeling, WV-OH Metropolitan Statistical Area","1,069"
+17,"Wooster, OH Micropolitan Statistical Area",706
+18,"Youngstown-Warren, OH Metropolitan Statistical Area","4,105"
+19,,
+20,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+21,,
+22,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Anchorage, AK Metropolitan Statistical Area",464
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Alaska.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Anchorage, AK Metropolitan Statistical Area","4,138"
+3,,
+4,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+5,,
+6,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Reports_by_Age.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Identity Theft Reports by Age    str
+Unnamed: 1                       str
+dtype: object
+Table:
+,Identity Theft Reports by Age,Unnamed: 1
+0,,
+1,Age Range,# of Reports
+2,19 and Under,"21,420"
+3,20 - 29,"187,195"
+4,30 - 39,"291,807"
+5,40 - 49,"207,658"
+6,50 - 59,"135,758"
+7,60 - 69,"83,485"
+8,70 - 79,"36,790"
+9,80 and Over,"9,605"
+10,,
+11,"Of the 1,135,291 total identity theft reports in 2024, 86% included consumer age information.",
+12,,
+13,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Bismarck, ND Metropolitan Statistical Area",153
+3,"Fargo, ND-MN Metropolitan Statistical Area",378
+4,"Grand Forks, ND-MN Metropolitan Statistical Area",100
+5,,
+6,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+7,,
+8,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/NorthDakota.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Bismarck, ND Metropolitan Statistical Area",797
+3,"Fargo, ND-MN Metropolitan Statistical Area","2,183"
+4,"Grand Forks, ND-MN Metropolitan Statistical Area",606
+5,,
+6,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+7,,
+8,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Boise City, ID Metropolitan Statistical Area","1,173"
+3,"Coeur d'Alene, ID Metropolitan Statistical Area",224
+4,"Idaho Falls, ID Metropolitan Statistical Area",242
+5,"Logan, UT-ID Metropolitan Statistical Area",168
+6,"Twin Falls, ID Metropolitan Statistical Area",129
+7,,
+8,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+9,,
+10,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Idaho.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Boise City, ID Metropolitan Statistical Area","7,571"
+3,"Coeur d'Alene, ID Metropolitan Statistical Area","1,748"
+4,"Idaho Falls, ID Metropolitan Statistical Area","1,136"
+5,"Logan, UT-ID Metropolitan Statistical Area",996
+6,"Twin Falls, ID Metropolitan Statistical Area",773
+7,,
+8,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+9,,
+10,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Billings, MT Metropolitan Statistical Area",279
+3,"Bozeman, MT Metropolitan Statistical Area",217
+4,"Kalispell, MT Micropolitan Statistical Area",166
+5,"Missoula, MT Metropolitan Statistical Area",167
+6,,
+7,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+8,,
+9,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Montana.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Billings, MT Metropolitan Statistical Area","1,608"
+3,"Bozeman, MT Metropolitan Statistical Area","1,101"
+4,"Kalispell, MT Micropolitan Statistical Area","1,079"
+5,"Missoula, MT Metropolitan Statistical Area","1,274"
+6,,
+7,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+8,,
+9,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Duluth, MN-WI Metropolitan Statistical Area",269
+3,"Fargo, ND-MN Metropolitan Statistical Area",378
+4,"Grand Forks, ND-MN Metropolitan Statistical Area",100
+5,"La Crosse-Onalaska, WI-MN Metropolitan Statistical Area",152
+6,"Mankato, MN Metropolitan Statistical Area",103
+7,"Minneapolis-St. Paul-Bloomington, MN-WI Metropolitan Statistical Area","5,552"
+8,"Rochester, MN Metropolitan Statistical Area",233
+9,"Sioux Falls, SD-MN Metropolitan Statistical Area",352
+10,"St. Cloud, MN Metropolitan Statistical Area",178
+11,,
+12,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+13,,
+14,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Minnesota.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Duluth, MN-WI Metropolitan Statistical Area","2,226"
+3,"Fargo, ND-MN Metropolitan Statistical Area","2,183"
+4,"Grand Forks, ND-MN Metropolitan Statistical Area",606
+5,"La Crosse-Onalaska, WI-MN Metropolitan Statistical Area","1,142"
+6,"Mankato, MN Metropolitan Statistical Area",695
+7,"Minneapolis-St. Paul-Bloomington, MN-WI Metropolitan Statistical Area","38,139"
+8,"Rochester, MN Metropolitan Statistical Area","1,818"
+9,"Sioux Falls, SD-MN Metropolitan Statistical Area","2,266"
+10,"St. Cloud, MN Metropolitan Statistical Area","1,361"
+11,,
+12,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+13,,
+14,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Gulfport-Biloxi, MS Metropolitan Statistical Area",940
+3,"Hattiesburg, MS Metropolitan Statistical Area",302
+4,"Jackson, MS Metropolitan Statistical Area","1,873"
+5,"Memphis, TN-MS-AR Metropolitan Statistical Area","5,502"
+6,"Tupelo, MS Micropolitan Statistical Area",236
+7,,
+8,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+9,,
+10,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Mississippi.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Gulfport-Biloxi, MS Metropolitan Statistical Area","4,784"
+3,"Hattiesburg, MS Metropolitan Statistical Area","1,695"
+4,"Jackson, MS Metropolitan Statistical Area","8,141"
+5,"Memphis, TN-MS-AR Metropolitan Statistical Area","25,046"
+6,"Tupelo, MS Micropolitan Statistical Area","1,262"
+7,,
+8,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+9,,
+10,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Identity Theft Reports    str
+Unnamed: 1                                    str
+dtype: object
+Table:
+,Metropolitan Areas: Identity Theft Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Albuquerque, NM Metropolitan Statistical Area","1,563"
+3,"Farmington, NM Metropolitan Statistical Area",109
+4,"Las Cruces, NM Metropolitan Statistical Area",430
+5,"Santa Fe, NM Metropolitan Statistical Area",192
+6,,
+7,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.",
+8,,
+9,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/NewMexico.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Metropolitan Areas: Fraud and Other Reports    str
+Unnamed: 1                                     str
+dtype: object
+Table:
+,Metropolitan Areas: Fraud and Other Reports,Unnamed: 1
+0,,
+1,Metropolitan Area,# of Reports
+2,"Albuquerque, NM Metropolitan Statistical Area","10,534"
+3,"Farmington, NM Metropolitan Statistical Area",746
+4,"Las Cruces, NM Metropolitan Statistical Area","2,158"
+5,"Santa Fe, NM Metropolitan Statistical Area","1,927"
+6,,
+7,"Metropolitan Areas are defined by the Office of Management and Budget, and population estimates are based on 2023 U.S. Census figures. Metropolitan Areas are ranked based on the number of reports per 100,000 population.  Reports exclude state-specific data contributor reports.",
+8,,
+9,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",
+
+====================
+
+File name: csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Types_by_Age.csv
+Type: table (pandas.DataFrame)
+Column data types:
+Identity Theft Types by Age    str
+Unnamed: 1                     str
+Unnamed: 2                     str
+Unnamed: 3                     str
+Unnamed: 4                     str
+Unnamed: 5                     str
+Unnamed: 6                     str
+Unnamed: 7                     str
+Unnamed: 8                     str
+dtype: object
+Table:
+,Identity Theft Types by Age,Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8
+0,,,,,,,,,
+1,Theft Type,19 and Under,20 - 29,30 - 39,40 - 49,50 - 59,60 - 69,70 - 79,80 and Over
+2,Bank Account,"1,830","17,137","26,277","22,475","18,075","14,684","7,794","2,340"
+3,Credit Card,"2,447","81,362","131,297","89,864","52,940","28,281","11,861","2,987"
+4,Employment or Tax-Related,"11,569","16,158","18,941","15,096","10,937","7,992","3,220",742
+5,Government Documents or Benefits,"2,771","9,438","14,306","12,915","11,492","9,058","4,338",1343
+6,Loan or Lease,1062,"30,510","53,001","36,598","22,092","13,458","5,784","1,416"
+7,Other Identity Theft,"2,969","53,580","85,773","57,952","35,213","17,372","6,852","1,797"
+8,Phone or Utilities,735,"13,833","24,005","17,419","11,710","7,642","3,132",829
+9,,,,,,,,,
+10,"Of the 1,135,291 total identity theft reports in 2024, 86% included consumer age information.",,,,,,,,
+11,,,,,,,,,
+12,"Source: Consumer Sentinel Network Data Book 2024, Federal Trade Commission",,,,,,,,
+
+====================
+
+
+Now think step-by-step carefully. 
+First, provide a step-by-step reasoning of how you would arrive at the correct answer.
+Do not assume the data files are clean or well-structured (e.g., missing values, inconsistent data type in a column).
+Do not assume the data type of the columns is what you see in the data snippet (e.g., 2012 in Year could be a string, instead of an int). So you need to convert it to the correct type if your subsequent code relies on the correct data type (e.g., cast two columns to the same type before joining the two tables).
+You have to consider the possible data issues observed in the data snippet and how to handle them.
+Output the steps in a JSON format with the following keys:
+- id: always "main-task" for the main task. For each subtask, use "subtask-1", "subtask-2", etc.
+- query: the question the step is trying to answer. Copy down the question from above for the main task.
+- data_sources: the data sources you need to check to answer the question. Include all the file names you need for the main task.
+- subtasks: a list of subtasks. Each subtask should have the same structure as the main task.
+For example, a JSON object for the task might look like this:
+{
+    "id": "main-task",
+    "query": "Report the average number of reported identity thefts for all metropolitan areas that are larger than one million in population in 2023. - If you don't have their population size in 2023, use two years where you know the censuses (or an estimate of the censurs) and linearly interpolate between them to estimate the 2023 population size.  - Be sure to robustly match the names of metropolitan areas: Use only the city and state portion of the name, ignoring suffixes like 'Metropolitan Statistical Area' or 'MSA' and normalizing punctuation. Drop entries where there's no match in the html for the areas fraud reports. Round to 4 decimal places",
+    "data_sources": [
+        "file1.csv",
+        "file2.csv"
+    ],
+    "subtasks": [
+        {
+            "id": "subtask-1",
+            "query": "What is the exceedance rate in 2022?",
+            "data_sources": [
+                "water-body-testing-2022.csv"
+            ]
+        },
+        {
+            "id": "subtask-2",
+            "query": "What is the column name for the exceedance rate?",
+            "data_sources": [
+                "water-body-testing-2022.csv"
+            ]
+        }
+    ]
+}
+You can have multiple steps, and each step should be a JSON object.
+Your output for this task should be a JSON array of JSON objects.
+Mark the JSON array with ````json` and ````json` to indicate the start and end of the code block.
+
+Then, provide the corresponding Python code to extract the answer from the data sources. 
+The data sources you may need to answer the question are: ['/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/DistrictofColumbia.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Wyoming.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Illinois.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Maryland.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Indiana.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Missouri.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/DistrictofColumbia.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/SouthDakota.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/RhodeIsland.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Ohio.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Alaska.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Reports_by_Age.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/NorthDakota.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Idaho.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Montana.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Minnesota.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Mississippi.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/NewMexico.csv', '/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Types_by_Age.csv'].
+
+If possible, print the answer (in a JSON format) to each step you provided in the JSON array using the print() function.
+Use "id" as the key to print the answer.
+For example, if you have an answer to subtask-1, subtask-2, and main-task (i.e., the final answer), you should print it like this:
+print(json.dumps(
+{"subtask-1": answer1, 
+"subtask-2": answer2, 
+"main-task": answer
+}, indent=4))
+You can find a suitable indentation for the print statement. Always import json at the beginning of your code.
+
+Mark the code with ````python` and ````python` to indicate the start and end of the code block.

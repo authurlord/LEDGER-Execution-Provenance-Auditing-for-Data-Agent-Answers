@@ -1,0 +1,33 @@
+{
+ "n_scale": 300,
+ "n_evaluable": 298,
+ "unknown_rate": 0.0067,
+ "frozen_point": {
+  "ops": [
+   "sum",
+   "diff",
+   "ratio",
+   "pctchg",
+   "prod"
+  ],
+  "chain": "full",
+  "max_depth": 2,
+  "tol_rel": 0.0001,
+  "percent": true
+ },
+ "constrained": {
+  "support_recall": 0.943,
+  "support_recall_counts": "281/298",
+  "unsupported_detection": 0.9564,
+  "unsupported_detection_counts": "285/298",
+  "false_support_rate": 0.0436,
+  "false_support_counts": "13/298"
+ },
+ "free_closure_baseline": {
+  "support_recall": 0.8533,
+  "support_recall_counts": "256/300",
+  "unsupported_detection": 0.62,
+  "unsupported_detection_counts": "186/300"
+ },
+ "note": "frozen point chosen on the 60-seed ONLY; this 300 set is disjoint (question-hash)."
+}

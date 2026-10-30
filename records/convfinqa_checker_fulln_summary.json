@@ -1,0 +1,74 @@
+{
+ "split_stats": {
+  "total_qas": 542,
+  "valid": 533,
+  "dedup_dropped": 85,
+  "unique": 448,
+  "seed": 60,
+  "rest": 388
+ },
+ "n300_continuity_split_stats": {
+  "total_qas": 542,
+  "valid": 533,
+  "dedup_dropped": 85,
+  "unique": 448,
+  "seed": 60,
+  "scale": 300
+ },
+ "frozen_point": {
+  "ops": [
+   "sum",
+   "diff",
+   "ratio",
+   "pctchg",
+   "prod"
+  ],
+  "chain": "full",
+  "max_depth": 2,
+  "tol_rel": 0.0001,
+  "percent": true
+ },
+ "n300_continuity": {
+  "label": "n300_continuity",
+  "n": 300,
+  "n_evaluable": 298,
+  "unknown": 2,
+  "unknown_rate": 0.0067,
+  "constrained": {
+   "support_recall": 0.943,
+   "support_recall_counts": "281/298",
+   "unsupported_detection": 0.9564,
+   "unsupported_detection_counts": "285/298",
+   "false_support_rate": 0.0436,
+   "false_support_counts": "13/298"
+  },
+  "free_closure_baseline": {
+   "support_recall": 0.8533,
+   "support_recall_counts": "256/300",
+   "unsupported_detection": 0.62,
+   "unsupported_detection_counts": "186/300"
+  }
+ },
+ "full_n_headline": {
+  "label": "full_n_headline",
+  "n": 388,
+  "n_evaluable": 386,
+  "unknown": 2,
+  "unknown_rate": 0.0052,
+  "constrained": {
+   "support_recall": 0.9326,
+   "support_recall_counts": "360/386",
+   "unsupported_detection": 0.9611,
+   "unsupported_detection_counts": "371/386",
+   "false_support_rate": 0.0389,
+   "false_support_counts": "15/386"
+  },
+  "free_closure_baseline": {
+   "support_recall": 0.8608,
+   "support_recall_counts": "334/388",
+   "unsupported_detection": 0.6237,
+   "unsupported_detection_counts": "242/388"
+  }
+ },
+ "note": "full-n is the entire unique disjoint remainder after the same 60-seed calibration split."
+}

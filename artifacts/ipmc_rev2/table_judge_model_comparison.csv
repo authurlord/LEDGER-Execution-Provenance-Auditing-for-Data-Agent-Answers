@@ -1,0 +1,4 @@
+accuracy_delta_27b_minus_35b,dataset,n_clear,qwen3.6-27b-nvfp4_accuracy,qwen3.6-27b-nvfp4_correct,qwen3.6-27b-nvfp4_repeat_flip_items,qwen3.6-35b_accuracy,qwen3.6-35b_correct,qwen3.6-35b_repeat_flip_items
+0.010000000000000009,convfinqa_constructed,200,0.86,172,14,0.85,170,4
+-0.02564102564102566,kramabench_human,39,0.6153846153846154,24,7,0.6410256410256411,25,1
+-0.09999999999999998,wikisql_semantic_perturbations,50,0.78,39,5,0.88,44,3

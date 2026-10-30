@@ -1,0 +1,6 @@
+# Preserve archived evidence bytes and their SHA-256 manifests across platforms.
+running_examples/identity_theft/** -text -whitespace
+records/** -text -whitespace
+datasets/normalized/** -text -whitespace
+docs/annotation/*.csv -text -whitespace
+artifacts/** -text -whitespace

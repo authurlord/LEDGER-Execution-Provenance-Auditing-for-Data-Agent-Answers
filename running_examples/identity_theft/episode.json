@@ -1,0 +1,62 @@
+{
+  "episode_id": "legal-hard-1",
+  "episode_timestamp_from_cache_filename": "2026-06-17T00:04:50+08:00",
+  "benchmark": "KramaBench",
+  "domain": "legal",
+  "system": "BaselineLLMSystemLocalQwenDiscovery",
+  "question": "Report the average number of reported identity thefts for all metropolitan areas that are larger than one million in population in 2023. - If you don't have their population size in 2023, use two years where you know the censuses (or an estimate of the censurs) and linearly interpolate between them to estimate the 2023 population size.  - Be sure to robustly match the names of metropolitan areas: Use only the city and state portion of the name, ignoring suffixes like 'Metropolitan Statistical Area' or 'MSA' and normalizing punctuation. Drop entries where there's no match in the html for the areas fraud reports. Round to 4 decimal places",
+  "quantity": "mean number of identity-theft reports among metropolitan areas with 2023 population > 1,000,000",
+  "stated_answer": 10724.1429,
+  "manuscript_two_decimal_rendering": "10,724.14",
+  "official_answer": 12964.8727,
+  "program_language": "python",
+  "program_sha256": "2f39ef4442b78e9cfd6b8e324018b11c4362070c37bd3814fc9591dcca20412f",
+  "host_status": "success",
+  "host_output": {
+    "main-task": 10724.1429
+  },
+  "host_value": 10724.1429,
+  "host_value_equals_stated_answer": true,
+  "host_aggregation": {
+    "valid_msa_names_from_16_fraud_files": 87,
+    "matched_national_rows_before_population_filter": 85,
+    "population_gt_1m_rows": 14,
+    "sum_reports": 150138.0,
+    "mean_reports": 10724.142857142857,
+    "rounded_4dp": 10724.1429
+  },
+  "replay_status": "normal_exit",
+  "replay_exit_code": 0,
+  "replay_output": {
+    "main-task": null
+  },
+  "replay_value": null,
+  "replay_comparable_to_stated_answer": false,
+  "audit_status": "no_replay_certificate",
+  "failure_code": "missing_comparable_output",
+  "secondary_failure_codes": [
+    "undeclared_host_reads",
+    "declared_evidence_not_read",
+    "trace_canonicalization_basename_collision"
+  ],
+  "raw_checker_failure_code": "a",
+  "raw_checker_detail": "stated='10724.1429' recomputed='none'",
+  "evidence_counts": {
+    "declared_count": 17,
+    "host_read_count": 17,
+    "declared_and_host_read_count": 1,
+    "host_reads_outside_declared_count": 16,
+    "declared_but_unread_count": 16,
+    "host_subset_of_resolved_declared": false
+  },
+  "offered_file_count": 20,
+  "host_reads_outside_offered_count": 15,
+  "reference_recomputation": {
+    "method": "faithful reimplementation of the bundled KramaBench reference program; html parsed with bs4 html.parser because lxml is absent in the episode environment",
+    "matched_rows": 363,
+    "population_gt_1m_rows": 55,
+    "sum_reports": 713068.0,
+    "mean_reports": 12964.872727272726,
+    "rounded_4dp": 12964.8727
+  }
+}

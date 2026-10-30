@@ -1,0 +1,77 @@
+{
+    "system_subtasks_responses": [],
+    "id": "main-task",
+    "query": "Report the average number of reported identity thefts for all metropolitan areas that are larger than one million in population in 2023. - If you don't have their population size in 2023, use two years where you know the censuses (or an estimate of the censurs) and linearly interpolate between them to estimate the 2023 population size.  - Be sure to robustly match the names of metropolitan areas: Use only the city and state portion of the name, ignoring suffixes like 'Metropolitan Statistical Area' or 'MSA' and normalizing punctuation. Drop entries where there's no match in the html for the areas fraud reports. Round to 4 decimal places",
+    "data_sources": [
+        "csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv",
+        "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv"
+    ],
+    "subtasks": [
+        {
+            "id": "subtask-1",
+            "query": "Extract metropolitan area names and identity theft report counts from the main reports CSV and state-specific CSVs.",
+            "data_sources": [
+                "csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv",
+                "csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv"
+            ],
+            "answer": "Warning: No answer found in the Python pipeline."
+        },
+        {
+            "id": "subtask-2",
+            "query": "Normalize metropolitan area names by removing 'Metropolitan Statistical Area' and 'MSA' suffixes and standardizing punctuation.",
+            "data_sources": [],
+            "answer": "Warning: No answer found in the Python pipeline."
+        },
+        {
+            "id": "subtask-3",
+            "query": "Retrieve 2023 population estimates for the matched metropolitan areas. Since the data source mentions 2023 Census figures, we assume the provided data or external knowledge of 2020 Census and 2023 estimates is needed. However, the prompt implies we might need to interpolate. The data files themselves don't contain population data. We must rely on external knowledge or the 'Reports per 100K' column to back-calculate population if available, or use known 2020/2023 census data. Given the constraint 'If you don't have their population size in 2023... use two years... and linearly interpolate', and the fact that the data book is 2024 and mentions 2023 Census figures, the most robust way is to use the 'Reports per 100K Population' and '# of Reports' to calculate the implied population for 2023, as stated in the data description: 'population estimates are based on 2023 U.S. Census figures'.",
+            "data_sources": [
+                "csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv"
+            ],
+            "answer": "Warning: No answer found in the Python pipeline."
+        },
+        {
+            "id": "subtask-4",
+            "query": "Filter metropolitan areas with population > 1,000,000.",
+            "data_sources": [],
+            "answer": "Warning: No answer found in the Python pipeline."
+        },
+        {
+            "id": "subtask-5",
+            "query": "Calculate the average number of reported identity thefts for the filtered areas.",
+            "data_sources": [],
+            "answer": "Warning: No answer found in the Python pipeline."
+        }
+    ],
+    "answer": 10724.1429
+}

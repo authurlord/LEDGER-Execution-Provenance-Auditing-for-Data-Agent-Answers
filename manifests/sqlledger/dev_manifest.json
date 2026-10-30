@@ -1,0 +1,42 @@
+{
+ "seed": 20260711,
+ "git_commit": "023ca9f",
+ "engine": "sqlite-3.46.0",
+ "n_records": 8620,
+ "per_dataset": {
+  "wikisql": {
+   "n": 7000,
+   "classes": {
+    "s1": 1000,
+    "s2": 1000,
+    "u_a1": 1000,
+    "u_b": 1000,
+    "u_c1": 1000,
+    "u_c2": 1000,
+    "u_a3": 1000
+   },
+   "rejections": {}
+  },
+  "spider": {
+   "n": 1620,
+   "classes": {
+    "s1": 290,
+    "u_b": 254,
+    "u_c1": 250,
+    "u_c2": 290,
+    "u_a3": 290,
+    "u_a1": 246
+   },
+   "rejections": {
+    "u_a1_no_mutant": 44,
+    "u_b_empty_stated": 36,
+    "u_c1_unexpected": 40,
+    "layout_sensitive": 10
+   }
+  }
+ },
+ "dataset_hashes": {
+  "wikisql_dev.db": "c3685e41f2de9d17b3c643b285e1aec13eeeeb3dd04189085636c1d637d0978f"
+ },
+ "records_sha256": "ba7ea45fb25053e02d95e3536f224b34fa9e32cec8a6eda469713d75e8032250"
+}

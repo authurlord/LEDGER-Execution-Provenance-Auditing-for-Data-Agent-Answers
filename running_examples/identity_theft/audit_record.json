@@ -1,0 +1,34 @@
+{
+  "episode_id": "legal-hard-1",
+  "original_checker": {
+    "grounding_label": "unsupported",
+    "unsupported_class": "a",
+    "support_detail": "stated='10724.1429' recomputed='none'",
+    "recomputed_value": null,
+    "source_record": "records/records_ledger_n2_kb_legal_discovery.jsonl"
+  },
+  "evidence_backed_diagnosis": {
+    "certificate_issued": false,
+    "primary_failure_code": "missing_comparable_output",
+    "replay_execution": "normal_exit",
+    "replay_output": {
+      "main-task": null
+    },
+    "replay_value_type": "null",
+    "comparison_with_stated_answer": "undefined/non-comparable",
+    "secondary_failure_codes": [
+      "undeclared_host_reads",
+      "declared_evidence_not_read",
+      "trace_canonicalization_basename_collision"
+    ],
+    "evidence_authorization": {
+      "declared_count": 17,
+      "host_read_count": 17,
+      "declared_and_host_read_count": 1,
+      "host_reads_outside_declared_count": 16,
+      "declared_but_unread_count": 16,
+      "host_subset_of_resolved_declared": false
+    },
+    "checker_note": "The historical checker stringified Python None as 'none' and therefore emitted class a. The preserved replay stdout is JSON null, so the safer paper-level witness is missing/non-comparable output."
+  }
+}

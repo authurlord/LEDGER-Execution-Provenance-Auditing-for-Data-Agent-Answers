@@ -1,0 +1,122 @@
+[
+  {
+    "rank": 1,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 2,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv",
+    "declared": true,
+    "host_read": true
+  },
+  {
+    "rank": 3,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 4,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 5,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 6,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 7,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 8,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/DistrictofColumbia.csv",
+    "declared": false,
+    "host_read": true
+  },
+  {
+    "rank": 9,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 10,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 11,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 12,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 13,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Reports_by_Age.csv",
+    "declared": false,
+    "host_read": false
+  },
+  {
+    "rank": 14,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 15,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 16,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 17,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 18,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 19,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv",
+    "declared": true,
+    "host_read": false
+  },
+  {
+    "rank": 20,
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Types_by_Age.csv",
+    "declared": false,
+    "host_read": false
+  }
+]

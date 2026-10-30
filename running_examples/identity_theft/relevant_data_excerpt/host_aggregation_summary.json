@@ -1,0 +1,8 @@
+{
+  "valid_msa_names_from_16_fraud_files": 87,
+  "matched_national_rows_before_population_filter": 85,
+  "population_gt_1m_rows": 14,
+  "sum_reports": 150138.0,
+  "mean_reports": 10724.142857142857,
+  "rounded_4dp": 10724.1429
+}

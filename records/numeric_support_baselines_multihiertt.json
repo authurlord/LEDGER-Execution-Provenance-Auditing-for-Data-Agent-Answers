@@ -1,0 +1,82 @@
+{
+  "frozen_point": {
+    "max_depth": 2,
+    "ops": [
+      "sum",
+      "diff",
+      "ratio",
+      "pctchg",
+      "prod"
+    ],
+    "percent": true,
+    "tol_rel": 0.0001
+  },
+  "notes": {
+    "all_numbers_in_cited_file": "Available for ConvFinQA because each example has one inline evidence document; the existing free-closure native tolerance is retained.",
+    "multihiertt_omission": "Whole-file/context closure is omitted rather than imputed because the canonical paired records retain cited operands but not a stable full-context candidate pool.",
+    "oracle": "Gold-program execution is shown only as an upper bound."
+  },
+  "results": [
+    {
+      "accepted": 52,
+      "dataset": "multihiertt",
+      "method": "exact_operand",
+      "n": 12602,
+      "support_n": 6301,
+      "support_recall": 0.0076178384383431205,
+      "support_recall_counts": "48/6301",
+      "unsupported_detection": 0.9993651801301381,
+      "unsupported_detection_counts": "6297/6301",
+      "unsupported_n": 6301
+    },
+    {
+      "accepted": 52,
+      "dataset": "multihiertt",
+      "method": "nearest_operand_tolerance",
+      "n": 12602,
+      "support_n": 6301,
+      "support_recall": 0.0076178384383431205,
+      "support_recall_counts": "48/6301",
+      "unsupported_detection": 0.9993651801301381,
+      "unsupported_detection_counts": "6297/6301",
+      "unsupported_n": 6301
+    },
+    {
+      "accepted": 3290,
+      "dataset": "multihiertt",
+      "method": "single_operation",
+      "n": 12602,
+      "support_n": 6301,
+      "support_recall": 0.515315029360419,
+      "support_recall_counts": "3247/6301",
+      "unsupported_detection": 0.9931756863989842,
+      "unsupported_detection_counts": "6258/6301",
+      "unsupported_n": 6301
+    },
+    {
+      "accepted": 5824,
+      "dataset": "multihiertt",
+      "method": "operand_constrained_closure",
+      "n": 12602,
+      "support_n": 6301,
+      "support_recall": 0.8963656562450405,
+      "support_recall_counts": "5648/6301",
+      "unsupported_detection": 0.9720679257260753,
+      "unsupported_detection_counts": "6125/6301",
+      "unsupported_n": 6301
+    },
+    {
+      "accepted": 6301,
+      "dataset": "multihiertt",
+      "method": "gold_program_execution_oracle",
+      "n": 12602,
+      "support_n": 6301,
+      "support_recall": 1.0,
+      "support_recall_counts": "6301/6301",
+      "unsupported_detection": 1.0,
+      "unsupported_detection_counts": "6301/6301",
+      "unsupported_n": 6301
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,70 @@
+{
+  "conclusion": "The 27B NVFP4 diagnostic is marginally better on ConvFinQA but worse on the human boundary and WikiSQL, with more repeat flips and parse failures. The observed trend is not explained by a simple 35B model failure, so the 35B run remains primary and both complete runs are retained.",
+  "datasets": [
+    {
+      "accuracy_delta_27b_minus_35b": 0.010000000000000009,
+      "dataset": "convfinqa_constructed",
+      "n_clear": 200,
+      "qwen3.6-27b-nvfp4_accuracy": 0.86,
+      "qwen3.6-27b-nvfp4_correct": 172,
+      "qwen3.6-27b-nvfp4_repeat_flip_items": 14,
+      "qwen3.6-35b_accuracy": 0.85,
+      "qwen3.6-35b_correct": 170,
+      "qwen3.6-35b_repeat_flip_items": 4
+    },
+    {
+      "accuracy_delta_27b_minus_35b": -0.02564102564102566,
+      "dataset": "kramabench_human",
+      "n_clear": 39,
+      "qwen3.6-27b-nvfp4_accuracy": 0.6153846153846154,
+      "qwen3.6-27b-nvfp4_correct": 24,
+      "qwen3.6-27b-nvfp4_repeat_flip_items": 7,
+      "qwen3.6-35b_accuracy": 0.6410256410256411,
+      "qwen3.6-35b_correct": 25,
+      "qwen3.6-35b_repeat_flip_items": 1
+    },
+    {
+      "accuracy_delta_27b_minus_35b": -0.09999999999999998,
+      "dataset": "wikisql_semantic_perturbations",
+      "n_clear": 50,
+      "qwen3.6-27b-nvfp4_accuracy": 0.78,
+      "qwen3.6-27b-nvfp4_correct": 39,
+      "qwen3.6-27b-nvfp4_repeat_flip_items": 5,
+      "qwen3.6-35b_accuracy": 0.88,
+      "qwen3.6-35b_correct": 44,
+      "qwen3.6-35b_repeat_flip_items": 3
+    }
+  ],
+  "design": {
+    "changed_factor": "model",
+    "inputs": "same frozen 290 items",
+    "max_tokens": 384,
+    "repeats": 3,
+    "response_format": "json_object",
+    "temperature": 0
+  },
+  "models": {
+    "qwen3.6-27b-nvfp4": {
+      "calls": 870,
+      "majority_correct": 235,
+      "n_clear": 289,
+      "n_items": 290,
+      "parse_failures": 34,
+      "repeat_flip_items": 26,
+      "tokens_in": 324156,
+      "tokens_out": 118469
+    },
+    "qwen3.6-35b": {
+      "calls": 870,
+      "majority_correct": 239,
+      "n_clear": 289,
+      "n_items": 290,
+      "parse_failures": 29,
+      "repeat_flip_items": 8,
+      "tokens_in": 324156,
+      "tokens_out": 143263
+    }
+  },
+  "primary_model_retained": "qwen3.6-35b",
+  "schema_version": 1
+}

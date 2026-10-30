@@ -1,0 +1,106 @@
+{
+  "frozen_point": {
+    "max_depth": 2,
+    "ops": [
+      "sum",
+      "diff",
+      "ratio",
+      "pctchg",
+      "prod"
+    ],
+    "percent": true,
+    "tol_rel": 0.0001
+  },
+  "notes": {
+    "all_numbers_in_cited_file": "Available for ConvFinQA because each example has one inline evidence document; the existing free-closure native tolerance is retained.",
+    "multihiertt_omission": "Whole-file/context closure is omitted rather than imputed because the canonical paired records retain cited operands but not a stable full-context candidate pool.",
+    "oracle": "Gold-program execution is shown only as an upper bound."
+  },
+  "results": [
+    {
+      "accepted": 1,
+      "dataset": "convfinqa",
+      "method": "exact_operand",
+      "n": 772,
+      "support_n": 386,
+      "support_recall": 0.0025906735751295338,
+      "support_recall_counts": "1/386",
+      "unsupported_detection": 1.0,
+      "unsupported_detection_counts": "386/386",
+      "unsupported_n": 386
+    },
+    {
+      "accepted": 1,
+      "dataset": "convfinqa",
+      "method": "nearest_operand_tolerance",
+      "n": 772,
+      "support_n": 386,
+      "support_recall": 0.0025906735751295338,
+      "support_recall_counts": "1/386",
+      "unsupported_detection": 1.0,
+      "unsupported_detection_counts": "386/386",
+      "unsupported_n": 386
+    },
+    {
+      "accepted": 279,
+      "dataset": "convfinqa",
+      "method": "single_operation",
+      "n": 772,
+      "support_n": 386,
+      "support_recall": 0.7150259067357513,
+      "support_recall_counts": "276/386",
+      "unsupported_detection": 0.9922279792746114,
+      "unsupported_detection_counts": "383/386",
+      "unsupported_n": 386
+    },
+    {
+      "accepted": 375,
+      "dataset": "convfinqa",
+      "method": "operand_constrained_closure",
+      "n": 772,
+      "support_n": 386,
+      "support_recall": 0.9326424870466321,
+      "support_recall_counts": "360/386",
+      "unsupported_detection": 0.961139896373057,
+      "unsupported_detection_counts": "371/386",
+      "unsupported_n": 386
+    },
+    {
+      "accepted": 478,
+      "dataset": "convfinqa",
+      "method": "all_numbers_in_cited_file",
+      "n": 772,
+      "support_n": 386,
+      "support_recall": 0.8601036269430051,
+      "support_recall_counts": "332/386",
+      "unsupported_detection": 0.6217616580310881,
+      "unsupported_detection_counts": "240/386",
+      "unsupported_n": 386
+    },
+    {
+      "accepted": 478,
+      "dataset": "convfinqa",
+      "method": "all_context_numbers",
+      "n": 772,
+      "support_n": 386,
+      "support_recall": 0.8601036269430051,
+      "support_recall_counts": "332/386",
+      "unsupported_detection": 0.6217616580310881,
+      "unsupported_detection_counts": "240/386",
+      "unsupported_n": 386
+    },
+    {
+      "accepted": 386,
+      "dataset": "convfinqa",
+      "method": "gold_program_execution_oracle",
+      "n": 772,
+      "support_n": 386,
+      "support_recall": 1.0,
+      "support_recall_counts": "386/386",
+      "unsupported_detection": 1.0,
+      "unsupported_detection_counts": "386/386",
+      "unsupported_n": 386
+    }
+  ],
+  "schema_version": 1
+}

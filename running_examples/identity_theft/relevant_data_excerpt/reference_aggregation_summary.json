@@ -1,0 +1,8 @@
+{
+  "method": "faithful reimplementation of the bundled KramaBench reference program; html parsed with bs4 html.parser because lxml is absent in the episode environment",
+  "matched_rows": 363,
+  "population_gt_1m_rows": 55,
+  "sum_reports": 713068.0,
+  "mean_reports": 12964.872727272726,
+  "rounded_4dp": 12964.8727
+}

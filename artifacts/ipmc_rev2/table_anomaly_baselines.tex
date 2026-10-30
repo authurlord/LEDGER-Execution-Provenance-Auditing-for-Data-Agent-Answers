@@ -1,0 +1,31 @@
+\begin{tabular}{llrr}
+\toprule
+Dataset & Method & Support recall & Unsupported detection \\
+\midrule
+convfinqa_seed & robust mad distance & 0.900 (270/300) & 0.140 (42/300) \\
+convfinqa_seed & isolation forest & 0.900 (270/300) & 0.190 (57/300) \\
+convfinqa_seed & local outlier factor & 0.900 (270/300) & 0.210 (63/300) \\
+convfinqa_seed & one class svm & 0.900 (270/300) & 0.153 (46/300) \\
+convfinqa_seed & logistic regression supervised upper & 0.900 (270/300) & 0.593 (178/300) \\
+convfinqa_remainder & robust mad distance & 0.892 (346/388) & 0.137 (53/388) \\
+convfinqa_remainder & isolation forest & 0.905 (351/388) & 0.191 (74/388) \\
+convfinqa_remainder & local outlier factor & 0.899 (349/388) & 0.198 (77/388) \\
+convfinqa_remainder & one class svm & 0.912 (354/388) & 0.144 (56/388) \\
+convfinqa_remainder & logistic regression supervised upper & 0.899 (349/388) & 0.593 (230/388) \\
+multihiertt & robust mad distance & 0.928 (5848/6301) & 0.076 (478/6301) \\
+multihiertt & isolation forest & 0.760 (4786/6301) & 0.322 (2031/6301) \\
+multihiertt & local outlier factor & 0.000 (0/6301) & 1.000 (6301/6301) \\
+multihiertt & one class svm & 0.000 (0/6301) & 1.000 (6301/6301) \\
+multihiertt & logistic regression supervised upper & 0.939 (5919/6301) & 0.247 (1557/6301) \\
+convfinqa_wrong_operation & robust mad distance & 0.895 (342/382) & 0.050 (19/382) \\
+convfinqa_wrong_operation & isolation forest & 0.916 (350/382) & 0.228 (87/382) \\
+convfinqa_wrong_operation & local outlier factor & 0.000 (0/382) & 1.000 (382/382) \\
+convfinqa_wrong_operation & one class svm & 0.000 (0/382) & 1.000 (382/382) \\
+convfinqa_wrong_operation & logistic regression supervised upper & 0.901 (344/382) & 0.079 (30/382) \\
+kramabench_human & robust mad distance & 1.000 (11/11) & 0.000 (0/28) \\
+kramabench_human & isolation forest & 0.000 (0/11) & 1.000 (28/28) \\
+kramabench_human & local outlier factor & 0.000 (0/11) & 1.000 (28/28) \\
+kramabench_human & one class svm & 0.000 (0/11) & 1.000 (28/28) \\
+kramabench_human & logistic regression supervised upper & 0.000 (0/11) & 1.000 (28/28) \\
+\bottomrule
+\end{tabular}

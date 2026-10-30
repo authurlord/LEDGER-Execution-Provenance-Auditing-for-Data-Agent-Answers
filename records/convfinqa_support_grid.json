@@ -1,0 +1,38 @@
+[
+ {
+  "ops": "cell",
+  "tol": 0.001,
+  "support_recall": 0.4,
+  "unsupported_detection": 0.9333
+ },
+ {
+  "ops": "cell",
+  "tol": 0.0001,
+  "support_recall": 0.4,
+  "unsupported_detection": 0.9333
+ },
+ {
+  "ops": "cell",
+  "tol": 1e-05,
+  "support_recall": 0.4,
+  "unsupported_detection": 0.9333
+ },
+ {
+  "ops": "pairwise",
+  "tol": 0.001,
+  "support_recall": 0.9333,
+  "unsupported_detection": 0.5
+ },
+ {
+  "ops": "pairwise",
+  "tol": 0.0001,
+  "support_recall": 0.8667,
+  "unsupported_detection": 0.6333
+ },
+ {
+  "ops": "pairwise",
+  "tol": 1e-05,
+  "support_recall": 0.7833,
+  "unsupported_detection": 0.6833
+ }
+]

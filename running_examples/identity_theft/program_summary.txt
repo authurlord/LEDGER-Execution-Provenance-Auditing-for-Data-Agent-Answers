@@ -1,0 +1,6 @@
+1. Read the national metropolitan identity-theft table.
+2. Read 16 State MSA Fraud and Other CSVs and union their Metropolitan Area names.
+3. Strip MSA/Metropolitan Statistical Area suffixes and retain national rows whose names occur in that union.
+4. Infer 2023 population as (# of Reports / Reports per 100K Population) * 100,000.
+5. Keep inferred population > 1,000,000, then mean(# of Reports) and round to four decimals.
+6. Print one JSON object containing main-task.

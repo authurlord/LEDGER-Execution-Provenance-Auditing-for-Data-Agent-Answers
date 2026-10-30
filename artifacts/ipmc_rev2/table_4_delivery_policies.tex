@@ -1,0 +1,21 @@
+\begin{tabular}{llrrrr}
+\toprule
+Dataset & Policy & Delivered & Coverage & Human unsupported & Delivered score \\
+\midrule
+kramabench_human_clear & deliver all & 39/39 & 1.000 & 28 & 0.162 \\
+kramabench_human_clear & deliver if execution success & 36/39 & 0.923 & 25 & 0.143 \\
+kramabench_human_clear & deliver if citations resolve & 33/39 & 0.846 & 22 & 0.194 \\
+kramabench_human_clear & deliver if unrestricted replay match & 19/39 & 0.487 & 10 & 0.235 \\
+kramabench_human_clear & deliver if replay certificate & 21/39 & 0.538 & 10 & 0.212 \\
+kramabench_human_clear & deliver if replay or closure certificate & 21/39 & 0.538 & 10 & 0.212 \\
+kramabench_human_clear & deliver if evidence aware judge supported & 8/39 & 0.205 & 2 & 0.467 \\
+kramabench_human_clear & random matched replay coverage & 21/39 & 0.538 & 17 & 0.162 \\
+kramabench_all & deliver all & 166/166 & 1.000 & 0 & 0.307 \\
+kramabench_all & deliver if execution success & 149/166 & 0.898 & 0 & 0.319 \\
+kramabench_all & deliver if citations resolve & 0/166 & 0.000 & 0 & -- \\
+kramabench_all & deliver if unrestricted replay match & 98/166 & 0.590 & 0 & 0.456 \\
+kramabench_all & deliver if replay certificate & 107/166 & 0.645 & 0 & 0.429 \\
+kramabench_all & deliver if replay or closure certificate & 107/166 & 0.645 & 0 & 0.429 \\
+kramabench_all & random matched replay coverage & 107/166 & 0.645 & 0 & 0.332 \\
+\bottomrule
+\end{tabular}

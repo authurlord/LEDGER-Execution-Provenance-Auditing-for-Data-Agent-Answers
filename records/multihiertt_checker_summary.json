@@ -1,0 +1,140 @@
+{
+ "dataset": "MultiHiertt train",
+ "input_path": "datasets/multihiertt/multihiertt_data/train.json",
+ "records_path": "records/records_ledger_checker_multihiertt.jsonl",
+ "frozen_point": {
+  "ops": [
+   "sum",
+   "diff",
+   "ratio",
+   "pctchg",
+   "prod"
+  ],
+  "chain": "full",
+  "max_depth": 2,
+  "tol_rel": 0.0001,
+  "percent": true
+ },
+ "load_stats": {
+  "total": 7830,
+  "evaluable": 6301,
+  "unknown": 1529,
+  "excluded_reasons": {
+   "missing_program": 1524,
+   "program_parse_failed": 5
+  }
+ },
+ "headline": {
+  "label": "multihiertt_train_evaluable",
+  "n": 6301,
+  "support_recall": 0.8964,
+  "support_recall_counts": "5648/6301",
+  "unsupported_detection": 0.9721,
+  "unsupported_detection_counts": "6125/6301",
+  "false_support_rate": 0.0279,
+  "false_support_counts": "176/6301",
+  "unknown": 0
+ },
+ "depth_distribution": {
+  "1": 1977,
+  "2": 2966,
+  "3": 572,
+  "4": 492,
+  "5": 128,
+  "6": 53,
+  "7": 30,
+  "8": 36,
+  "9": 9,
+  "10": 6,
+  "11": 16,
+  "12": 2,
+  "13": 2,
+  "14": 2,
+  "15": 1,
+  "16": 4,
+  "17": 3,
+  "20": 1,
+  "24": 1
+ },
+ "depth_strata": {
+  "depth_1": {
+   "label": "depth_1",
+   "n": 1977,
+   "support_recall": 0.9848,
+   "support_recall_counts": "1947/1977",
+   "unsupported_detection": 0.9874,
+   "unsupported_detection_counts": "1952/1977",
+   "false_support_rate": 0.0126,
+   "false_support_counts": "25/1977",
+   "unknown": 0
+  },
+  "depth_2": {
+   "label": "depth_2",
+   "n": 2966,
+   "support_recall": 0.9491,
+   "support_recall_counts": "2815/2966",
+   "unsupported_detection": 0.9831,
+   "unsupported_detection_counts": "2916/2966",
+   "false_support_rate": 0.0169,
+   "false_support_counts": "50/2966",
+   "unknown": 0
+  },
+  "depth_3": {
+   "label": "depth_3",
+   "n": 572,
+   "support_recall": 0.6189,
+   "support_recall_counts": "354/572",
+   "unsupported_detection": 0.9545,
+   "unsupported_detection_counts": "546/572",
+   "false_support_rate": 0.0455,
+   "false_support_counts": "26/572",
+   "unknown": 0
+  },
+  "depth_ge4": {
+   "label": "depth_ge4",
+   "n": 786,
+   "support_recall": 0.6768,
+   "support_recall_counts": "532/786",
+   "unsupported_detection": 0.9046,
+   "unsupported_detection_counts": "711/786",
+   "false_support_rate": 0.0954,
+   "false_support_counts": "75/786",
+   "unknown": 0
+  }
+ },
+ "prop1_miss_attribution": {
+  "recall_misses": 653,
+  "misses_depth_gt_2": 472,
+  "misses_depth_gt_2_rate": 0.7228,
+  "miss_depth_distribution": {
+   "1": 30,
+   "2": 151,
+   "3": 218,
+   "4": 83,
+   "5": 72,
+   "6": 36,
+   "7": 15,
+   "8": 23,
+   "9": 5,
+   "10": 4,
+   "11": 9,
+   "12": 1,
+   "13": 2,
+   "14": 1,
+   "15": 1,
+   "17": 1,
+   "24": 1
+  },
+  "interpretation": "Depth>2 miss mass is outside the frozen bounded checker language (max_depth=2); this is Prop-1 boundary confirmation, not MultiHiertt tuning failure."
+ },
+ "sampling": {
+  "used": false,
+  "discarded": 0
+ },
+ "G8_gate": {
+  "criteria": "evaluable>=200 AND unsupported_detection>=0.85",
+  "evaluable": 6301,
+  "unsupported_detection": 0.9721,
+  "PASS": true
+ }
+}

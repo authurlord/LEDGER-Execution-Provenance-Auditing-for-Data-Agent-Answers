@@ -1,0 +1,144 @@
+263cd8dbed1ea80c6b2f0f635635ea4e4ea79d3ccb0230d4cb4cb610227cf2f8  README.md
+6ac71acf61fb7529db7a748d65e0d2bf438e69da21832a28133c2ec191033e72  REPRODUCE.md
+b5ecb4310ed89d0eb910dfbeb84462caae92d9ac1fd089fb065997682a908562  audit_record.json
+a6e453a4593dfbb5ac792084d65bed10cd575b4f7f96bbc67e5f5b7b1df803da  declared_evidence.json
+561a1c877885d7caee74c9f1315cc8f1cedf687ab7cc11565cfe0afc806bb0fc  episode.json
+b4a64e9c3809d3f4cb3dd90562b3713b14335a7298e0021e23ffca05584f8e25  evidence/declared/input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv
+89ecca3974d2369ac8b9535557c1af8778d66092b94af7b43c68d309d3a604ec  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv
+db18db550616a35f17289c5f04d49b706bd8c3929c735552ca0bfabc9c8571ec  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv
+7797d2a080590c382a44f637e1ee2cb67b5282ab1d0c00f625a4adc4362f2f30  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv
+e89364e32f45c7adea17ce4e0c42a9e04c3b599e7dc7267c78ff54927e2dbd92  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv
+5ea5cec6d69c49421e08e2e08787e1e1c6a4c8aa325905c506020efb386bca5c  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv
+2c0a3f73b4583e9ba697a3966dc03211350323d5ff897c682b73ca47b5352dc5  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv
+c382e13c0aa0996d16059c341e371b90d70dbe351adcc803b8b806157b56724d  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv
+55cf8b2ccf87a933aa81685988f5f2d78c932076d02b521c2ab04ba3ca7ab39c  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv
+d80453d26c26ccb6f0f52ffb6cfb01b5982c326e092b4dc7a210d188d6ccaf30  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv
+8f061b628488368b15c1233cd1eeda60720b52fc0d00658c17ab2bc7b5809d6f  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv
+886ce7fd54a67501bfbb2f6c751d28cdc4dfbff4b56deb6dc5b98299cb0db1eb  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv
+35798315a4d010deba995d72375f25644e6118b73c22c32e7b9eeece666c8209  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv
+bafb939059e5bb98c73ee0536a754800d9a682f1dacaa4caeaacd1f381958b54  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv
+e060ebc0b8b48e0eb3a920efc85cf854dc8ceb43f552bacdcbff00a65172ae3e  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv
+9e2e8627278682626ef805220066b7beb5f37bc98319077d319dfda9a0efbe9d  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv
+0f01184400a6c0801d266edac471b95fbd66d6123b176e71fc6a4ac60040bfa2  evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv
+b4a64e9c3809d3f4cb3dd90562b3713b14335a7298e0021e23ffca05584f8e25  evidence/host_read/input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv
+d5ec17c1648a74c9adb8891e9e8a39031a7de57492457305dbc2c39474a2f9a9  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Alaska.csv
+e600095d44cf6facce6bb584d650a3f2d3ceb5b3d80a610eb2d713b13274e93e  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/DistrictofColumbia.csv
+b71c1d1efe2a4a3bb3b1a1c78404a036dfe8ef0abf488d6ab9defe153d6c8915  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Idaho.csv
+604b95a23190bd0204b024f7da83314869574d72ba4967a701c972be75865edb  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Illinois.csv
+10a403074cd260e743976c18d700cfb9d4f4e49a9e18ca6ecc972ce6690d0e84  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Indiana.csv
+d41f6b0d0ea7f8eae4cf28ee394880c13d62eb930b5d4556c57edf80ebdc4ffc  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Maryland.csv
+3d876edfbeb36dd90347892b8e729c43b1dbe1c25921d259427da6c6190d00e5  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Minnesota.csv
+284fd305ec1b6f31ecd812034eddfcb1f3818303436582ea013283d3bca3b734  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Mississippi.csv
+e3a583249a8448d2c46e7afcd0c3ab127a6fe49ce05f885211419a534853c449  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Missouri.csv
+b7d0377554d9cc325130e6c2b7a739fb7c29b392f4048763f1601eb89997d090  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Montana.csv
+63eb14f343d42932351569fa6ea4eaacabe960ceb918e09e6b2f51e6e9ad8223  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/NewMexico.csv
+d569eac674d0dbe06d1686f63908788d640c15d023b9273c1948514df636e162  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/NorthDakota.csv
+c9fdbba91c040e485a09fdc07efa767b6cb9331c6fb4cbd229b123c893bdae5e  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Ohio.csv
+034aba04d3a332d20277dc91ceb12c1e910e3bfdee4ec0589a1155cab5ecae37  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/RhodeIsland.csv
+7fee7171c867be93e63d90a50bab36241bad0e8f54330e4e6aab6afbcab08e77  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/SouthDakota.csv
+88d2c0ceee0e7c6341ca76b952ce873a7968c9d66c4fe95b4a7bb3cd874fc74d  evidence/host_read/input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/Wyoming.csv
+e7fd46477c8980a8df059403cd4ef52799b2c3b1ebfd8b5c9ce4476f96c079b4  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alabama.csv
+89ecca3974d2369ac8b9535557c1af8778d66092b94af7b43c68d309d3a604ec  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv
+84220106b49d7ecf1804b573f9c40cb41203e4ae8caf7aa220042a765743a65a  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Arizona.csv
+7f68ab78f2b3ffebfcdfab1879d2bb77c3eb96eace7f556a8e1373445c1059b3  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Arkansas.csv
+a711fc0be2f796656f5d6311d7bef85e0b2abd62fd0991631e08092110b57300  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/California.csv
+6d9decf63ac82f0388685a34a735a0e3823b0cd3362925fba036bc575d30b195  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Colorado.csv
+27c4f97edfc9028643a7a4ff79e3765522f947c72c16ba016eac33532aadf9f1  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Connecticut.csv
+2e3f14d595ae3b583dd5ed261ddf29a11abe8c63f205aca362893e16b8dda11d  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Delaware.csv
+db18db550616a35f17289c5f04d49b706bd8c3929c735552ca0bfabc9c8571ec  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv
+0c21f69128a2f2583d17b567a228334e80730af58c31230efaa556f48d0a210a  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Florida.csv
+cb807aa8736bcb5e4e0d6d3b6457522577fbc3252b9636217ff56532c206fce6  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Georgia.csv
+fe5c4a5bd4bbe12dffd492b5c7bbbe2d96fe4d6012912563debe13e5cc6f2599  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Hawaii.csv
+7797d2a080590c382a44f637e1ee2cb67b5282ab1d0c00f625a4adc4362f2f30  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv
+e89364e32f45c7adea17ce4e0c42a9e04c3b599e7dc7267c78ff54927e2dbd92  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv
+5ea5cec6d69c49421e08e2e08787e1e1c6a4c8aa325905c506020efb386bca5c  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv
+c9e78635e9e5474d5d761d93035fbf4f6a15ff109fb3f0cad847fd6d1efa396f  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Iowa.csv
+e521d3d0db79bc1531308e415c8cdf380304ea3f2785cad7b8fcdf6ecb9e6081  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Kansas.csv
+83f874595d776e5b6337f17b43824fa725521ff7aa570ef999239f6da8378702  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Kentucky.csv
+e79237a59b645734722a81191814d872eb0f6c83e102ea12eb9a1e5b798b0414  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Louisiana.csv
+03cad78e9417fb77c4d83a69310d036f5ed847192b486951ddb0d9ab8cc705f7  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maine.csv
+2c0a3f73b4583e9ba697a3966dc03211350323d5ff897c682b73ca47b5352dc5  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv
+96ebd202626d92d9e9b68ec6812c3a0610fb939ad74758bc538ea3c01e409928  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Massachusetts.csv
+7e6de78e7736ee6d39ac81ec90313401b65c5264f0ffba4f4414e96693e997f1  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Michigan.csv
+c382e13c0aa0996d16059c341e371b90d70dbe351adcc803b8b806157b56724d  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv
+55cf8b2ccf87a933aa81685988f5f2d78c932076d02b521c2ab04ba3ca7ab39c  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv
+d80453d26c26ccb6f0f52ffb6cfb01b5982c326e092b4dc7a210d188d6ccaf30  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv
+8f061b628488368b15c1233cd1eeda60720b52fc0d00658c17ab2bc7b5809d6f  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv
+8c21561d0fdbd2feea8143edc25172d16a7223f0930dfb34036d1a215a2ba1ad  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Nebraska.csv
+081e531bb821b6e9b553bcf608f0b05ab7e436a25299769b6df74752f16696f5  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Nevada.csv
+52d4a9f6857692d07d043c281e6b998977ea976e58ff04a69de939c563bb76d9  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewHampshire.csv
+575d560754d22d1c2d8ce49fbe6da44c92aecc717624a5c8e25c83498cef93de  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewJersey.csv
+886ce7fd54a67501bfbb2f6c751d28cdc4dfbff4b56deb6dc5b98299cb0db1eb  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv
+2eef080d49bf596b1970fb7b195d17c2fb1f9eef5152171308c9717b30e0ecd2  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewYork.csv
+82813c241c838dd5accaafbf0b1e4e9c6c86f556ce57398081b1ca8c427388b6  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthCarolina.csv
+35798315a4d010deba995d72375f25644e6118b73c22c32e7b9eeece666c8209  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv
+bafb939059e5bb98c73ee0536a754800d9a682f1dacaa4caeaacd1f381958b54  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv
+a57e73c9e532deeffa67a824d2a9fdb9b37d7357dc5e9fbc732b31b481d4ad36  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Oklahoma.csv
+0b01ed1e0a8bb4baea8fd4e95dcf4a114eb3dbbcd135b19b76e2b79a0b9fe06b  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Oregon.csv
+bf7ea3852b3471f66db9ed06eda1053d625632b899005f219dd94d99effe93b8  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Pennsylvania.csv
+5e3f44acd2ae0a00b1c076bd298948a94fe3e7abfa815360490e03ed16ed7aa1  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/PuertoRico.csv
+e060ebc0b8b48e0eb3a920efc85cf854dc8ceb43f552bacdcbff00a65172ae3e  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv
+2ce24142d9870cb714f2ead800904d7370874b4814c7e7940fe166516c3de706  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthCarolina.csv
+9e2e8627278682626ef805220066b7beb5f37bc98319077d319dfda9a0efbe9d  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv
+1fa22305b500fe8d50df6b9c64db87821329a3f18c2ac013a527c4ba90ba6c2b  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Tennessee.csv
+beecbeb16612e5283dbeb949396ec6bde9f5e15274da2a2e7d7e38525391cc32  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Texas.csv
+7722efd7db3a8d0457f7d2102fc5cbc5d7863c031af28844f952b57dda518ebd  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Utah.csv
+8207722368cc11e9038d5f5bc912cd43cc6dfe510e9564375e8c5956ff24b546  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Vermont.csv
+cd93ef5510e3ffdfe9114b49f73837fdd42fcf823bbdd705de6be1c26e28d3ad  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Virginia.csv
+fe9ed2158d1e4cf1b34014a41f3c862ea08eb710925f80a44e72b1c12f36bc7d  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Washington.csv
+a53dee405c4c34ef2603e9ee9f938c70ab6d57f59d0cb05fcaaaeaf4ad2b6cb5  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/WestVirginia.csv
+669bf325d0774dbfdf732b8be7be86da24deae74c1b962b90796f772c73e5bac  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wisconsin.csv
+0f01184400a6c0801d266edac471b95fbd66d6123b176e71fc6a4ac60040bfa2  evidence/reference/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv
+49a24a8d33f07cf22ec4698b012b61414b0d6571674d64d4d34d11273033aaad  evidence/reference/input/metropolitan_statistics.html
+d7d1d5cdac359c0801dce45767e0ee247023ba7ecbb1f3a84a2f17364495acb3  evidence_manifest.csv
+9b08b2bb7f84dad4338eb04b7a5506128d692327240812fc677df4708e229739  final_answer.txt
+2f39ef4442b78e9cfd6b8e324018b11c4362070c37bd3814fc9591dcca20412f  final_program.py
+81816a7ca2325b721239082ffc927d9a63478cc05e0fd9f33d6e164b044995fb  host_reads.jsonl
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  host_stderr.txt
+8347b31e124c2ffe403483ee459a4c0196b42d8dae055d60301053f744c08b3d  host_stdout.txt
+90205006d585ba062945db8b715bd755462cf49ff93dd636a900aba3bfd8aab0  offered_evidence.json
+36afb3689474de8fb60fd5a0fee5a1dea7aa548d834606667c282c8f9d73ef6c  paper_context.tex
+5bc9c158b95368edef5ad56566331272d43abbaf91caab2f162dd821db385bac  program_summary.txt
+cf04698b4355ae038ebfa01f55c1cd8543dea4d30c96000eba82d2af555dd185  question.txt
+3ce3795f0e36fcf26d0b60f6b6cc85ecb3aa335a7f56a9fd1d5dfb8a9d626898  raw/answer.json
+e891420779d8f6aebbb79fecc75f8c0976d8c8d06d9c915b18175be12f6b47e9  raw/audit_checker_source.py
+092623e41ca461d15d5661eb5508bbf3b6cbad42e4517132b959ba4dde68153d  raw/benchmark_reference_program.py
+f910c7fcdfaf5452adb41238469bee637168d6d2d4fe69e74c8298b557aeaa3c  raw/benchmark_task.json
+39102afc972c9d953ed5aa1e939e95c33a6c9371142044103765a8f7eb314571  raw/host_executor_source.py
+b224f47769e6842760b9cf902a3e18feb4727bf3c50c39f4ce7dd3d50cf9628a  raw/initial_response.txt
+7014bb3121737536ad2822d0a75023e3e27c85362835d83b0565201cbdffce70  raw/intermediate/errors-0.txt
+fff991dddb20deb75b64a98acfc95d2a6e8d2a4b1090fc7cd4cb2aee4faa7a0e  raw/intermediate/errors-1.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  raw/intermediate/errors-2.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  raw/intermediate/errors-3.txt
+3bde855a990dd041255377da6b4d8eff2887c137757cc1cc04b402855e960d66  raw/intermediate/ledger_cost.json
+675fa1aab59faba8820bf2057ce80483829bb929fff5e41e015ade64dd73e587  raw/intermediate/pipeline-0.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  raw/intermediate/pipeline-0_out.json
+2d9a829bcc7a83e0df1020bcb7fa8aa8b0d31c08f19b481bbb17ac77e147ac93  raw/intermediate/pipeline-1.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  raw/intermediate/pipeline-1_out.json
+1315ac9f5a1e0e6fa8881cd5e0c1537e5d3b49749609c3e423ccddc050cb4cba  raw/intermediate/pipeline-2.py
+8347b31e124c2ffe403483ee459a4c0196b42d8dae055d60301053f744c08b3d  raw/intermediate/pipeline-2_out.json
+2f39ef4442b78e9cfd6b8e324018b11c4362070c37bd3814fc9591dcca20412f  raw/intermediate/pipeline-3.py
+8347b31e124c2ffe403483ee459a4c0196b42d8dae055d60301053f744c08b3d  raw/intermediate/pipeline-3_out.json
+38a659d0ab078892305113d0d190416af708ccbccc8c6096902a1b4ac8ace0a0  raw/intermediate/token_count-0.json
+32a1932f67a20ca8df7c29d780d47c416848d088bde253940c05d1dc74bcea98  raw/intermediate/token_count-1.json
+05edade38758a5d81515b347d7d4b54513b7672dc1140c8c6f134bc19646939e  raw/intermediate/token_count-2.json
+fb409d21185868935d172aad3e12e48a93675474bb592cc5166ae95c875b6a29  raw/intermediate/token_count-3.json
+b6b395b7b4db3cb52fee7fd046f068e60ad1b4a29e2b1195743470120992b581  raw/ledger_record.json
+c4e7ac91e14a7620391dd6cff92d2a4a5c1bb6272f3102c26b6038eed668e8b7  raw/prompt.txt
+e7af8d678980794afd44ca1771e9ae70d4ae954edd1d1cff9c793c2bc336cc0a  raw/reconstructed_host_strace_filtered.txt
+c62109f08020672826d26204fca45eb00f429fcd20ed64852c1899a340b9bf3d  raw/reconstructed_replay_strace_filtered.txt
+1967735417eb5445ac83526a725f7967dde9960c892879c2657b41b4a7761466  raw/task_response_cache.json
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  raw/verification_host_stderr.txt
+8347b31e124c2ffe403483ee459a4c0196b42d8dae055d60301053f744c08b3d  raw/verification_host_stdout.txt
+2f5c84717893d1ef4065d5a2a611728251a8b44711dc4ba6bf415b2f9ce09803  release_manifest.json
+dac3346285eb2db168b356041c3fa9cb6520336157f72c18fc6a6bfcb8e201cd  relevant_data_excerpt/host_aggregation_rows.csv
+f0182fb5d1c11bb6c6dc77a0c894e166c0d1424cdc54d1690027780157958160  relevant_data_excerpt/host_aggregation_summary.json
+59fe1aa5b6ac8daacb9eb7f41e6141aebc1960b91dfcafbe5312f4d0ca46a4a8  relevant_data_excerpt/reference_aggregation_rows.csv
+addb029771bf09a841208e37c587c685ed283278f06e4bf12164f1032339ccf5  relevant_data_excerpt/reference_aggregation_summary.json
+b1e246613ce732095681470b73646abccd6d3f1a6f6fd2958b2d9c6ebd778d91  replay_reads.jsonl
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  replay_stderr.txt
+a55e445b534a1044283a7e93acaa8f71d31d40de8922f0dbb0900275c833aeb2  replay_stdout.txt
+aaf605ff571da75ddd6d17bc19658de3ae40843e26f64851f49d821747d9aeef  reproduce.py
+982b72600e97d240a1b832c41006d610f11b3ec3055d7faba3354c4af94c39dd  requirements.txt
+e206b41f65416b2dfa80f6d4e6ae04326d9b1dd762a70b4e261dfd76ce31457f  resolved_evidence.json
+c3c63385097434423d0cfe0a8aaa20ba2ddf2d9e88618ba0328806fb5324e239  runtime.json

@@ -1,0 +1,112 @@
+{
+ "split_stats": {
+  "total_qas": 542,
+  "valid": 533,
+  "dedup_dropped": 85,
+  "unique": 448,
+  "seed": 60,
+  "rest": 388
+ },
+ "n300_continuity_split_stats": {
+  "total_qas": 542,
+  "valid": 533,
+  "dedup_dropped": 85,
+  "unique": 448,
+  "seed": 60,
+  "scale": 300
+ },
+ "frozen_point": {
+  "ops": [
+   "sum",
+   "diff",
+   "ratio",
+   "pctchg",
+   "prod"
+  ],
+  "chain": "full",
+  "max_depth": 2,
+  "tol_rel": 0.0001,
+  "percent": true
+ },
+ "evaluable_rest": 386,
+ "wrong_operation_constructible": 382,
+ "skipped": {
+  "not_constructible": 4,
+  "not_evaluable": 2
+ },
+ "comparison": {
+  "cross_example_swap": {
+   "label": "cross_example_swap",
+   "n": 386,
+   "unsupported_detection": 0.9611,
+   "unsupported_detection_counts": "371/386",
+   "false_support_rate": 0.0389,
+   "false_support_counts": "15/386"
+  },
+  "same_operand_wrong_operation": {
+   "label": "same_operand_wrong_operation",
+   "n": 382,
+   "unsupported_detection": 0.0236,
+   "unsupported_detection_counts": "9/382",
+   "false_support_rate": 0.9764,
+   "false_support_counts": "373/382"
+  }
+ },
+ "wrong_operation_strata": [
+  {
+   "label": "wrong_op_in_frozen_ops=True",
+   "n": 382,
+   "unsupported_detection": 0.0236,
+   "unsupported_detection_counts": "9/382",
+   "false_support_rate": 0.9764,
+   "false_support_counts": "373/382",
+   "accepted_counts": "373/382"
+  },
+  {
+   "label": "wrong_op_in_frozen_ops=False",
+   "n": 0,
+   "unsupported_detection": null,
+   "unsupported_detection_counts": "0/0",
+   "false_support_rate": null,
+   "false_support_counts": "0/0",
+   "accepted_counts": "0/0"
+  }
+ ],
+ "wrong_operation_depth_strata": [
+  {
+   "label": "in_frozen_ops_and_within_frozen_depth",
+   "n": 347,
+   "unsupported_detection": 0.0,
+   "unsupported_detection_counts": "0/347",
+   "false_support_rate": 1.0,
+   "false_support_counts": "347/347",
+   "accepted_counts": "347/347"
+  },
+  {
+   "label": "in_frozen_ops_but_over_frozen_depth",
+   "n": 35,
+   "unsupported_detection": 0.2571,
+   "unsupported_detection_counts": "9/35",
+   "false_support_rate": 0.7429,
+   "false_support_counts": "26/35",
+   "accepted_counts": "26/35"
+  },
+  {
+   "label": "outside_frozen_ops",
+   "n": 0,
+   "unsupported_detection": null,
+   "unsupported_detection_counts": "0/0",
+   "false_support_rate": null,
+   "false_support_counts": "0/0",
+   "accepted_counts": "0/0"
+  }
+ ],
+ "construction_counts": {
+  "first_op_add_to_subtract": 41,
+  "first_op_divide_to_multiply": 98,
+  "first_op_multiply_to_divide": 26,
+  "first_op_subtract_to_add": 207,
+  "mean_forget_divide": 10
+ },
+ "note": "Closure acceptance checks derivability from cited operands, not derivation identity. Live traces use hermetic re-execution; the recomputed value is authoritative."
+}

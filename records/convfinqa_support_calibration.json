@@ -1,0 +1,432 @@
+{
+ "summary": {
+  "n": 60,
+  "support_recall_on_gold": 0.9333,
+  "unsupported_detection_SWAP (primary, unbiased)": 0.4833,
+  "false_support_rate_SWAP": 0.5167,
+  "unsupported_detection_JITTER (sanity, checker-filtered -> biased up)": 0.8667,
+  "note": "labels BY-CONSTRUCTION (gold=supported; cross-example swapped gold=unsupported). Checker = cell/agg/pairwise-op derivability, gold-program-free approximation."
+ },
+ "per_example": [
+  {
+   "taskid": "convfinqa-convfinqa0",
+   "gold": 1.04569,
+   "gold_derivable_via": "ratio",
+   "swap_negative": 56571464.77,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa1",
+   "gold": 0.04569,
+   "gold_derivable_via": "pctchg",
+   "swap_negative": 56.57146,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa2",
+   "gold": 3500.0,
+   "gold_derivable_via": "ratio/100",
+   "swap_negative": 2253.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa3",
+   "gold": 0.53599,
+   "gold_derivable_via": "pctchgx100",
+   "swap_negative": 411814.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa4",
+   "gold": 840535.0,
+   "gold_derivable_via": "ratio",
+   "swap_negative": 0.00547,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa5",
+   "gold": 1327657.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 959.2,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa6",
+   "gold": 42.61,
+   "gold_derivable_via": "cell",
+   "swap_negative": 991.1,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa7",
+   "gold": 56571464.77,
+   "gold_derivable_via": null,
+   "swap_negative": -31.9,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa8",
+   "gold": 56.57146,
+   "gold_derivable_via": null,
+   "swap_negative": -0.03219,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa9",
+   "gold": 2253.0,
+   "gold_derivable_via": "sum",
+   "swap_negative": 308.5,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa10",
+   "gold": 411814.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 279.6,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa11",
+   "gold": 0.00547,
+   "gold_derivable_via": "ratio",
+   "swap_negative": 28.9,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa12",
+   "gold": 959.2,
+   "gold_derivable_via": "cell",
+   "swap_negative": 0.10336,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa13",
+   "gold": 991.1,
+   "gold_derivable_via": "cell",
+   "swap_negative": 198.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa14",
+   "gold": -31.9,
+   "gold_derivable_via": "diff",
+   "swap_negative": 123.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa15",
+   "gold": -0.03219,
+   "gold_derivable_via": "pctchg",
+   "swap_negative": 75.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa16",
+   "gold": 308.5,
+   "gold_derivable_via": "cell",
+   "swap_negative": 0.60976,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa17",
+   "gold": 279.6,
+   "gold_derivable_via": "cell",
+   "swap_negative": 0.79012,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa18",
+   "gold": 28.9,
+   "gold_derivable_via": "diff",
+   "swap_negative": 0.00488,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa19",
+   "gold": 0.10336,
+   "gold_derivable_via": "pctchg",
+   "swap_negative": 162.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa20",
+   "gold": 198.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 62.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa21",
+   "gold": 123.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 13.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa22",
+   "gold": 75.0,
+   "gold_derivable_via": "ratio",
+   "swap_negative": 34.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa23",
+   "gold": 0.60976,
+   "gold_derivable_via": "pctchg",
+   "swap_negative": 3534.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa24",
+   "gold": 0.79012,
+   "gold_derivable_via": "ratio",
+   "swap_negative": 3475.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa25",
+   "gold": 0.00488,
+   "gold_derivable_via": null,
+   "swap_negative": 59.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa26",
+   "gold": 162.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 0.01698,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa27",
+   "gold": 62.0,
+   "gold_derivable_via": "diff",
+   "swap_negative": 605762.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa28",
+   "gold": 13.0,
+   "gold_derivable_via": "diff",
+   "swap_negative": 193101.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa29",
+   "gold": 34.0,
+   "gold_derivable_via": "sum",
+   "swap_negative": 412661.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa30",
+   "gold": 3534.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 2.13702,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa31",
+   "gold": 3475.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 16.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa32",
+   "gold": 59.0,
+   "gold_derivable_via": "sum",
+   "swap_negative": 2.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa33",
+   "gold": 0.01698,
+   "gold_derivable_via": "pctchg",
+   "swap_negative": 14.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa34",
+   "gold": 605762.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 2.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa35",
+   "gold": 193101.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 7.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa36",
+   "gold": 412661.0,
+   "gold_derivable_via": "diff",
+   "swap_negative": 1832000.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa37",
+   "gold": 2.13702,
+   "gold_derivable_via": "pctchg",
+   "swap_negative": 2157000.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa38",
+   "gold": 16.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 3989000.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa39",
+   "gold": 2.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 2053096.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa40",
+   "gold": 14.0,
+   "gold_derivable_via": "sum",
+   "swap_negative": 8.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa41",
+   "gold": 2.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 0.0708,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa42",
+   "gold": 7.0,
+   "gold_derivable_via": "diff",
+   "swap_negative": 332.5,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa43",
+   "gold": 1832000.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 344.4,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa44",
+   "gold": 2157000.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": -11.9,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa45",
+   "gold": 3989000.0,
+   "gold_derivable_via": "sum",
+   "swap_negative": 17.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa46",
+   "gold": 2053096.0,
+   "gold_derivable_via": "sum",
+   "swap_negative": 213.2,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa47",
+   "gold": 8.0,
+   "gold_derivable_via": "sum",
+   "swap_negative": 0.07974,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa48",
+   "gold": 0.0708,
+   "gold_derivable_via": "pctchg",
+   "swap_negative": 7.97373,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa49",
+   "gold": 332.5,
+   "gold_derivable_via": "cell",
+   "swap_negative": 6.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa50",
+   "gold": 344.4,
+   "gold_derivable_via": "cell",
+   "swap_negative": 9.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa51",
+   "gold": -11.9,
+   "gold_derivable_via": "diff",
+   "swap_negative": 15.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa52",
+   "gold": 17.0,
+   "gold_derivable_via": "diff",
+   "swap_negative": 7.5,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa53",
+   "gold": 213.2,
+   "gold_derivable_via": "cell",
+   "swap_negative": 1.04569,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa54",
+   "gold": 0.07974,
+   "gold_derivable_via": "ratiox100",
+   "swap_negative": 0.04569,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa55",
+   "gold": 7.97373,
+   "gold_derivable_via": "ratio",
+   "swap_negative": 3500.0,
+   "swap_falsely_supported": true
+  },
+  {
+   "taskid": "convfinqa-convfinqa56",
+   "gold": 6.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 0.53599,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa57",
+   "gold": 9.0,
+   "gold_derivable_via": "cell",
+   "swap_negative": 840535.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa58",
+   "gold": 15.0,
+   "gold_derivable_via": "sum",
+   "swap_negative": 1327657.0,
+   "swap_falsely_supported": false
+  },
+  {
+   "taskid": "convfinqa-convfinqa59",
+   "gold": 7.5,
+   "gold_derivable_via": null,
+   "swap_negative": 42.61,
+   "swap_falsely_supported": false
+  }
+ ]
+}

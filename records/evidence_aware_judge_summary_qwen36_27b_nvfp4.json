@@ -1,0 +1,62 @@
+{
+  "calls": 870,
+  "cost_usd": 0.0,
+  "datasets": {
+    "convfinqa_constructed": {
+      "majority_accuracy": 0.86,
+      "majority_correct": 172,
+      "n_clear": 200,
+      "n_items": 200,
+      "parse_failures": 27,
+      "prediction_counts": {
+        "supported": 72,
+        "unknown": 8,
+        "unsupported": 120
+      },
+      "repeat_flip_items": 14,
+      "repeat_flip_rate": 0.07
+    },
+    "kramabench_human": {
+      "majority_accuracy": 0.6153846153846154,
+      "majority_correct": 24,
+      "n_clear": 39,
+      "n_items": 40,
+      "parse_failures": 0,
+      "prediction_counts": {
+        "supported": 3,
+        "unknown": 7,
+        "unsupported": 30
+      },
+      "repeat_flip_items": 7,
+      "repeat_flip_rate": 0.175
+    },
+    "wikisql_semantic_perturbations": {
+      "majority_accuracy": 0.78,
+      "majority_correct": 39,
+      "n_clear": 50,
+      "n_items": 50,
+      "parse_failures": 7,
+      "prediction_counts": {
+        "supported": 9,
+        "unknown": 2,
+        "unsupported": 39
+      },
+      "repeat_flip_items": 5,
+      "repeat_flip_rate": 0.1
+    }
+  },
+  "human_evidence_limitation": "The transferred archive lacks raw cited rows/program bodies for most human cases; the judge received declared columns, reads, execution status, and recomputed output. Human accuracy is therefore reported as limited-evidence, not a definitive fair ranking.",
+  "latency_s_sum": 2805.2164680581773,
+  "ledger_comparator": {
+    "model_calls": 0,
+    "monetary_cost_usd": 0.0,
+    "property": "deterministic audit-layer recomputability, not an LLM semantic verdict"
+  },
+  "model": "qwen3.6-27b-nvfp4",
+  "parse_failures": 34,
+  "repeats": 3,
+  "schema_version": 1,
+  "temperature": 0,
+  "tokens_in": 324156,
+  "tokens_out": 118469
+}

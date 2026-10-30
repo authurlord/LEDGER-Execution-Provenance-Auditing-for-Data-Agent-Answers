@@ -1,0 +1,273 @@
+{
+  "taskid": "legal-hard-1",
+  "domain": "legal",
+  "system": "BaselineLLMSystemLocalQwenDiscovery|discovery",
+  "sources_selected": [
+    "input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv"
+  ],
+  "gold_sources": [
+    "metropolitan_statistics.html",
+    "State MSA Identity Theft Data/*"
+  ],
+  "source_precision": 0.0,
+  "source_recall": 0.0,
+  "pred": 10724.1429,
+  "gold": 12964.8727,
+  "score": 0.0,
+  "tokens_in": 68591,
+  "tokens_out": 7266,
+  "tool_calls": 1,
+  "turns": 4,
+  "latency_s": 78.69,
+  "trace_path": "/mnt/data/yanmy/LakeOrch/KramaBench/system_scratch/BaselineLLMSystemLocalQwenDiscovery/legal-hard-1/_intermediate/pipeline-3.py",
+  "provenance": [
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    },
+    {
+      "source_file": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv",
+      "columns": [
+        "Metropolitan Area",
+        "Normalized MSA",
+        "Population",
+        "Reports per 100K Population"
+      ],
+      "ops": [
+        "mean"
+      ]
+    }
+  ],
+  "grounding_label": "unsupported",
+  "unsupported_class": "a",
+  "support_detail": "stated='10724.1429' recomputed='none'",
+  "offered_files": [
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv",
+    "input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Fraud and Other data/DistrictofColumbia.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv",
+    "input/csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Reports_by_Age.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv",
+    "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv",
+    "input/csn-data-book-2024-csv/CSVs/2024_CSN_Identity_Theft_Types_by_Age.csv"
+  ],
+  "uncited_refs": [],
+  "exec_failed": false,
+  "measures_file": "legal_measures_20260703_132431.csv"
+}

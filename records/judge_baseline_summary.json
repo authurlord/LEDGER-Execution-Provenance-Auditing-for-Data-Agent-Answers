@@ -1,0 +1,205 @@
+{
+ "mode": "full",
+ "model": "deepseek-v4-flash",
+ "temperature": 0,
+ "repeats": 3,
+ "items_by_group": {
+  "convfinqa_constructed": 200,
+  "kramabench_stated_answer": 110,
+  "kb_support_annotation": 40
+ },
+ "calls": 1050,
+ "parse_errors": 2,
+ "tokens_in": 264976,
+ "tokens_out": 428380,
+ "total_cost_usd": 0.157043,
+ "cost_per_1000_usd": 0.149565,
+ "pricing_note": {
+  "input_per_1m_usd": 0.14,
+  "output_per_1m_usd": 0.28,
+  "source": "deepseek-v4-flash cache-miss, https://api-docs.deepseek.com/quick_start/pricing (verify)"
+ },
+ "flip_rate": {
+  "eligible_items": 350,
+  "flipped_items": 169,
+  "flip_rate": 0.4829
+ },
+ "metrics_overall": {
+  "n": 1050,
+  "accuracy": 0.3848,
+  "correct": 404,
+  "macro_f1": 0.3253,
+  "per_label": {
+   "supported": {
+    "precision": 0.96,
+    "recall": 0.1048,
+    "f1": 0.189,
+    "tp": 72,
+    "fp": 3,
+    "fn": 615
+   },
+   "unsupported": {
+    "precision": 0.4872,
+    "recall": 0.956,
+    "f1": 0.6454,
+    "tp": 304,
+    "fp": 320,
+    "fn": 14
+   },
+   "unknown": {
+    "precision": 0.0798,
+    "recall": 0.6222,
+    "f1": 0.1414,
+    "tp": 28,
+    "fp": 323,
+    "fn": 17
+   }
+  },
+  "confusion": {
+   "supported->supported": 72,
+   "supported->unknown": 309,
+   "supported->unsupported": 306,
+   "unknown->supported": 3,
+   "unknown->unknown": 28,
+   "unknown->unsupported": 14,
+   "unsupported->unknown": 14,
+   "unsupported->unsupported": 304
+  }
+ },
+ "metrics_by_group": {
+  "convfinqa_constructed": {
+   "n": 600,
+   "accuracy": 0.5983,
+   "correct": 359,
+   "macro_f1": 0.3806,
+   "per_label": {
+    "supported": {
+     "precision": 1.0,
+     "recall": 0.21,
+     "f1": 0.3471,
+     "tp": 63,
+     "fp": 0,
+     "fn": 237
+    },
+    "unsupported": {
+     "precision": 0.6652,
+     "recall": 0.9867,
+     "f1": 0.7946,
+     "tp": 296,
+     "fp": 149,
+     "fn": 4
+    },
+    "unknown": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 92,
+     "fn": 0
+    }
+   },
+   "confusion": {
+    "supported->supported": 63,
+    "supported->unknown": 88,
+    "supported->unsupported": 149,
+    "unsupported->unknown": 4,
+    "unsupported->unsupported": 296
+   }
+  },
+  "kramabench_stated_answer": {
+   "n": 330,
+   "accuracy": 0.0455,
+   "correct": 15,
+   "macro_f1": 0.0452,
+   "per_label": {
+    "supported": {
+     "precision": 1.0,
+     "recall": 0.028,
+     "f1": 0.0545,
+     "tp": 9,
+     "fp": 0,
+     "fn": 312
+    },
+    "unsupported": {
+     "precision": 0.0432,
+     "recall": 0.6667,
+     "f1": 0.0811,
+     "tp": 6,
+     "fp": 133,
+     "fn": 3
+    },
+    "unknown": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 182,
+     "fn": 0
+    }
+   },
+   "confusion": {
+    "supported->supported": 9,
+    "supported->unknown": 179,
+    "supported->unsupported": 133,
+    "unsupported->unknown": 3,
+    "unsupported->unsupported": 6
+   }
+  },
+  "kb_support_annotation": {
+   "n": 120,
+   "accuracy": 0.25,
+   "correct": 30,
+   "macro_f1": 0.1802,
+   "per_label": {
+    "supported": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 3,
+     "fn": 66
+    },
+    "unsupported": {
+     "precision": 0.05,
+     "recall": 0.2222,
+     "f1": 0.0816,
+     "tp": 2,
+     "fp": 38,
+     "fn": 7
+    },
+    "unknown": {
+     "precision": 0.3636,
+     "recall": 0.6222,
+     "f1": 0.459,
+     "tp": 28,
+     "fp": 49,
+     "fn": 17
+    }
+   },
+   "confusion": {
+    "supported->unknown": 42,
+    "supported->unsupported": 24,
+    "unknown->supported": 3,
+    "unknown->unknown": 28,
+    "unknown->unsupported": 14,
+    "unsupported->unknown": 7,
+    "unsupported->unsupported": 2
+   }
+  }
+ },
+ "ledger_comparator": {
+  "calls": 0,
+  "latency_ms": "<10",
+  "cost_usd": 0.0
+ },
+ "outputs": {
+  "records": "records/judge_baseline_records.jsonl",
+  "summary": "records/judge_baseline_summary.json",
+  "doc": "docs/LLM_JUDGE_BASELINE.md"
+ },
+ "safety": {
+  "does_not_write_grounding_label": true,
+  "human_columns_written": false,
+  "gold_answer_provided_to_judge": false
+ }
+}

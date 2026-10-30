@@ -1,0 +1,145 @@
+{
+ "input_records": "records/records_ledger_checker_convfinqa_full.jsonl",
+ "n300_continuity": {
+  "label": "n300_continuity",
+  "n_all": 300,
+  "n_constrained_evaluable": 298,
+  "unknown": 2,
+  "metrics": {
+   "constrained_support_recall": {
+    "metric": "constrained_support_recall",
+    "count": 281,
+    "n": 298,
+    "rate": 0.943,
+    "ci95_beta": [
+     0.91,
+     0.966
+    ]
+   },
+   "constrained_unsupported_detection": {
+    "metric": "constrained_unsupported_detection",
+    "count": 285,
+    "n": 298,
+    "rate": 0.9564,
+    "ci95_beta": [
+     0.927,
+     0.977
+    ]
+   },
+   "free_support_recall": {
+    "metric": "free_support_recall",
+    "count": 256,
+    "n": 300,
+    "rate": 0.8533,
+    "ci95_beta": [
+     0.808,
+     0.891
+    ]
+   },
+   "free_unsupported_detection": {
+    "metric": "free_unsupported_detection",
+    "count": 186,
+    "n": 300,
+    "rate": 0.62,
+    "ci95_beta": [
+     0.562,
+     0.675
+    ]
+   }
+  },
+  "paired_detection": {
+   "n_paired_evaluable": 298,
+   "discordant_table": {
+    "both_flagged": 180,
+    "constrained_only_flagged": 105,
+    "free_only_flagged": 4,
+    "neither_flagged": 9,
+    "matrix_constrained_rows_free_cols": [
+     [
+      180,
+      105
+     ],
+     [
+      4,
+      9
+     ]
+    ]
+   },
+   "mcnemar_exact_p": 1.7808476387094032e-26,
+   "paired_effect_delta": 0.3389,
+   "constrained_detection_rate_on_paired": 0.9564,
+   "free_detection_rate_on_paired": 0.6174
+  }
+ },
+ "full_n_headline": {
+  "label": "full_n_headline",
+  "n_all": 388,
+  "n_constrained_evaluable": 386,
+  "unknown": 2,
+  "metrics": {
+   "constrained_support_recall": {
+    "metric": "constrained_support_recall",
+    "count": 360,
+    "n": 386,
+    "rate": 0.9326,
+    "ci95_beta": [
+     0.903,
+     0.956
+    ]
+   },
+   "constrained_unsupported_detection": {
+    "metric": "constrained_unsupported_detection",
+    "count": 371,
+    "n": 386,
+    "rate": 0.9611,
+    "ci95_beta": [
+     0.937,
+     0.978
+    ]
+   },
+   "free_support_recall": {
+    "metric": "free_support_recall",
+    "count": 334,
+    "n": 388,
+    "rate": 0.8608,
+    "ci95_beta": [
+     0.822,
+     0.894
+    ]
+   },
+   "free_unsupported_detection": {
+    "metric": "free_unsupported_detection",
+    "count": 242,
+    "n": 388,
+    "rate": 0.6237,
+    "ci95_beta": [
+     0.573,
+     0.672
+    ]
+   }
+  },
+  "paired_detection": {
+   "n_paired_evaluable": 386,
+   "discordant_table": {
+    "both_flagged": 236,
+    "constrained_only_flagged": 135,
+    "free_only_flagged": 4,
+    "neither_flagged": 11,
+    "matrix_constrained_rows_free_cols": [
+     [
+      236,
+      135
+     ],
+     [
+      4,
+      11
+     ]
+    ]
+   },
+   "mcnemar_exact_p": 4.402176408278431e-35,
+   "paired_effect_delta": 0.3394,
+   "constrained_detection_rate_on_paired": 0.9611,
+   "free_detection_rate_on_paired": 0.6218
+  }
+ }
+}

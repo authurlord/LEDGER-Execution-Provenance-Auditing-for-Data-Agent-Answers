@@ -1,0 +1,398 @@
+{
+  "differential_runtime_s": {
+    "mean": 0.00023441649390243914,
+    "total": 0.6364407809451222
+  },
+  "executable_base_examples": 500,
+  "false_alarms_on_unmodified_gold": {
+    "differential_execution": 0,
+    "ledger_replay_certificate_only": 0,
+    "normalized_ast_edit_threshold": 0,
+    "normalized_sql_exact_match": 0,
+    "operator_clause_multiset": 0,
+    "original_output_equality": 0
+  },
+  "perturbations": 2715,
+  "results": [
+    {
+      "detected": 426,
+      "detection_rate": 0.852,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "added_irrelevant_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "original_output_equality"
+    },
+    {
+      "detected": 500,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "added_irrelevant_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_sql_exact_match"
+    },
+    {
+      "detected": 500,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "added_irrelevant_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "operator_clause_multiset"
+    },
+    {
+      "detected": 500,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "added_irrelevant_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_ast_edit_threshold"
+    },
+    {
+      "detected": 163,
+      "detection_rate": 0.326,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "added_irrelevant_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "differential_execution"
+    },
+    {
+      "detected": 0,
+      "detection_rate": 0.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "added_irrelevant_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "ledger_replay_certificate_only"
+    },
+    {
+      "detected": 479,
+      "detection_rate": 0.9775510204081632,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "dropped_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "original_output_equality"
+    },
+    {
+      "detected": 490,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "dropped_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_sql_exact_match"
+    },
+    {
+      "detected": 490,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "dropped_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "operator_clause_multiset"
+    },
+    {
+      "detected": 490,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "dropped_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_ast_edit_threshold"
+    },
+    {
+      "detected": 477,
+      "detection_rate": 0.9734693877551021,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "dropped_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "differential_execution"
+    },
+    {
+      "detected": 0,
+      "detection_rate": 0.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "dropped_predicate",
+      "unmodified_gold_n": 500,
+      "validator": "ledger_replay_certificate_only"
+    },
+    {
+      "detected": 0,
+      "detection_rate": 0.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 100,
+      "perturbation_class": "same_original_output_counterfactual",
+      "unmodified_gold_n": 500,
+      "validator": "original_output_equality"
+    },
+    {
+      "detected": 100,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 100,
+      "perturbation_class": "same_original_output_counterfactual",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_sql_exact_match"
+    },
+    {
+      "detected": 67,
+      "detection_rate": 0.67,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 100,
+      "perturbation_class": "same_original_output_counterfactual",
+      "unmodified_gold_n": 500,
+      "validator": "operator_clause_multiset"
+    },
+    {
+      "detected": 100,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 100,
+      "perturbation_class": "same_original_output_counterfactual",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_ast_edit_threshold"
+    },
+    {
+      "detected": 27,
+      "detection_rate": 0.27,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 100,
+      "perturbation_class": "same_original_output_counterfactual",
+      "unmodified_gold_n": 500,
+      "validator": "differential_execution"
+    },
+    {
+      "detected": 0,
+      "detection_rate": 0.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 100,
+      "perturbation_class": "same_original_output_counterfactual",
+      "unmodified_gold_n": 500,
+      "validator": "ledger_replay_certificate_only"
+    },
+    {
+      "detected": 109,
+      "detection_rate": 0.7517241379310344,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 145,
+      "perturbation_class": "wrong_aggregate",
+      "unmodified_gold_n": 500,
+      "validator": "original_output_equality"
+    },
+    {
+      "detected": 145,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 145,
+      "perturbation_class": "wrong_aggregate",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_sql_exact_match"
+    },
+    {
+      "detected": 145,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 145,
+      "perturbation_class": "wrong_aggregate",
+      "unmodified_gold_n": 500,
+      "validator": "operator_clause_multiset"
+    },
+    {
+      "detected": 145,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 145,
+      "perturbation_class": "wrong_aggregate",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_ast_edit_threshold"
+    },
+    {
+      "detected": 123,
+      "detection_rate": 0.8482758620689655,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 145,
+      "perturbation_class": "wrong_aggregate",
+      "unmodified_gold_n": 500,
+      "validator": "differential_execution"
+    },
+    {
+      "detected": 0,
+      "detection_rate": 0.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 145,
+      "perturbation_class": "wrong_aggregate",
+      "unmodified_gold_n": 500,
+      "validator": "ledger_replay_certificate_only"
+    },
+    {
+      "detected": 488,
+      "detection_rate": 0.9959183673469387,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_column",
+      "unmodified_gold_n": 500,
+      "validator": "original_output_equality"
+    },
+    {
+      "detected": 490,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_column",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_sql_exact_match"
+    },
+    {
+      "detected": 490,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_column",
+      "unmodified_gold_n": 500,
+      "validator": "operator_clause_multiset"
+    },
+    {
+      "detected": 490,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_column",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_ast_edit_threshold"
+    },
+    {
+      "detected": 159,
+      "detection_rate": 0.32448979591836735,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_column",
+      "unmodified_gold_n": 500,
+      "validator": "differential_execution"
+    },
+    {
+      "detected": 0,
+      "detection_rate": 0.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_column",
+      "unmodified_gold_n": 500,
+      "validator": "ledger_replay_certificate_only"
+    },
+    {
+      "detected": 358,
+      "detection_rate": 0.7306122448979592,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_value",
+      "unmodified_gold_n": 500,
+      "validator": "original_output_equality"
+    },
+    {
+      "detected": 490,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_value",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_sql_exact_match"
+    },
+    {
+      "detected": 0,
+      "detection_rate": 0.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_value",
+      "unmodified_gold_n": 500,
+      "validator": "operator_clause_multiset"
+    },
+    {
+      "detected": 490,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_value",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_ast_edit_threshold"
+    },
+    {
+      "detected": 166,
+      "detection_rate": 0.33877551020408164,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_value",
+      "unmodified_gold_n": 500,
+      "validator": "differential_execution"
+    },
+    {
+      "detected": 0,
+      "detection_rate": 0.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 490,
+      "perturbation_class": "wrong_predicate_value",
+      "unmodified_gold_n": 500,
+      "validator": "ledger_replay_certificate_only"
+    },
+    {
+      "detected": 389,
+      "detection_rate": 0.778,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "wrong_projection_column",
+      "unmodified_gold_n": 500,
+      "validator": "original_output_equality"
+    },
+    {
+      "detected": 500,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "wrong_projection_column",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_sql_exact_match"
+    },
+    {
+      "detected": 500,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "wrong_projection_column",
+      "unmodified_gold_n": 500,
+      "validator": "operator_clause_multiset"
+    },
+    {
+      "detected": 500,
+      "detection_rate": 1.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "wrong_projection_column",
+      "unmodified_gold_n": 500,
+      "validator": "normalized_ast_edit_threshold"
+    },
+    {
+      "detected": 128,
+      "detection_rate": 0.256,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "wrong_projection_column",
+      "unmodified_gold_n": 500,
+      "validator": "differential_execution"
+    },
+    {
+      "detected": 0,
+      "detection_rate": 0.0,
+      "false_alarms_on_unmodified_gold": 0,
+      "n": 500,
+      "perturbation_class": "wrong_projection_column",
+      "unmodified_gold_n": 500,
+      "validator": "ledger_replay_certificate_only"
+    }
+  ],
+  "same_original_output": 466,
+  "schema_version": 1
+}

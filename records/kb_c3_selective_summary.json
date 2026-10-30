@@ -1,0 +1,187 @@
+{
+ "c3_decomposition": {
+  "environment": {
+   "oracle": {
+    "n": 20,
+    "acc": 0.3148,
+    "acc_total": 0.2833,
+    "scored": 18,
+    "supported": 14,
+    "unsupported": 0,
+    "unknown": 6,
+    "classes": {
+     "a": 0,
+     "b": 0,
+     "c": 0,
+     "d": 0
+    },
+    "tok_in": 18401,
+    "tok_out": 2285,
+    "turns": 1.55,
+    "lat": 22.3
+   },
+   "discovery": {
+    "n": 20,
+    "acc": 0.2094,
+    "acc_total": 0.1885,
+    "scored": 18,
+    "supported": 18,
+    "unsupported": 0,
+    "unknown": 2,
+    "classes": {
+     "a": 0,
+     "b": 0,
+     "c": 0,
+     "d": 0
+    },
+    "tok_in": 61000,
+    "tok_out": 3955,
+    "turns": 1.85,
+    "lat": 44.6
+   },
+   "class": "selection-bound"
+  },
+  "wildfire": {
+   "oracle": {
+    "n": 21,
+    "acc": 0.317,
+    "acc_total": 0.2566,
+    "scored": 17,
+    "supported": 15,
+    "unsupported": 0,
+    "unknown": 6,
+    "classes": {
+     "a": 0,
+     "b": 0,
+     "c": 0,
+     "d": 0
+    },
+    "tok_in": 22743,
+    "tok_out": 2640,
+    "turns": 2.29,
+    "lat": 26.0
+   },
+   "discovery": {
+    "n": 21,
+    "acc": 0.3922,
+    "acc_total": 0.3175,
+    "scored": 17,
+    "supported": 14,
+    "unsupported": 0,
+    "unknown": 7,
+    "classes": {
+     "a": 0,
+     "b": 0,
+     "c": 0,
+     "d": 0
+    },
+    "tok_in": 40854,
+    "tok_out": 3332,
+    "turns": 1.9,
+    "lat": 35.3
+   },
+   "class": "reasoning-bound"
+  },
+  "legal": {
+   "oracle": {
+    "n": 30,
+    "acc": 0.4074,
+    "acc_total": 0.3667,
+    "scored": 27,
+    "supported": 14,
+    "unsupported": 0,
+    "unknown": 16,
+    "classes": {
+     "a": 0,
+     "b": 0,
+     "c": 0,
+     "d": 0
+    },
+    "tok_in": 9155,
+    "tok_out": 1757,
+    "turns": 3.03,
+    "lat": 16.5
+   },
+   "discovery": {
+    "n": 30,
+    "acc": 0.2593,
+    "acc_total": 0.2333,
+    "scored": 27,
+    "supported": 16,
+    "unsupported": 3,
+    "unknown": 11,
+    "classes": {
+     "a": 1,
+     "b": 0,
+     "c": 2,
+     "d": 0
+    },
+    "tok_in": 56243,
+    "tok_out": 3134,
+    "turns": 3.07,
+    "lat": 35.1
+   },
+   "class": "selection-bound"
+  },
+  "archeology": {
+   "oracle": {
+    "n": 12,
+    "acc": 0.25,
+    "acc_total": 0.25,
+    "scored": 12,
+    "supported": 7,
+    "unsupported": 0,
+    "unknown": 5,
+    "classes": {
+     "a": 0,
+     "b": 0,
+     "c": 0,
+     "d": 0
+    },
+    "tok_in": 9748,
+    "tok_out": 2248,
+    "turns": 2.42,
+    "lat": 38.1
+   },
+   "discovery": {
+    "n": 12,
+    "acc": 0.25,
+    "acc_total": 0.25,
+    "scored": 12,
+    "supported": 9,
+    "unsupported": 0,
+    "unknown": 3,
+    "classes": {
+     "a": 0,
+     "b": 0,
+     "c": 0,
+     "d": 0
+    },
+    "tok_in": 33384,
+    "tok_out": 1706,
+    "turns": 1.33,
+    "lat": 21.3
+   },
+   "class": "reasoning-bound"
+  }
+ },
+ "dump_all_reference": 0.036,
+ "d2_anchors": {
+  "discovery": 0.276,
+  "oracle": 0.314
+ },
+ "selective_answering_discovery": {
+  "always": {
+   "coverage": "74/74",
+   "precision_on_answered": 0.2762
+  },
+  "supported": {
+   "coverage": "52/74",
+   "precision_on_answered": 0.3397
+  },
+  "supported+unknown": {
+   "coverage": "71/74",
+   "precision_on_answered": 0.2878
+  }
+ }
+}

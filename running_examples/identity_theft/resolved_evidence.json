@@ -1,0 +1,121 @@
+[
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/2024_CSN_Metropolitan_Areas_Identity_Theft_Reports.csv",
+    "sha256": "b4a64e9c3809d3f4cb3dd90562b3713b14335a7298e0021e23ffca05584f8e25",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/DistrictofColumbia.csv",
+    "sha256": "db18db550616a35f17289c5f04d49b706bd8c3929c735552ca0bfabc9c8571ec",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Wyoming.csv",
+    "sha256": "0f01184400a6c0801d266edac471b95fbd66d6123b176e71fc6a4ac60040bfa2",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Illinois.csv",
+    "sha256": "e89364e32f45c7adea17ce4e0c42a9e04c3b599e7dc7267c78ff54927e2dbd92",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Maryland.csv",
+    "sha256": "2c0a3f73b4583e9ba697a3966dc03211350323d5ff897c682b73ca47b5352dc5",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Indiana.csv",
+    "sha256": "5ea5cec6d69c49421e08e2e08787e1e1c6a4c8aa325905c506020efb386bca5c",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Missouri.csv",
+    "sha256": "d80453d26c26ccb6f0f52ffb6cfb01b5982c326e092b4dc7a210d188d6ccaf30",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/SouthDakota.csv",
+    "sha256": "9e2e8627278682626ef805220066b7beb5f37bc98319077d319dfda9a0efbe9d",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/RhodeIsland.csv",
+    "sha256": "e060ebc0b8b48e0eb3a920efc85cf854dc8ceb43f552bacdcbff00a65172ae3e",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Ohio.csv",
+    "sha256": "bafb939059e5bb98c73ee0536a754800d9a682f1dacaa4caeaacd1f381958b54",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Alaska.csv",
+    "sha256": "89ecca3974d2369ac8b9535557c1af8778d66092b94af7b43c68d309d3a604ec",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NorthDakota.csv",
+    "sha256": "35798315a4d010deba995d72375f25644e6118b73c22c32e7b9eeece666c8209",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Idaho.csv",
+    "sha256": "7797d2a080590c382a44f637e1ee2cb67b5282ab1d0c00f625a4adc4362f2f30",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Montana.csv",
+    "sha256": "8f061b628488368b15c1233cd1eeda60720b52fc0d00658c17ab2bc7b5809d6f",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Minnesota.csv",
+    "sha256": "c382e13c0aa0996d16059c341e371b90d70dbe351adcc803b8b806157b56724d",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/Mississippi.csv",
+    "sha256": "55cf8b2ccf87a933aa81685988f5f2d78c932076d02b521c2ab04ba3ca7ab39c",
+    "resolve_status": "resolved"
+  },
+  {
+    "canonical_id": "input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv",
+    "source_path_at_episode_host": "/mnt/data/yanmy/LakeOrch/KramaBench/data/legal/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv",
+    "packaged_path": "evidence/declared/input/csn-data-book-2024-csv/CSVs/State MSA Identity Theft data/NewMexico.csv",
+    "sha256": "886ce7fd54a67501bfbb2f6c751d28cdc4dfbff4b56deb6dc5b98299cb0db1eb",
+    "resolve_status": "resolved"
+  }
+]
